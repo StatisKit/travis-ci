@@ -11,4 +11,5 @@ conda config --set always_yes yes --set changeps1 no
 conda update -q conda
 conda info -a
 conda install conda-build=2.0.2
+conda install anaconda-client
 pip install python-coveralls
