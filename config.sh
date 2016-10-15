@@ -21,3 +21,5 @@ conda info -a
 conda install conda-build=2.0.2
 conda install anaconda-client
 pip install python-coveralls
+
+set +xe
