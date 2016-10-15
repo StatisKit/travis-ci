@@ -1,4 +1,4 @@
-set -xe
+set -e
 
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   if [[ "$MINICONDA" = "3" ]]; then
@@ -22,4 +22,4 @@ conda install conda-build=2.0.2
 conda install anaconda-client
 pip install python-coveralls
 
-set +xe
+set +e
