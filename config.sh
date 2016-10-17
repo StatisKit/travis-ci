@@ -21,8 +21,7 @@ if [[ ! "$CONDA_CACHE_DIR" = "" ]]; then
   echo "conda-build:" >> $HOME/.condarc;
   echo "  root-dir: " $CONDA_CACHE_DIR >> $HOME/.condarc;
   if [[ ! -f $CONDA_CACHE_DIR/$TRAVIS_BUILD_NUMBER ]]; then
-    rm -rf $CONDA_CACHE_DIR;
-    mkdir $CONDA_CACHE_DIR;
+    travis cache --delete;
     touch  $CONDA_CACHE_DIR/$TRAVIS_BUILD_NUMBER;
   fi
 fi
