@@ -15,7 +15,7 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
 fi
 bash miniconda.sh -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
-conda config --set always_yes yes --set changeps1 no
+conda config --set always_yes yes --set changeps1 no --set root_dir $HOME/.cache/conda-bld
 conda update -q conda
 conda info -a
 conda install conda-build=2.0.2
