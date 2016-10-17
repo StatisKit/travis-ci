@@ -17,8 +17,13 @@ bash miniconda.sh -b -p $HOME/miniconda
 export PATH=$HOME/miniconda/bin:$PATH
 conda config --set always_yes yes --set changeps1 no
 if [[ ! "$CONDA_CACHE_DIR" = "" ]]; then
-  echo "conda-build:" >> $HOME/.condarc
-  echo "  root-dir: " $CONDA_CACHE_DIR >> $HOME/.condarc
+  echo "conda-build:" >> $HOME/.condarc;
+  echo "  root-dir: " $CONDA_CACHE_DIR >> $HOME/.condarc;
+  if [[ ! -f $CONDA_CACHE_DIR/$TRAVIS_BUILD_NUMBER ]]; then
+    rm -rf $CONDA_CACHE_DIR;
+    mkdir $CONDA_CACHE_DIR;
+    touch  $CONDA_CACHE_DIR/$TRAVIS_BUILD_NUMBER;
+  fi
 fi
 conda update -q conda
 conda info -a
