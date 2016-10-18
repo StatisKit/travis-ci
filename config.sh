@@ -24,6 +24,9 @@ if [[ ! "$CONDA_CACHE_DIR" = "" ]]; then
     rm -rf $CONDA_CACHE_DIR;
     mkdir $CONDA_CACHE_DIR;
     touch $CONDA_CACHE_DIR/$TRAVIS_BUILD_NUMBER;
+    if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
+      timeout () { perl -e 'alarm shift; exec @ARGV' "$@"; };
+    fi
   fi
 fi
 conda update -q conda
