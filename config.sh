@@ -27,7 +27,7 @@ if [[ ! "$CONDA_CACHE_DIR" = "" ]]; then
 fi
 conda update -q conda
 conda info -a
-conda install conda-build=2.0.2
+conda install conda-build=1
 conda install anaconda-client
 pip install python-coveralls
 
