@@ -17,3 +17,5 @@ fi
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
 fi
+
+set +e
