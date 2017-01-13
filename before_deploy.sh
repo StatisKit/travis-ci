@@ -2,7 +2,7 @@ set -e
 set +v
 
 DOCKER_DEPLOY="false"
-if [[ "$TRAVIS_OS_NAME" = "linux" &&  ! "$DOCKER_USERNAME" = "" && ! "$DOCKER_PASSWORD" = "" ]]; then
+if [[ "$TRAVIS_OS_NAME" = "linux" &&  ! "$DOCKER_USERNAME" = "" && ! "$DOCKER_PASSWORD" = "" && "$RECIPE" = "" ]]; then
     DOCKER_DEPLOY="true"
 fi
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
