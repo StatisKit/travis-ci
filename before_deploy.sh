@@ -12,7 +12,6 @@ fi
 ANACONDA_DEPLOY="false"
 if [[ -z ANACONDA_USERNAME && -z ANACONDA_PASSWORD && -z RECIPE ]]; then
     ANACONDA_DEPLOY="true"
-  fi
 fi
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
