@@ -10,7 +10,7 @@ if [[ "$DOCKER_DEPLOY" = "true" ]]; then
 fi
 
 export ANACONDA_DEPLOY="false"
-if [[ -z ANACONDA_USERNAME && -z ANACONDA_PASSWORD && -z RECIPE ]]; then
+if [[ -z $ANACONDA_USERNAME && -z $ANACONDA_PASSWORD && -z $RECIPE ]]; then
     ANACONDA_DEPLOY="true"
 fi
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
