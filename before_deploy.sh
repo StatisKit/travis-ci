@@ -11,7 +11,7 @@ if [[ "$DOCKER_DEPLOY" = "true" ]]; then
 fi
 
 ANACONDA_DEPLOY="false"
-if [[ -z ANACONDA_USERNAME && -z ANACONDA_PASSWORD ]]; then
+if [[ -z ANACONDA_USERNAME && -z ANACONDA_PASSWORD && -z RECIPE ]]; then
     ANACONDA_DEPLOY="true"
   fi
 fi
