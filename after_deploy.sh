@@ -1,4 +1,4 @@
-set -e
+set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
   docker logout
@@ -8,4 +8,4 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   anaconda logout
 fi
 
-set +e
+set +ev

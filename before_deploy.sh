@@ -1,4 +1,5 @@
 set -e
+set +v
 
 DOCKER_DEPLOY="false"
 if [[ "$TRAVIS_OS_NAME" = "linux" && -z $DOCKER_USERNAME && -z $DOCKER_PASSWORD ]]; then
@@ -18,4 +19,5 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
 fi
 
+set -v
 set +e

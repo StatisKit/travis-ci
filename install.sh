@@ -1,4 +1,4 @@
-set -e
+set -ev
 
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -35,4 +35,4 @@ conda install conda-build
 conda install anaconda-client
 pip install python-coveralls
 
-set +e
+set +ev
