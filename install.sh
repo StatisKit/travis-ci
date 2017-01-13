@@ -35,4 +35,6 @@ conda install conda-build
 conda install anaconda-client
 pip install python-coveralls
 
+rm miniconda.sh
+
 set +ev
