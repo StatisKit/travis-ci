@@ -1,20 +1,22 @@
 set -e
 set +v
 
-export DOCKER_DEPLOY="false"
-if [[ "$TRAVIS_OS_NAME" = "linux" && -z $DOCKER_USERNAME && -z $DOCKER_PASSWORD ]]; then
+DOCKER_DEPLOY="false"
+if [[ "$TRAVIS_OS_NAME" = "linux" &&  ! "$DOCKER_USERNAME" = "" && ! "$DOCKER_PASSWORD" = "" ]]; then
     DOCKER_DEPLOY="true"
 fi
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
   docker login -p $DOCKER_PASSWORD -u $DOCKER_USERNAME
 fi
+export DOCKER_DEPLOY=$DOCKER_DEPLOY
 
-export ANACONDA_DEPLOY="false"
-if [[ -z $ANACONDA_USERNAME && -z $ANACONDA_PASSWORD && -z $RECIPE ]]; then
+ANACONDA_DEPLOY="false"
+if [[ ! "$ANACONDA_USERNAME" = "" && ! "$ANACONDA_PASSWORD" = "" && ! "$RECIPE" = "" ]]; then
     ANACONDA_DEPLOY="true"
 fi
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
 fi
+export ANACONDA_DEPLOY=$ANACONDA_DEPLOY
 
 set +ev
