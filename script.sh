@@ -1,6 +1,6 @@
 set -ev
 
-if [[ -z $RECIPE ]]; then
+if [[ ! "$RECIPE" = "" ]]; then
   conda build ../conda/$RECIPE -c conda-forge -c statiskit
 fi
 
