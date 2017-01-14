@@ -15,7 +15,7 @@ if [[ ! "$ANACONDA_USERNAME" = "" && ! "$ANACONDA_PASSWORD" = "" && ! "$RECIPE" 
     ANACONDA_DEPLOY="true"
 fi
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
-  anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
+  yes | anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
 fi
 export ANACONDA_DEPLOY=$ANACONDA_DEPLOY
 
