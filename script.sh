@@ -5,7 +5,9 @@ if [[ ! "$RECIPE" = "" ]]; then
 elif [[ ! "$UBUNTU" = "" ]]; then
   docker pull ubuntu:$UBUNTU
   docker tag ubuntu:$UBUNTU statiskit/ubuntu
-  docker build -t statiskit/ubuntu:$UBUNTU ../docker/ubuntu
+  mv ../docker/ubuntu ../docker/Dockerfile
+  docker build -t statiskit/ubuntu:$UBUNTU ../docker
+  mv ../docker/Dockerfile ../docker/ubuntu
 fi
 
 set +ev
