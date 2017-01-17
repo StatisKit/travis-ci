@@ -5,7 +5,7 @@ if [[ "$DOCKER_DEPLOY" = "true" ]]; then
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
-  anaconda upload `conda build ../conda/$RECIPE -c conda-forge -c statiskit --output` -u statiskit
+  anaconda upload `conda build ../conda/$RECIPE -c conda-forge -c statiskit --output` -u statiskit --force
 fi
 
 set +ev
