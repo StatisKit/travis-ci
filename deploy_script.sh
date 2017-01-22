@@ -9,7 +9,7 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
     if [[ ! "$ENVIRONMENT" = "" ]]; then
       anaconda upload ../$ENVIRONMENT -u statiskit --force
     fi
-    md5sum `conda build ../conda/$RECIPE -c conda-forge -c statiskit --output`
+    #md5sum `conda build ../conda/$RECIPE -c conda-forge -c statiskit --output`
   fi
   if [[ ! "$RECIPE" = "" ]]; then
     anaconda upload `conda build ../conda/$RECIPE -c conda-forge -c statiskit --output` -u statiskit --force
