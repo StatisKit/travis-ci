@@ -12,7 +12,7 @@ export DOCKER_DEPLOY=$DOCKER_DEPLOY
 
 ANACONDA_DEPLOY="false"
 if [[ ! "$ANACONDA_USERNAME" = "" && ! "$ANACONDA_PASSWORD" = "" ]]; then
-    if [[ ! "$RECIPE" = "" || ! "$ENVIRONMENT" = "" ]]; then
+    if [[ ! "$RECIPE" = "" || ! "$ENVIRONMENT" = "" ]]; then
         ANACONDA_DEPLOY="true"
     fi
 fi
