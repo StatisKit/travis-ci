@@ -7,7 +7,9 @@ fi
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
     if [[ ! "$ENVIRONMENT" = "" ]]; then
-      anaconda upload ../$ENVIRONMENT -u statiskit --force
+      mv environment.yml
+      anaconda upload environment.yml -u statiskit --force
+      mv environment.yml ../$ENVIRONMENT
     fi
     #md5sum `conda build ../conda/$RECIPE -c conda-forge -c statiskit --output`
   fi
