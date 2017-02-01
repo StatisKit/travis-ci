@@ -9,7 +9,7 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
 elif [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
   curl http://statiskit.readthedocs.io/en/latest/_downloads/developer_install.sh -o developer_install.sh;
 fi
-export BASH_MODE=true
+export BATCH_MODE=true
 source developer_install.sh
 rm developer_install.sh
 
