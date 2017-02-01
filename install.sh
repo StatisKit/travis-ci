@@ -10,7 +10,9 @@ elif [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
   curl https://raw.githubusercontent.com/StatisKit/StatisKit/master/doc/developer/developer_install.sh -o developer_install.sh;
 fi
 export BATCH_MODE=true
+set +ev
 source developer_install.sh
+set -ev
 rm developer_install.sh
 
 set +ev
