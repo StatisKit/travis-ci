@@ -1,15 +1,11 @@
 set -ev
 
 if [[ ! "$ANACONDA_OFFICIAL" = "true" ]]; then
-  export ANACONDA_OFFICIAL=false
-fi
-
-if [[ "$ANACONDA_OFFICIAL" = "true" ]]; then
-  export ANACONDA_CHANNELS="-c statiskit -c conda-forge"
-  export ANACONDA_UPLOAD="statiskit"
-else
   export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge"
   export ANACONDA_UPLOAD=$ANACONDA_USERNAME
+else
+  export ANACONDA_CHANNELS="-c statiskit -c conda-forge"
+  export ANACONDA_UPLOAD="statiskit"
 fi
 
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
