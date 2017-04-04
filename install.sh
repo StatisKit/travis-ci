@@ -4,6 +4,14 @@ if [[ ! "$ANACONDA_OFFICIAL" = "true" ]]; then
   export ANACONDA_OFFICIAL=false
 fi
 
+if [[ "$ANACONDA_OFFICIAL" = "true" ]]; then
+  export ANACONDA_CHANNELS="-c statiskit -c conda-forge"
+  export ANACONDA_UPLOAD="statiskit"
+else
+  export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge"
+  export ANACONDA_UPLOAD=$ANACONDA_USERNAME
+fi
+
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   if [[ "$PLATFORM" = "x86" ]]; then
