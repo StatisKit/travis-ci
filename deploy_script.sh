@@ -14,7 +14,7 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
     #md5sum `conda build ../conda/$RECIPE -c conda-forge -c statiskit --output`
   fi
   if [[ ! "$RECIPE" = "" ]]; then
-      anaconda upload `conda build ../conda/$RECIPE $ANACONDA_CHANNELS` -u $ANACONDA_UPLOAD --force
+      anaconda upload `conda build ../conda/$RECIPE $ANACONDA_CHANNELS --output` -u $ANACONDA_UPLOAD --force
   fi
 fi
 
