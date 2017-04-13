@@ -1,10 +1,10 @@
 set +ve
 
 git clone https://github.com/StatisKit/StatisKit.git
-if [[ -f StatisKit/doc/$TRAVIS_ON_NAME_$INSTALL ]]; then
-  rm StatisKit/doc/$TRAVIS_ON_NAME_$INSTALL
+if [[ -f StatisKit/doc/$TRAVIS_OS_NAME"_"$INSTALL ]]; then
+  rm StatisKit/doc/$TRAVIS_OS_NAME"_"$INSTALL
 fi
-mv $INSTALL StatisKit/doc/$TRAVIS_OS_NAME_$INSTALL
+mv $INSTALL StatisKit/doc/$TRAVIS_OS_NAME"_"$INSTALL
 cd StatisKit
 git config --global user.email $GIT_EMAIL
 git config --global user.name $GIT_NAME
