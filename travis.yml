@@ -23,6 +23,7 @@ script:
     else
       ./$INSTALL --batch-mode=yes;
     fi
+  - bash ../travis.sh
   
 cache:
   directories:
