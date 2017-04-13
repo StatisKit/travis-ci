@@ -6,6 +6,8 @@ if [[ -f StatisKit/doc/$TRAVIS_ON_NAME_$INSTALL ]]; then
 fi
 mv $INSTALL StatisKit/doc/$TRAVIS_ON_NAME_$INSTALL
 cd StatisKit
+git config --global user.email $GIT_EMAIL
+git config --global user.name $GIT_NAME
 git commit -a -m "Update "$TRAVIS_ON_NAME_$INSTALL" script"
 echo "machine github.com" >> ~/.netrc
 echo "       login "$GITHUB_USERNAME >> ~/.netrc
