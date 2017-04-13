@@ -9,8 +9,7 @@ env:
   - INSTALL=developer_install
   
 install:
-  - pip install pyinstaller --install-option="--prefix=~/.local"
-  - export PATH=$PATH:~/.local/bin
+  - sudo pip install pyinstaller
   
 script:
   - git clone https://gist.github.com/8a8b5ea835ac3cf5c46f8e02b31f6f34.git install-scripts
