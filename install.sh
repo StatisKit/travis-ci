@@ -19,7 +19,7 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
 fi
 curl "https://raw.githubusercontent.com/StatisKit/StatisKit/master/doc/"$TRAVIS_OS_NAME"_developer_install" -o developer_install;
 chmod a+rwx developer_install
-./developer_install --batch-mode=yes --configure-only=yes
+./developer_install --batch-mode=yes --configure-only=yes --prefix=$HOME/miniconda
 rm developer_install
-
+export PATH=$HOME/miniconda/bin:$PATH
 set +ev
