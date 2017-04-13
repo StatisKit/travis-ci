@@ -18,6 +18,7 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
 fi
 curl "https://raw.githubusercontent.com/StatisKit/StatisKit/master/doc/"$TRAVIS_OS_NAME"_developer_install" -o developer_install;
+chmod a+rwx developer_install
 ./developer_install --batch-mode=yes --configure-only=yes
 rm developer_install
 
