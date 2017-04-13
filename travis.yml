@@ -19,9 +19,9 @@ script:
   - pyinstaller $INSTALL.py --onefile
   - cd dist
   - if [[ "$INSTALL" = "developer_install" ]]; then
-      source $INSTALL --configure-only=yes
+      source $INSTALL --configure-only=yes;
     else
-      source $INSTALL
+      source $INSTALL;
   
 cache:
   directories:
