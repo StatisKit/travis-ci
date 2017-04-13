@@ -1,4 +1,4 @@
-set -ve
+set +ve
 
 git clone https://github.com/StatisKit/StatisKit.git
 if [[ -f StatisKit/doc/$TRAVIS_ON_NAME_$INSTALL ]]; then
