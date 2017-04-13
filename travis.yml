@@ -1,5 +1,5 @@
 os:
-  # - linux
+  - linux
   - osx
 
 sudo: required
@@ -22,7 +22,3 @@ script:
       ./$INSTALL --batch-mode=yes;
     fi
   - bash ../../travis.sh
-  
-cache:
-  directories:
-  - $HOME/install-scripts/dist
