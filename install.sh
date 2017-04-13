@@ -22,6 +22,5 @@ chmod a+rwx developer_install
 ./developer_install --batch-mode=yes --configure-only=yes --prefix=$HOME/miniconda
 rm developer_install
 export PATH=$HOME/miniconda/bin:$PATH
-source activate statiskit-dev
 
 set +ev
