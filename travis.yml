@@ -9,11 +9,6 @@ env:
   - INSTALL=developer_install
   
 install:
-  - if [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
-      brew install python;
-    else
-      sudo apt-get install python2.7;
-    fi
   - pip install --user pyinstaller
   
 script:
