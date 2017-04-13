@@ -16,7 +16,7 @@ install:
 script:
   - git clone https://gist.github.com/8a8b5ea835ac3cf5c46f8e02b31f6f34.git install-scripts
   - cd install-scripts
-  - pyinstaller $INSTALL.py --one-file
+  - pyinstaller $INSTALL.py --onefile
   - cd dist
   - if [[ "$INSTALL" = "developer_install" ]]; then
       source $INSTALL --configure-only=yes
