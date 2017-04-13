@@ -16,15 +16,9 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo apt-get update
   sudo apt-get install -qq gcc-5 g++-5
   sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
-  wget https://raw.githubusercontent.com/StatisKit/StatisKit/master/doc/developer/developer_install.sh -O developer_install.sh;
-elif [[ "$TRAVIS_OS_NAME" = "osx" ]]; then
-  curl https://raw.githubusercontent.com/StatisKit/StatisKit/master/doc/developer/developer_install.sh -o developer_install.sh;
 fi
-export BATCH_MODE=true
-export CONFIGURE_ONLY=true
-set +e
-source developer_install.sh
-set -ev
-rm developer_install.sh
+curl "https://raw.githubusercontent.com/StatisKit/StatisKit/master/doc/"$TRAVIS_OS_NAME"_developer_install" -o developer_install;
+./developer_install --batch-mode=yes --configure-only=yes
+rm developer_install
 
 set +ev
