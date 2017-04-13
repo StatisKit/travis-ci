@@ -9,7 +9,7 @@ env:
   - INSTALL=developer_install
   
 install:
-  - pip install pyinstaller --install-option="--prefix=~/.local/bin"
+  - pip install pyinstaller --install-option="--prefix=~/.local"
   - export PATH=$PATH:~/.local/bin
   
 script:
