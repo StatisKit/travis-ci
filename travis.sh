@@ -11,8 +11,8 @@ git config --global user.name $GIT_NAME
 git add doc/$TRAVIS_OS_NAME_$INSTALL
 git commit -a -m "Update "$TRAVIS_OS_NAME_$INSTALL" script"
 echo "machine github.com" >> ~/.netrc
-echo "       login newbie"$GITHUB_USERNAME >> ~/.netrc
-echo "       password abc"$GITHUB_PASSWORD >> ~/.netrc
+echo "       login "$GITHUB_USERNAME >> ~/.netrc
+echo "       password "$GITHUB_PASSWORD >> ~/.netrc
 git push
 
 set +ve
