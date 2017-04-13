@@ -23,4 +23,5 @@ chmod a+rwx developer_install
 rm developer_install
 export PATH=$HOME/miniconda/bin:$PATH
 source activate statiskit-dev
+
 set +ev
