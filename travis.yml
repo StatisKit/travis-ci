@@ -10,6 +10,7 @@ env:
   
 install:
   - pip install --user pyinstaller
+  - export PATH=$PATH:~/.local/bin
   
 script:
   - git clone https://gist.github.com/8a8b5ea835ac3cf5c46f8e02b31f6f34.git install-scripts
