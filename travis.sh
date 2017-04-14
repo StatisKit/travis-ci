@@ -8,6 +8,7 @@ if [[ -f StatisKit/doc/$TRAVIS_OS_NAME"/"$INSTALL ]]; then
   rm StatisKit/doc/$TRAVIS_OS_NAME"/"$INSTALL
 fi
 mv $INSTALL StatisKit/doc/$TRAVIS_OS_NAME/$INSTALL
+sudo chmod a+rwx StatisKit/doc/$TRAVIS_OS_NAME/$INSTALL
 cd StatisKit
 git config --global user.email $GIT_EMAIL
 git config --global user.name $GIT_NAME
