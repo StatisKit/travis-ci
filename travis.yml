@@ -5,8 +5,8 @@ os:
 sudo: required
 
 env:
-  - INSTALL=user_install
-  - INSTALL=developer_install
+  - INSTALL=user
+  - INSTALL=developer
   
 install:
   - sudo pip install pyinstaller
@@ -14,11 +14,11 @@ install:
 script:
   - git clone https://github.com/StatisKit/install-scripts.git
   - cd install-scripts
-  - pyinstaller $INSTALL.py --onefile
+  - python pre_install.py --target=$INSTALL
   - cd dist
-  - if [[ "$INSTALL" = "developer_install" ]]; then
-      ./$INSTALL --configure-only=yes --batch-mode=yes;
+  - if [[ "$INSTALL" = "developer" ]]; then
+      ./developer_install --configure-only=yes --batch-mode=yes;
     else
-      ./$INSTALL --batch-mode=yes;
+      ./user_install --batch-mode=yes;
     fi
   - bash ../../travis.sh
