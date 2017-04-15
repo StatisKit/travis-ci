@@ -10,7 +10,6 @@ env:
   
 install:
   - sudo pip install pyinstaller
-  - sudo pip install certifi
   
 script:
   - git clone https://github.com/StatisKit/install-scripts.git
