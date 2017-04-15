@@ -17,8 +17,8 @@ script:
   - python pre_install.py --target=$INSTALL
   - cd dist
   - if [[ "$INSTALL" = "developer" ]]; then
-      ./developer_install --configure-only=yes --batch-mode=yes;
+      ./developer_install --configure-only=yes --prepend-path=no;
     else
-      ./user_install --batch-mode=yes;
+      ./user_install --prepend-path=no;
     fi
   - bash ../../travis.sh
