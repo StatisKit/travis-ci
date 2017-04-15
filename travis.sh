@@ -7,7 +7,7 @@ fi
 if [[ -f "StatisKit/doc/"$TRAVIS_OS_NAME"/"$INSTALL"_install" ]]; then
   rm "StatisKit/doc/"$TRAVIS_OS_NAME"/"$INSTALL"_install"
 fi
-mv $INSTALL "StatisKit/doc/"$TRAVIS_OS_NAME"/"$INSTALL"_install"
+mv $INSTALL"_install" "StatisKit/doc/"$TRAVIS_OS_NAME"/"$INSTALL"_install"
 sudo chmod a+rwx "StatisKit/doc/$TRAVIS_OS_NAME"/"$INSTALL"_install"
 cd StatisKit
 git config --global user.email $GIT_EMAIL
