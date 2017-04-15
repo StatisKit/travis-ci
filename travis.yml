@@ -13,7 +13,7 @@ install:
   - sudo pip install certifi
   
 script:
-  - git clone https://gist.github.com/8a8b5ea835ac3cf5c46f8e02b31f6f34.git install-scripts
+  - git clone https://github.com/StatisKit/install-scripts.git
   - cd install-scripts
   - pyinstaller $INSTALL.py --onefile
   - cd dist
