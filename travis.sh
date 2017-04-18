@@ -1,6 +1,6 @@
 set +ve
 
-git clone https://github.com/StatisKit/StatisKit.git
+git clone https://github.com/StatisKit/StatisKit.git --depth=1
 if [[ ! -d StatisKit/doc/$TRAVIS_OS_NAME ]]; then
   mkdir StatisKit/doc/$TRAVIS_OS_NAME
 fi
