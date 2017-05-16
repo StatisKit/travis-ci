@@ -22,5 +22,6 @@ chmod a+rwx developer_install
 ./developer_install --prepend-path=no --configure-only=yes --prefix=$HOME/miniconda
 rm developer_install
 export PATH=$HOME/miniconda/bin:$PATH
+export TEST_LEVEL=1
 
 set +ev
