@@ -10,9 +10,8 @@ if [[ ! "$RECIPE" = "" ]]; then
 elif [[ ! "$ENVIRONMENT" = "" ]]; then
   conda env update -f ../$ENVIRONMENT
 elif [[ ! "$DOCKERFILE" = "" ]]; then
-  docker pull ubuntu:14.04
   mv ../docker/$DOCKERFILE ../docker/Dockerfile
-  docker build -t statiskit/$DOCKERFILE:14.04 ../docker
+  docker build -t statiskit/$DOCKERFILE ../docker
   mv ../docker/Dockerfile ../docker/$DOCKERFILE
 fi
 
