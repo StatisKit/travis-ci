@@ -9,12 +9,11 @@ if [[ ! "$RECIPE" = "" ]]; then
   $TRAVIS_WAIT conda build ../conda/$RECIPE $ANACONDA_CHANNELS
 elif [[ ! "$ENVIRONMENT" = "" ]]; then
   conda env update -f ../$ENVIRONMENT
-elif [[ ! "$UBUNTU" = "" ]]; then
-  docker pull ubuntu:$UBUNTU
-  docker tag ubuntu:$UBUNTU statiskit/ubuntu
-  mv ../docker/ubuntu ../docker/Dockerfile
-  docker build -t statiskit/ubuntu:$UBUNTU ../docker
-  mv ../docker/Dockerfile ../docker/ubuntu
+elif [[ ! "$DOCKERFILE" = "" ]]; then
+  docker pull ubuntu:14.04
+  mv ../docker/$DOCKERFILE ../docker/Dockerfile
+  docker build -t statiskit/$DOCKERFILE:14.04 ../docker
+  mv ../docker/Dockerfile ../docker/$DOCKERFILE
 fi
 
 set +ev
