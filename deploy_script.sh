@@ -1,7 +1,7 @@
 set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  docker push statiskit/$DOCKERFILE:14.04
+  docker push statiskit/$DOCKERFILE
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
