@@ -8,7 +8,7 @@ if [[ ! "$RECIPE" = "" ]]; then
   fi
   $TRAVIS_WAIT conda build ../conda/$RECIPE $ANACONDA_CHANNELS
 elif [[ ! "$NOTEBOOK" = "" ]]; then
-  jupyter nbconvert --ExecutePreprocessor.timeout=3600 --to notebook --execute ../$NOTEBOOK.ipynb --output ../$NOTEBOOK.ipynb
+  jupyter nbconvert --ExecutePreprocessor.timeout=3600 --to notebook --execute ../$NOTEBOOK --output ../$NOTEBOOK
 elif [[ ! "$DOCKERFILE" = "" ]]; then
   mv ../docker/$DOCKERFILE ../docker/Dockerfile
   docker build -t statiskit/$DOCKERFILE ../docker
