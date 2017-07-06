@@ -8,4 +8,10 @@ if [[ ! "$RECIPE" = "" ]]; then
 	fi
 fi
 
+if [[ ! "$ENVIRONMENT" = "" ]]; then
+	cd ..
+	conda env create -f environment.yml
+	source activate $ENVIRONMENT
+fi
+
 set +ev
