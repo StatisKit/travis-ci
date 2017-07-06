@@ -7,8 +7,8 @@ if [[ ! "$RECIPE" = "" ]]; then
     TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
   fi
   $TRAVIS_WAIT conda build ../conda/$RECIPE $ANACONDA_CHANNELS
-elif [[ ! "$ENVIRONMENT" = "" ]]; then
-  conda env update -f ../$ENVIRONMENT
+elif [[ ! "$NOTEBOOK" = "" ]]; then
+  jupyter nbconvert --ExecutePreprocessor.timeout=3600 --to notebook --execute ../$NOTEBOOK.ipynb --output ../$NOTEBOOK.ipynb
 elif [[ ! "$DOCKERFILE" = "" ]]; then
   mv ../docker/$DOCKERFILE ../docker/Dockerfile
   docker build -t statiskit/$DOCKERFILE ../docker
