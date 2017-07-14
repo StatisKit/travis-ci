@@ -11,7 +11,7 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
     fi
   fi
   if [[ ! "$RECIPE" = "" ]]; then
-      anaconda upload `conda build ../conda/$RECIPE $ANACONDA_CHANNELS --output` -u $ANACONDA_UPLOAD --force
+      anaconda upload `conda build ../conda/$RECIPE $ANACONDA_CHANNELS --output` -u $ANACONDA_UPLOAD --force --no-progress
   fi
 fi
 
