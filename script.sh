@@ -6,7 +6,7 @@ if [[ ! "$CONDA_RECIPE" = "" ]]; then
   elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
     TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
   fi
-  $TRAVIS_WAIT conda build ../bin/$CONDA_RECIPE $ANACONDA_CHANNELS
+  $TRAVIS_WAIT conda build ../bin/conda/$CONDA_RECIPE $ANACONDA_CHANNELS
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   jupyter nbconvert --ExecutePreprocessor.timeout=3600 --to notebook --execute ../share/$JUPYTER_NOTEBOOK --output ../share/$JUPYTER_NOTEBOOK
 elif [[ ! "$DOCKERFILE" = "" ]]; then
