@@ -2,7 +2,7 @@ set -e
 set +v
 
 DOCKER_DEPLOY="false"
-if [[ "$TRAVIS_OS_NAME" = "linux" &&  ! "$DOCKER_USERNAME" = "" && ! "$DOCKER_PASSWORD" = "" && "$RECIPE" = "" && "$ENVIRONMENT" = "" ]]; then
+if [[ "$TRAVIS_OS_NAME" = "linux" &&  ! "$DOCKER_USERNAME" = "" && ! "$DOCKER_PASSWORD" = "" && "$CONDA_RECIPE" = "" && "$CONDA_ENVIRONMENT" = "" ]]; then
     DOCKER_DEPLOY="true"
 fi
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
@@ -12,7 +12,7 @@ export DOCKER_DEPLOY=$DOCKER_DEPLOY
 
 ANACONDA_DEPLOY="false"
 if [[ ! "$ANACONDA_USERNAME" = "" && ! "$ANACONDA_PASSWORD" = "" ]]; then
-    if [[ ! "$RECIPE" = "" || ! "$ENVIRONMENT" = "" ]]; then
+    if [[ ! "$CONDA_RECIPE" = "" || ! "$CONDA_ENVIRONMENT" = "" ]]; then
         ANACONDA_DEPLOY="true"
     fi
 fi

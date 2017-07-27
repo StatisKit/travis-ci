@@ -1,16 +1,16 @@
 set -ev
 
-if [[ ! "$RECIPE" = "" ]]; then
-	if [[ -f ../conda/$RECIPE/travis-ci.patch ]]; then
+if [[ ! "$CONDA_RECIPE" = "" ]]; then
+	if [[ -f ../bin/$CONDA_RECIPE/travis-ci.patch ]]; then
 		cd ..
-		git apply -v conda/$RECIPE/travis-ci.patch
+		git apply -v bin/$CONDA_RECIPE/travis-ci.patch
 		cd travis-ci
 	fi
 fi
 
-if [[ ! "$ENVIRONMENT" = "" ]]; then
+if [[ ! "$CONDA_ENVIRONMENT" = "" ]]; then
 	conda env create -f ../environment.yml
-	source activate $ENVIRONMENT
+	source activate $CONDA_ENVIRONMENT
 fi
 
 set +ev
