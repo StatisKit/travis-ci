@@ -11,7 +11,7 @@ elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   jupyter nbconvert --ExecutePreprocessor.timeout=3600 --to notebook --execute ../share/jupyter/$JUPYTER_NOTEBOOK --output ../share/jupyter/$JUPYTER_NOTEBOOK
 elif [[ ! "$DOCKERFILE" = "" ]]; then
   mv ../bin/docker/$DOCKERFILE ../bin/docker/Dockerfile
-  docker build -t statiskit/$DOCKERFILE ../docker
+  docker build -t statiskit/$DOCKERFILE ../bin/docker
   mv ../bin/docker/Dockerfile ../bin/docker/$DOCKERFILE
 fi
 
