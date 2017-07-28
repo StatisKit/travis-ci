@@ -17,7 +17,7 @@ elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
 elif [[ ! "$DOCKERFILE" = "" ]]; then
   cd ../bin/docker
   mv $DOCKERFILE Dockerfile
-  $TRAVIS_WAIT docker build -t statiskit/$DOCKERFILE ../bin/docker
+  $TRAVIS_WAIT docker build -t statiskit/$DOCKERFILE .
   mv Dockerfile $DOCKERFILE
   cd ../../travis-ci
 fi
