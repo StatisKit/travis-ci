@@ -1,6 +1,6 @@
 set -ev
 
-if [[ ! "$ANACONDA_OFFICIAL" = "true" ]]; then
+if [[ ! "$ANACONDA_OFFICIAL" = "true" && ! "$ANACONDA_USERNAME" = "" ]]; then
   export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge"
   export ANACONDA_UPLOAD=$ANACONDA_USERNAME
 else
