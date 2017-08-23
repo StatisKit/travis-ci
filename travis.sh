@@ -17,5 +17,6 @@ echo "machine github.com" >> ~/.netrc
 echo "       login "$GITHUB_USERNAME >> ~/.netrc
 echo "       password "$GITHUB_PASSWORD >> ~/.netrc
 git push
+rm  ~/.netrc
 
 set +ve
