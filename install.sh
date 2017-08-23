@@ -3,6 +3,13 @@ set -ev
 if [[ "$PYTHON_VERSION" = "" ]]; then
   export PYTHON_VERSION=2
 fi
+
+if  [[ "$PYTHON_VERSION" = "2" ]]; then
+  export PYTHON_VERSION=2.7
+elif [[ "$PYTHON_VERSION" = "3" ]]; then
+  export PYTHON_VERSION=3.6
+fi
+
 if [[ ! "$ANACONDA_OFFICIAL" = "true" && ! "$ANACONDA_USERNAME" = "" ]]; then
   export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge"
   export ANACONDA_UPLOAD=$ANACONDA_USERNAME
