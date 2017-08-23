@@ -8,7 +8,7 @@ fi
   
 if [[ ! "$CONDA_RECIPE" = "" ]]; then
   cd ../bin/conda
-  $TRAVIS_WAIT conda build $CONDA_RECIPE $ANACONDA_CHANNELS
+  $TRAVIS_WAIT conda build --python=$PYTHON_VERSION $CONDA_RECIPE $ANACONDA_CHANNELS
   cd ../../travis-ci
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   cd ../share/jupyter
