@@ -9,7 +9,10 @@ fi
 if [[ -f "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install" ]]; then
   rm "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"_install"
 fi
+ls install-binaries/"$TRAVIS_OS_NAME"
+ls install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"
 mv $INSTALL"_install install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install"
+cd install-binaries
 git config --global user.email $GIT_EMAIL
 git config --global user.name $GIT_NAME
 git add $TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install"
@@ -20,5 +23,6 @@ echo "       login "$GITHUB_USERNAME >> ~/.netrc
 echo "       password "$GITHUB_PASSWORD >> ~/.netrc
 git push
 rm  ~/.netrc
+cd ..
 
 set +ve
