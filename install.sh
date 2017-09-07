@@ -1,13 +1,7 @@
 set -ev
 
-if [[ "$PYTHON_VERSION" = "" ]]; then
-  export PYTHON_VERSION=2
-fi
-
-if  [[ "$PYTHON_VERSION" = "2" ]]; then
-  export PYTHON_VERSION=2.7
-elif [[ "$PYTHON_VERSION" = "3" ]]; then
-  export PYTHON_VERSION=3.6
+if [[ "$CONDA_VERSION" = "" ]]; then
+  export CONDA_VERSION=2
 fi
 
 if [[ ! "$ANACONDA_OFFICIAL" = "true" && ! "$ANACONDA_USERNAME" = "" ]]; then
@@ -27,7 +21,7 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo apt-get install -qq gcc-5 g++-5
   sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
 fi
-curl "https://raw.githubusercontent.com/StatisKit/install-binaries/master/"$TRAVIS_OS_NAME"/developer_install" -o developer_install;
+curl "https://raw.githubusercontent.com/StatisKit/install-binaries/master/"$TRAVIS_OS_NAME"/PY"$CONDA_VERSION/"developer_install" -o developer_install;
 chmod a+rwx developer_install
 ./developer_install --prepend-path=no --configure-only=yes --prefix=$HOME/miniconda
 rm developer_install
