@@ -10,8 +10,8 @@ if [[ -f "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_inst
   rm "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"_install"
 fi
 ls install-binaries/"$TRAVIS_OS_NAME"
-ls install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"
 mv $INSTALL"_install install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install"
+ls install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"
 cd install-binaries
 git config --global user.email $GIT_EMAIL
 git config --global user.name $GIT_NAME
