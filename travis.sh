@@ -11,7 +11,7 @@ if [[ -f "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_inst
 fi
 ls install-binaries/"$TRAVIS_OS_NAME"
 echo $INSTALL"_install install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install"
-mv $INSTALL"_install install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION
+mv $INSTALL"_install" "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION
 ls install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"
 cd install-binaries
 git config --global user.email $GIT_EMAIL
