@@ -7,12 +7,12 @@ sudo: required
 env:
   - INSTALL=user
     PYTHON_VERSION=2
-  - INSTALL=developer
-    PYTHON_VERSION=2
-  - INSTALL=user
-    PYTHON_VERSION=3
-  - INSTALL=developer
-    PYTHON_VERSION=3
+  # - INSTALL=developer
+  #   PYTHON_VERSION=2
+  # - INSTALL=user
+  #   PYTHON_VERSION=3
+  # - INSTALL=developer
+  #   PYTHON_VERSION=3
 install:
   - sudo pip install pyinstaller
   
