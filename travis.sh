@@ -7,8 +7,8 @@ fi
 if [[ ! -d "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION ]]; then
   mkdir "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION
 fi
-if [[ -f "install-binaries/"$TRAVIS_OS_NAME"/"$INSTALL"_install" ]]; then
-  rm "install-binaries/"$TRAVIS_OS_NAME"/"$INSTALL"_install"
+if [[ -f "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install" ]]; then
+  rm "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"_install"
 fi
 mv $INSTALL"_install install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install"
 git config --global user.email $GIT_EMAIL
