@@ -1,7 +1,6 @@
 set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  docker tag statiskit/$DOCKERFILE statiskit/$DOCKERFILE:$CONDA_VERSION
   docker push statiskit/$DOCKERFILE:$CONDA_VERSION
 fi
 
