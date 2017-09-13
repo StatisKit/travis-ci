@@ -12,7 +12,7 @@ if [[ ! "$CONDA_RECIPE" = "" ]]; then
   cd ../../travis-ci
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   cd ../share/jupyter
-  $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.timeout=3600 --to notebook --execute $JUPYTER_NOTEBOOK --output $JUPYTER_NOTEBOOK
+  $TRAVIS_WAIT jupyter nbconvert --MappingKernelManager.default_kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=3600 --to notebook --execute $JUPYTER_NOTEBOOK --output $JUPYTER_NOTEBOOK
   cd ../../travis-ci
 elif [[ ! "$DOCKERFILE" = "" ]]; then
   cd ../bin/docker
