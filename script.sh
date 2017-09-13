@@ -17,7 +17,7 @@ elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
 elif [[ ! "$DOCKERFILE" = "" ]]; then
   cd ../bin/docker
   mv $DOCKERFILE Dockerfile
-  $TRAVIS_WAIT docker build -t statiskit/$DOCKERFILE .
+  $TRAVIS_WAIT docker build --build-arg CONDA_VERSION=$CONDA_VERSION -t statiskit/$DOCKERFILE .
   mv Dockerfile $DOCKERFILE
   cd ../../travis-ci
 fi
