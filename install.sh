@@ -20,6 +20,12 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo apt-get update
   sudo apt-get install -qq gcc-5 g++-5
   sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+  if [[ ! "$DOCKERFILE" = "" ]]; then
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get update
+    sudo apt-get -y install docker-ce
+  fi
 fi
 curl "https://raw.githubusercontent.com/StatisKit/install-binaries/master/"$TRAVIS_OS_NAME"/PY"$CONDA_VERSION/"developer_install" -o developer_install;
 chmod a+rwx developer_install
