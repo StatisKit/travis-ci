@@ -8,7 +8,7 @@ if [[ ! -d "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION ]]; then
   mkdir "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION
 fi
 if [[ -f "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install" ]]; then
-  rm "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"_install"
+  rm "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install"
 fi
 echo $INSTALL"_install install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION"/"$INSTALL"_install"
 mv $INSTALL"_install" "install-binaries/"$TRAVIS_OS_NAME"/PY"$PYTHON_VERSION
