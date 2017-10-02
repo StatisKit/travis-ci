@@ -5,10 +5,10 @@ if [[ "$CONDA_VERSION" = "" ]]; then
 fi
 
 if [[ ! "$ANACONDA_OFFICIAL" = "true" && ! "$ANACONDA_USERNAME" = "" ]]; then
-  export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge"
+  export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge "$ANACONDA_CHANNELS
   export ANACONDA_UPLOAD=$ANACONDA_USERNAME
 else
-  export ANACONDA_CHANNELS="-c statiskit -c conda-forge"
+  export ANACONDA_CHANNELS="-c statiskit -c conda-forge "$ANACONDA_CHANNELS
   export ANACONDA_UPLOAD="statiskit"
 fi
 
