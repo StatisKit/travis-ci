@@ -5,10 +5,10 @@ if [[ "$CONDA_VERSION" = "" ]]; then
 fi
 
 if [[ ! "$ANACONDA_OFFICIAL" = "true" && ! "$ANACONDA_USERNAME" = "" ]]; then
-  export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge "$ANACONDA_CHANNELS
+  export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit -c conda-forge"
   export ANACONDA_UPLOAD=$ANACONDA_USERNAME
 else
-  export ANACONDA_CHANNELS="-c statiskit -c conda-forge "$ANACONDA_CHANNELS
+  export ANACONDA_CHANNELS="-c statiskit -c conda-forge"
   export ANACONDA_UPLOAD="statiskit"
 fi
 
@@ -27,13 +27,21 @@ if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
     sudo apt-get -y install docker-ce
   fi
 fi
-curl "https://raw.githubusercontent.com/StatisKit/install-binaries/master/"$TRAVIS_OS_NAME"/PY"$CONDA_VERSION/"developer_install" -o developer_install;
-chmod a+rwx developer_install
-./developer_install --prepend-path=no --configure-only=yes --prefix=$HOME/miniconda
-rm developer_install
+
+if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
+  curl "https://repo.continuum.io/miniconda/Miniconda"$CONDA_VERSION"-latest-Linux-x86_64.sh" -o miniconda.sh
+else
+  curl "https://repo.continuum.io/miniconda/Miniconda"$CONDA_VERSION"-latest-MacOSX-x86_64.sh" -o miniconda.sh
+fi
+
+chmod a+rwx miniconda.sh
+./miniconda.sh -b -p $HOME/miniconda
+rm miniconda.sh
 export PATH=$HOME/miniconda/bin:$PATH
 export TEST_LEVEL=1
 source activate root
+conda update conda
+conda install conda-build anaconda-client
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
 set +ev
