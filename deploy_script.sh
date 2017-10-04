@@ -1,7 +1,7 @@
 set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  docker push statiskit/$DOCKERFILE:$CONDA_VERSION
+  docker push statiskit/$DOCKERFILE:$PYTHON_VERSION
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
