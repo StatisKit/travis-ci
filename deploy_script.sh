@@ -1,7 +1,7 @@
 set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  docker push statiskit/$DOCKERFILE:$PYTHON_VERSION
+  docker push statiskit/$DOCKERFILE:latest-py$PYTHON_VERSION
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
