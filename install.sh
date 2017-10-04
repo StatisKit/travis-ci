@@ -33,6 +33,6 @@ chmod a+rwx developer_install
 rm developer_install
 export PATH=$HOME/miniconda/bin:$PATH
 export TEST_LEVEL=1
-export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
+export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
 set +ev
