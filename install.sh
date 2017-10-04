@@ -40,6 +40,7 @@ rm miniconda.sh
 export PATH=$HOME/miniconda/bin:$PATH
 export TEST_LEVEL=1
 source activate root
+conda config --set always_yes yes
 conda update conda
 conda install conda-build anaconda-client
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
