@@ -9,8 +9,9 @@ if [[ ! "$CONDA_RECIPE" = "" ]]; then
 fi
 
 if [[ ! "$CONDA_ENVIRONMENT" = "" ]]; then
-	conda env create -f ../environment.yml
+        conda env create -n $CONDA_ENVIRONMENT python=$CONDA_VERSION
 	source activate $CONDA_ENVIRONMENT
+	conda env update -f ../environment.yml
 fi
 
 set +ev
