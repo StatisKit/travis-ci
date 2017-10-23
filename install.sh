@@ -12,6 +12,10 @@ else
   export ANACONDA_UPLOAD="statiskit"
 fi
 
+if [[ "$TRAVIS_TAG" = "" ]]; then
+  export TRAVIS_TAG="latest"
+fi
+
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   if [[ "$PLATFORM" = "x86" ]]; then
