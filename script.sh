@@ -13,9 +13,9 @@ if [[ ! "$CONDA_RECIPE" = "" ]]; then
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   cd ../share/jupyter
   $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.allow_errors=True --ExecutePreprocessor.kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=3600 --to notebook --execute $JUPYTER_NOTEBOOK --output $JUPYTER_NOTEBOOK
-  if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
-    clear && cat $JUPYTER_NOTEBOOK && clear
-  fi
+  # if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
+  #   clear && cat $JUPYTER_NOTEBOOK && clear
+  # fi
   cd ../../travis-ci
 elif [[ ! "$DOCKERFILE" = "" ]]; then
   cd ../bin/docker
