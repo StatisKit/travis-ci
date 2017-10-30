@@ -11,6 +11,9 @@ else
   export ANACONDA_CHANNELS="-c statiskit"
   export ANACONDA_UPLOAD="statiskit"
 fi
+if [[ `python -c "import os; print(str(os.environ.get('CONDA_RECPIPE', '').startswith('r-')).lower())"` = "true" ]]; then
+  export ANACONDA_CHANNELS=$ANACONDA_CHANNELS" -c r"
+fi
 
 if [[ "$TRAVIS_TAG" = "" ]]; then
   export TRAVIS_TAG="latest"
