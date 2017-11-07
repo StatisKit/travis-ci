@@ -10,6 +10,18 @@ if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
   fi
 fi
 
+if [[ ! "$DOCKER_USERNAME" = "" ]]; then
+  if [[ "$DOCKER_UPLOAD" = "" ]]; then
+    export DOCKER_UPLOAD=$DOCKER_USERNAME
+  fi
+fi
+
+if [[ ! "$DOCKERFILE" = "" ]]; then
+  if [[ "$DOCKER_REPOSITORY" = "" ]]; then
+    export DOCKER_REPOSITORY=`basename $(dirname ..\$DOCKERFILE)`
+  fi
+fi
+
 if [[ "$TRAVIS_TAG" = "" ]]; then
   export TRAVIS_TAG="latest"
 fi
