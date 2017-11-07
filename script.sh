@@ -1,23 +1,13 @@
 set -ev
   
 if [[ ! "$CONDA_RECIPE" = "" ]]; then
-  cd ../bin/conda
-  $TRAVIS_WAIT conda build --old-build-string --no-locking --python=$PYTHON_VERSION $CONDA_RECIPE $ANACONDA_CHANNELS
-  cd ../../travis-ci
+  $TRAVIS_WAIT conda build --old-build-string --no-locking --python=$PYTHON_VERSION ../$CONDA_RECIPE
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
-  cd ../share/jupyter
-  $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=3600 --to notebook --execute $JUPYTER_NOTEBOOK --output $JUPYTER_NOTEBOOK
-  # $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.allow_errors=True --ExecutePreprocessor.kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=3600 --to notebook --execute $JUPYTER_NOTEBOOK --output $JUPYTER_NOTEBOOK
-  # if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
-  #   clear && cat $JUPYTER_NOTEBOOK && clear
-  # fi
-  cd ../../travis-ci
+  $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=0 --to notebook --execute ../$JUPYTER_NOTEBOOK --output ../$JUPYTER_NOTEBOOK
 elif [[ ! "$DOCKERFILE" = "" ]]; then
-  cd ../bin/docker
-  mv $DOCKERFILE Dockerfile
+  mv ../$DOCKERFILE Dockerfile
   eval $TRAVIS_WAIT" docker build --build-arg CONDA_VERSION=$CONDA_VERSION -t statiskit/"$DOCKERFILE":"$TRAVIS_TAG"-py"$CONDA_VERSION"k ."
-  mv Dockerfile $DOCKERFILE
-  cd ../../travis-ci
+  mv Dockerfile ../$DOCKERFILE
 fi
 
 set +ev
