@@ -1,10 +1,4 @@
 set -ev
-
-if [[ "$TRAVIS_WAIT" = "true" ]]; then
-  TRAVIS_WAIT=travis_wait
-elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
-  TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
-fi
   
 if [[ ! "$CONDA_RECIPE" = "" ]]; then
   cd ../bin/conda
