@@ -14,6 +14,12 @@ if [[ "$TRAVIS_TAG" = "" ]]; then
   export TRAVIS_TAG="latest"
 fi
 
+if [[ "$TRAVIS_WAIT" = "true" ]]; then
+  TRAVIS_WAIT=travis_wait
+elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
+  TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
+fi
+
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
   sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   if [[ "$PLATFORM" = "x86" ]]; then
