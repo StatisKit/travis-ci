@@ -9,13 +9,8 @@ if [[ "$DOCKER_DEPLOY" = "true" ]]; then
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
-  if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then		
-    if [[ ! "$CONDA_ENVIRONMENT" = "" ]]; then		
-      anaconda upload ../environment.yml -u $ANACONDA_UPLOAD --force		
-    fi
-  fi
   if [[ ! "$CONDA_RECIPE" = "" ]]; then
-      anaconda upload `conda build --old-build-string --python=$PYTHON_VERSION ../bin/conda/$CONDA_RECIPE $ANACONDA_CHANNELS --output` -u $ANACONDA_UPLOAD --force --no-progress
+      anaconda upload `conda build --old-build-string --python=$PYTHON_VERSION ../$CONDA_RECIPE --output` -u $ANACONDA_UPLOAD --force --no-progress
   fi
 fi
 
