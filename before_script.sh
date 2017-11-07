@@ -1,9 +1,9 @@
 set -ev
 
 if [[ ! "$CONDA_RECIPE" = "" ]]; then
-    if [[ -f ../bin/conda/$CONDA_RECIPE/travis-ci.patch ]]; then
+    if [[ -f ../$CONDA_RECIPE/travis-ci.patch ]]; then
         cd ..
-        git apply -v bin/conda/$CONDA_RECIPE/travis-ci.patch
+        git apply -v $CONDA_RECIPE/travis-ci.patch
         cd travis-ci
     fi
 fi
