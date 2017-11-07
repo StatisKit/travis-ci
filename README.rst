@@ -93,6 +93,9 @@ If you want to:
   * :code:`JUPYTER_NOTEBOOK`.
     The path to the **Jupyter** notbook to run.
     This path must be relative to the repository root.
+  * :code:`CONDA_ENVIRONMENT`.
+    The path to the **Conda** environment to use when runnning the **Jupyter** notebook.
+   
     
 .. note::
 
