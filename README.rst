@@ -1,6 +1,11 @@
 travis-ci: Tools for Using Travis CI
 ====================================
 
+.. note::
+
+    It can be conveniant to work in a :code:`travis.yml` file instead of :code:`.travis.yml` file.
+    To do so, create the symoblic link :code:`.travis.yml` to the :code:`travis.yml` file.
+    
 This collection of scripts for **Travis CI** can be used with the following :code:`.travis.yml` file:
 
 .. code-block:: yaml
