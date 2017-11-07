@@ -4,15 +4,10 @@ if [[ "$CONDA_VERSION" = "" ]]; then
   export CONDA_VERSION=2
 fi
 
-if [[ ! "$ANACONDA_OFFICIAL" = "true" && ! "$ANACONDA_USERNAME" = "" ]]; then
-  export ANACONDA_CHANNELS="-c $ANACONDA_USERNAME -c statiskit"
-  export ANACONDA_UPLOAD=$ANACONDA_USERNAME
-else
-  export ANACONDA_CHANNELS="-c statiskit"
-  export ANACONDA_UPLOAD="statiskit"
-fi
-if [[ `python -c "import os; print(str(os.environ.get('CONDA_RECPIPE', '').startswith('r-')).lower())"` = "true" ]]; then
-  export ANACONDA_CHANNELS=$ANACONDA_CHANNELS" -c r"
+if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
+  if [[ "$ANACONDA_UPLOAD" = "" ]]; then
+    export ANACONDA_UPLOAD=$ANACONDA_USERNAME
+  fi
 fi
 
 if [[ "$TRAVIS_TAG" = "" ]]; then
@@ -46,11 +41,15 @@ chmod a+rwx miniconda.sh
 ./miniconda.sh -b -p $HOME/miniconda
 rm miniconda.sh
 export PATH=$HOME/miniconda/bin:$PATH
-export TEST_LEVEL=1
 source activate root
-conda config --set always_yes yes
+if [[ ! "$ANACONDA_CHANNELS" = "" ]]; then
+  conda config --add channels $ANACONDA_CHANNELS
+fi
+source config.sh
+
 conda update conda
 conda install conda-build anaconda-client
+
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
 set +ev
