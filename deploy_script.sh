@@ -1,11 +1,13 @@
 set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  eval "docker push statiskit/"$DOCKERFILE":"$TRAVIS_TAG"-py"$CONDA_VERSION"k"
-  if [[ ! "$TRAVIS_TAG" = "latest" ]]; then
-    eval docker tag statiskit/"$DOCKERFILE":"$TRAVIS_TAG"-py"$CONDA_VERSION"k" statiskit/"$DOCKERFILE":latest-py"$CONDA_VERSION"k"
-    eval "docker push statiskit/"$DOCKERFILE":latest-py"$CONDA_VERSION"k"
-  fi
+    if [[ ! "$DOCKERFILE" = "" ]]; then
+        eval "docker push "$DOCKER_UPLOAD"/"$DOCKER_REPOSITORY":"$TRAVIS_TAG"-py"$CONDA_VERSION"k"
+        if [[ ! "$TRAVIS_TAG" = "latest" ]]; then
+            eval "docker tag "$DOCKER_UPLOAD"/"$DOCKER_REPOSITORY":"$TRAVIS_TAG"-py"$CONDA_VERSION"k"$DOCKER_UPLOAD"/"$DOCKER_REPOSITORY":latest-py"$CONDA_VERSION"k"
+            eval "docker push "$DOCKER_UPLOAD"/"$DOCKER_REPOSITORY":latest-py"$CONDA_VERSION"k"
+        fi
+    fi
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
