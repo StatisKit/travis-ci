@@ -10,10 +10,26 @@ if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
   fi
 fi
 
+if [[ "$ANACONDA_DEPLOY" = "" ]]; then
+    if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
+        export ANACONDA_DEPLOY=true
+    else
+        export ANACONDA_DEPLOY=false
+    fi
+fi
+
 if [[ ! "$DOCKER_USERNAME" = "" ]]; then
   if [[ "$DOCKER_UPLOAD" = "" ]]; then
     export DOCKER_UPLOAD=$DOCKER_USERNAME
   fi
+fi
+
+if [[ "$DOCKER_DEPLOY" = "" ]]; then
+    if [[ ! "$DOCKER_USERNAME" = "" ]]; then
+        export DOCKER_DEPLOY=true
+    else
+        export DOCKER_DEPLOY=false
+    fi
 fi
 
 if [[ ! "$DOCKERFILE" = "" ]]; then
