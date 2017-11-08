@@ -5,10 +5,10 @@ conda config --add channels statiskit
 if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
   conda config --add channels $ANACONDA_UPLOAD
   if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
-      conda config --add channels $ANACONDA_UPLOAD:$ANACONDA_LABEL
+      conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL
   fi
 else
   if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
-      conda config --add channels statiskit:$ANACONDA_LABEL
+      conda config --add channels statiskit/label/$ANACONDA_LABEL
   fi
 fi
