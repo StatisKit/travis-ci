@@ -29,7 +29,7 @@ if [[ ! "$DOCKER_USERNAME" = "" ]]; then
 fi
 
 if [[ "$DOCKER_DEPLOY" = "" ]]; then
-    if [[ ! "$DOCKER_USERNAME" = "" ]]; then
+    if [[ ! "$DOCKER_USERNAME" = "" && "$TRAVIS_OS_NAME" = "linux" ]]; then
         export DOCKER_DEPLOY=true
     else
         export DOCKER_DEPLOY=false
