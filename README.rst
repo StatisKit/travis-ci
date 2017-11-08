@@ -83,7 +83,9 @@ If you want to:
     Deployment into the **Anaconda Cloud**.
     If set to :code:`true` (default if :code:`ANACONDA_USERNAME` is provided), the **Conda** recipe built will be deployed in the **Anaconda Cloud**.
     If set to :code:`false` (default if :code:`ANACONDA_USERNAME` is not provided), the **Conda** recipe built will not be deployed in the **Anaconda Cloud**.
-    
+  * :code:`ANACONDA_LABEL` equal to :code:`main` by default.
+    Label to associate to the **Conda** recipe deployed in the **Anaconda Cloud**.
+
 * Build a **Docker** image, you should define these environment  variables:
 
   * :code:`DOCKERFILE`.

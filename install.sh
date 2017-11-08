@@ -18,6 +18,10 @@ if [[ "$ANACONDA_DEPLOY" = "" ]]; then
     fi
 fi
 
+if [[ "$ANACONDA_LABEL" = "" ]]; then
+    export ANACONDA_LABEL=main
+fi
+
 if [[ ! "$DOCKER_USERNAME" = "" ]]; then
   if [[ "$DOCKER_UPLOAD" = "" ]]; then
     export DOCKER_UPLOAD=$DOCKER_USERNAME
