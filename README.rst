@@ -1,5 +1,5 @@
-travis-ci: Tools for Using Travis CI
-====================================
+travis-ci: Tools for Using Conda in Travis CI
+=============================================
 
 .. note::
 
