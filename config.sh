@@ -24,6 +24,12 @@ export TEST_LEVEL=1
 conda config --set always_yes yes
 conda config --add channels r
 conda config --add channels statiskit
+if [[ "$ANACONDA_LABEL" = "main" && ! "$TRAVIS_BRANCH" = "master" ]]; then
+  export ANACONDA_LABEL="unstable"
+fi
+if [[ ! "$ANACONDA_LABEL" = "main" || ! "$ANACONDA_LABEL" = "unstable" ]]; then
+  exit 1
+fi
 if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
   conda config --add channels statiskit/label/unstable
   conda config --add channels $ANACONDA_UPLOAD
