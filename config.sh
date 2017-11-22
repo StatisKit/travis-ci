@@ -28,6 +28,7 @@ if [[ "$ANACONDA_LABEL" = "main" && ! "$TRAVIS_BRANCH" = "master" ]]; then
   export ANACONDA_LABEL="unstable"
 fi
 if [[ ! "$ANACONDA_LABEL" = "main" || ! "$ANACONDA_LABEL" = "unstable" ]]; then
+  echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'main' or 'unstable'"
   exit 1
 fi
 if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
