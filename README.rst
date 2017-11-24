@@ -28,6 +28,9 @@ travis-ci: Tools for Using Conda in Travis CI
     It can be conveniant to work in a :code:`travis.yml` file instead of :code:`.travis.yml` file.
     To do so, create the symoblic link :code:`.travis.yml` to the :code:`travis.yml` file.
     
+Documentation
+-------------
+
 This collection of scripts for **Travis CI** can be used with the following :code:`.travis.yml` file:
 
 .. code-block:: yaml
@@ -141,3 +144,21 @@ If you want to:
 
    It is recommanded to define the environment variables :code:`ANACONDA_USERNAME` (resp. :code:`DOCKER_USERNAME`), :code:`ANACONDA_PASSWORD` (resp. :code:`DOCKER_PASSWORD`) and :code:`ANACONDA_UPLOAD` (resp. :code:`DOCKER_UPLOAD`) in the :code:`Settings` pannel of **Travis CI** instead of in the :code:`.travis.yml`.
  
+Usage
+-----
+
+Within the **StatisKit** organization, there exits 2 types of **Conda** deployment behavior for repositories:
+
+* A repository for realeases (i.e. `StatisKit <http://github.com/StatisKit/StatisKit>`_).
+  The goal of this repository is to build all source code that is designed to be installed in the same **Conda** environment and to test them together.
+  To do so,
+  
+  * all **Conda** packages are build and deployed to the :code:`release` label (given the environment variable :code:`ANACONDA_LABEL`) without considering the :code:`main` and :code:`unstable` labels.
+  * Once all packages are deployed to the :code:`release` label and have been tested, in a last job, packages are moved from the :code:`release` channel to the :code:`main` channel (given by the environment variable :code:`ANACONDA_RELABEL`).
+  
+  .. warning:: 
+  
+     These type of repositories must contain :code:`fast_finish: true` in the :code:`matrix` field.
+     Otherwise, the last job moving the packages on the :code:`release` channel to the :code:`main` would be executed even if one job failed.
+     
+* Repositories for continuous deployment (e.g., `ClangLite <http://github.com/StatisKit/ClangLite`_).
