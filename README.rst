@@ -149,7 +149,7 @@ Usage
 
 Within the **StatisKit** organization, there exits 2 types of **Conda** deployment behavior for repositories:
 
-* A repository for realeases (i.e. `StatisKit <http://github.com/StatisKit/StatisKit>`_).
+* A repository for realease deployment (i.e. `StatisKit <http://github.com/StatisKit/StatisKit>`_).
   The goal of this repository is to build all source code that is designed to be installed in the same **Conda** environment and to test them together.
   To do so,
   
@@ -161,4 +161,4 @@ Within the **StatisKit** organization, there exits 2 types of **Conda** deployme
      These type of repositories must contain :code:`fast_finish: true` in the :code:`matrix` field.
      Otherwise, the last job moving the packages on the :code:`release` channel to the :code:`main` would be executed even if one job failed.
      
-* Repositories for continuous deployment (e.g., `ClangLite <http://github.com/StatisKit/ClangLite`_).
+* Repositories for continuous deployment (e.g., `ClangLite <http://github.com/StatisKit/ClangLite>`_).
