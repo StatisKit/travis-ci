@@ -90,7 +90,7 @@ In the :code:`env` section, you can use the following environement variables to 
   
     The :code:`TRAVIS_WAIT` environment must be setted to the time to wait (in minutes).
     
-If you want to:
+And, if you want to:
 
 * Build a **Conda** recipe, you should define these environment variables:
 
