@@ -37,5 +37,8 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
       anaconda upload `conda build --old-build-string --python=$PYTHON_VERSION ../$CONDA_RECIPE --output | tr -s "\n" " "` -u $ANACONDA_UPLOAD --force --no-progress --label $ANACONDA_LABEL
   fi
 fi
-
+if [[ ! "$ANACONDA_RELABEL" = "" ]]; then
+    anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL $ANACONDA_RELABEL
+    anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
+fi
 set +ev
