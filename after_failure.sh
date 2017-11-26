@@ -22,7 +22,8 @@
 
 set -ev
 
-if [[ "$ANACONDA_LABEL" = $TRAVIS_OS_NAME"-release" ]]; then
+if [[ "$ANACONDA_RELEASE" = "true" ]]; then
+    anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
     travis cancel
 fi
 

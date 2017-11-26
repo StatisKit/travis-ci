@@ -40,6 +40,10 @@ if [[ "$ANACONDA_DEPLOY" = "" ]]; then
     fi
 fi
 
+if [[ "$ANACONDA_RELEASE" = "" ]]; then
+    export ANACONDA_RELEASE=false
+fi
+
 if [[ "$ANACONDA_LABEL" = "" ]]; then
     export ANACONDA_LABEL=main
 fi
