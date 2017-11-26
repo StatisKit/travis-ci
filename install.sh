@@ -62,9 +62,9 @@ if [[ "$DOCKER_DEPLOY" = "" ]]; then
     fi
 fi
 
-if [[ ! "$DOCKERFILE" = "" ]]; then
-  if [[ "$DOCKER_REPOSITORY" = "" ]]; then
-    export DOCKER_REPOSITORY=`basename $(dirname ..\$DOCKERFILE)`
+if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
+  if [[ "$DOCKER_CONTAINER" = "" ]]; then
+    export DOCKER_CONTAINER=`basename $(dirname ..\$DOCKER_CONTEXT)`
   fi
 fi
 
