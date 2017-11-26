@@ -22,4 +22,8 @@
 
 set -ev
 
+if [[ "$ANACONDA_LABEL" = $TRAVIS_OS_NAME"-release" ]]; then
+    travis cancel
+fi
+
 set +ev
