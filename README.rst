@@ -113,7 +113,7 @@ And, if you want to:
 
 * Build a **Docker** image, you should define these environment  variables:
 
-  * :code:`DOCKERFILE`.
+  * :code:`DOCKER_CONTEXT`.
     The path to the directory containing the :code:`Dockerfile` file containing the **Docker** instructions to execute.
     This path must be relative to the repository root.
   * :code:`DOCKER_USERNAME` (optional).
