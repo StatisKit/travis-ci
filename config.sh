@@ -39,9 +39,8 @@ if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
       conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL
   fi
 else
-  if [[ ! "$ANACONDA_LABEL" = "release" ]]; then
-    conda config --add channels statiskit
-  else
+  conda config --add channels statiskit
+  if [[ "$ANACONDA_LABEL" = "release" ]]; then
     export ANACONDA_LABEL="travis-release"
     export ANACONDA_RELEASE=true
   fi
