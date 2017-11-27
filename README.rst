@@ -25,7 +25,7 @@ travis-ci: Tools for Using Conda in Travis CI
 
 .. note::
 
-    It can be conveniant to work in a :code:`travis.yml` file instead of :code:`.travis.yml` file.
+    It can be convenient to work in a :code:`travis.yml` file instead of :code:`.travis.yml` file.
     To do so, create the symoblic link :code:`.travis.yml` to the :code:`travis.yml` file.
     
 Documentation
