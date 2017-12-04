@@ -1,7 +1,7 @@
 Organization Guide
 ------------------
 
-For organizations, it is recommanded to fork this repository and to adapt the :code:`config.sh:` file in which you should give:
+For organizations, it is recommanded to fork this repository and to adapt the :code:`config.sh` file in which you should give:
 
 * **Conda** channels used for builds and installs,
 * **Anaconda** label used for uploads.
