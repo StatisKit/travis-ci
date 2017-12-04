@@ -4,7 +4,7 @@
 .. This file is part of the StatisKit project. More information can be   ..
 .. found at                                                              ..
 ..                                                                       ..
-..     http://autowig.rtfd.io                                            ..
+..     http://StatisKit.rtfd.io                                            ..
 ..                                                                       ..
 .. The Apache Software Foundation (ASF) licenses this file to you under  ..
 .. the Apache License, Version 2.0 (the "License"); you may not use this ..
@@ -35,7 +35,6 @@ For more information considering **Travis CI** refers to its `documentation <htt
 
        ln -s travis.yml .travis.yml
     
-
 Documentation
 -------------
 
@@ -129,7 +128,7 @@ And, if you want to:
 
   .. note::
 
-     It is recommanded to define the environment variables :code:`ANACONDA_USERNAME`, :code:`ANACONDA_PASSWORD` and :code:`ANACONDA_UPLOAD` in the :code:`Settings` pannel of **Travis CI** instead of in the :code:`.travis.yml`.
+     It is recommanded to define the environment variables :code:`ANACONDA_USERNAME`, :code:`ANACONDA_PASSWORD` and :code:`ANACONDA_UPLOAD` in the :code:`Settings` pannel of **Travis CI** instead of in the :code:`.travis.yml` (see this `page <https://docs.travis-ci.com/user/environment-variables#Defining-Variables-in-Repository-Settings>`_).
 
 * Build a **Docker** image, you should define these environment  variables:
 
@@ -154,7 +153,7 @@ And, if you want to:
 
   .. note::
 
-     It is recommanded to define the environment variables :code:`DOCKER_USERNAME`), :code:`DOCKER_PASSWORD` and :code:`DOCKER_UPLOAD` in the :code:`Settings` pannel of **Travis CI** instead of in the :code:`.travis.yml`.
+     It is recommanded to define the environment variables :code:`DOCKER_USERNAME`), :code:`DOCKER_PASSWORD` and :code:`DOCKER_UPLOAD` in the :code:`Settings` pannel of **Travis CI** instead of in the :code:`.travis.yml` (see this `page <https://docs.travis-ci.com/user/environment-variables#Defining-Variables-in-Repository-Settings>`_).
 
 * Run a **Jupyter** notebook, you should define these environment  variables:
 
@@ -175,7 +174,7 @@ Usage
 At the organization level
 +++++++++++++++++++++++++
 
-For organizations it is recommanded to fork this repository and to adapte the :code:`config.sh:` file in which you should give:
+For organizations, it is recommanded to fork this repository and to adapt the :code:`config.sh:` file in which you should give:
 
 * **Conda** channels used for builds and installs,
 * **Anaconda** label used for uploads.
@@ -205,7 +204,7 @@ For example, let us consider the :code:`config.sh` written for the **StatisKit**
 
 5. For uploads on:
 
-   *  another **Anaconda** channel than :code:`statiskit`, the channels used by **Conda** are :code:`statiskit` (with the :code:`main` label and :code:`unstable` labels) and the one given by the code:`ANACONDA_UPLOAD` environment variable (with the :code:`main` and the label given by the :code:`ANACONDA_LABEL` environment variable if given).
+   *  Another **Anaconda** channel than :code:`statiskit`, the channels used by **Conda** are :code:`statiskit` (with the :code:`main` label and :code:`unstable` labels) and the one given by the code:`ANACONDA_UPLOAD` environment variable (with the :code:`main` and the label given by the :code:`ANACONDA_LABEL` environment variable if given).
 
       .. literalinclude:: config.sh
          :lines: 33-40,47
@@ -219,7 +218,6 @@ For example, let us consider the :code:`config.sh` written for the **StatisKit**
 
          In order to prevent **Anaconda** channel collision for the :code:`release` label on the :code:`statiskit` channel (e.g. with **AppVeyor CI**), the :code:`release` label is changed to :code:`travis-release`. 
 
-
 At the repository level
 +++++++++++++++++++++++
 
@@ -231,7 +229,7 @@ Within the **StatisKit** organization, there exits 2 types of **Conda** deployme
   The goal of this repository is to build all source code that is designed to be installed in the same **Conda** environment and to test them together.
   To do so,
   
-  * all **Conda** packages are build and deployed to the :code:`release` label (given the environment variable :code:`ANACONDA_LABEL`) without considering the :code:`main` and :code:`unstable` labels.
+  * all **Conda** packages are build and deployed to the :code:`release` label (given the environment variable :code:`ANACONDA_LABEL`) without considering the :code:`unstable` label.
   * Once all packages are deployed to the :code:`release` label and have been tested, in a last job, packages are moved from the :code:`release` channel to the :code:`main` channel (given by the environment variable :code:`ANACONDA_RELABEL`).
   
   .. warning:: 
