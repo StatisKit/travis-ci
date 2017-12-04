@@ -21,7 +21,6 @@
 ## permissions and limitations under the License.                        ##
 
 export TEST_LEVEL=1
-conda config --set always_yes yes
 conda config --add channels r
 if [[ "$ANACONDA_UPLOAD" = "statiskit" && "$ANACONDA_LABEL" = "release" && ! "$TRAVIS_BRANCH" = "master" ]]; then
   export ANACONDA_LABEL="unstable"

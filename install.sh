@@ -96,6 +96,7 @@ source activate root
 if [[ ! "$ANACONDA_CHANNELS" = "" ]]; then
   conda config --add channels $ANACONDA_CHANNELS
 fi
+conda config --set always_yes yes
 source config.sh
 
 conda update conda

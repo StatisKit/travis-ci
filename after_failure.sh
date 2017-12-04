@@ -22,10 +22,7 @@
 
 set -ev
 
-if [[ "$ANACONDA_RELEASE" = "true" && "$TRAVIS_ALLOW_FAILURE" = "false" ]]; then
-    # anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
-    travis cancel
-elif [[ "$TRAVIS_ALLOW_FAILURE" = "false" ]]; then
+if [[ "$TRAVIS_ALLOW_FAILURE" = "false" ]]; then
     travis cancel
 fi
 
