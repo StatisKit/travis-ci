@@ -1,10 +1,7 @@
 .. include:: ../README.rst
 
-User guide
-----------
-
-At the organization level
-+++++++++++++++++++++++++
+Organization Guide
+------------------
 
 For organizations, it is recommanded to fork this repository and to adapt the :code:`config.sh:` file in which you should give:
 
@@ -50,8 +47,8 @@ For example, let us consider the :code:`config.sh` written for the **StatisKit**
 
          In order to prevent **Anaconda** channel collision for the :code:`release` label on the :code:`statiskit` channel (e.g. with **AppVeyor CI**), the :code:`release` label is changed to :code:`travis-release`. 
 
-At the repository level
-+++++++++++++++++++++++
+Repository Guide
+----------------
 
 To activate **Travis CI** for a **GitHub** repository, refers to this `page <https://help.github.com/enterprise/2.11/admin/guides/developer-workflow/continuous-integration-using-travis-ci/>`_
 
