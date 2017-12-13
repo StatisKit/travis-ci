@@ -22,9 +22,7 @@
 
 set -ev
 
-echo $TRAVIS_ALLOW_FAILURE
-
-if [[ "$TRAVIS_ALLOW_FAILURE" = "false" ]]; then
+if [[ "$ANACONDA_LABEL" = "travis-release" && ! "$TRAVIS_ALLOW_FAILURE" = "true" ]]; then
     travis cancel
 fi
 
