@@ -28,6 +28,9 @@ if [[ ! "$CONDA_RECIPE" = "" ]]; then
     done
 fi
 
+echo "ANACONDA_LABEL: "$ANACONDA_LABEL
+echo "TRAVIS_ALLOW_FAILURE: "$TRAVIS_ALLOW_FAILURE
+
 if [[ "$ANACONDA_LABEL" = "travis-release" && ! "$TRAVIS_ALLOW_FAILURE" = "true" ]]; then
     travis cancel
 fi
