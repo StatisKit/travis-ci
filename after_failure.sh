@@ -22,6 +22,10 @@
 
 set -ev
 
+for filename in $CONDA_PREFIX/conda-bld/broken*; do
+    anaconda upload $filename -u $ANACONDA_UPLOAD --label broken
+done
+
 if [[ "$ANACONDA_LABEL" = "travis-release" && ! "$TRAVIS_ALLOW_FAILURE" = "true" ]]; then
     travis cancel
 fi
