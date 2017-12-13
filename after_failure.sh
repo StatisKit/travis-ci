@@ -22,8 +22,8 @@
 
 set -ev
 
-if [[ ! "$CONDA_RECIPE" = "" ]]; then
-    for filename in $CONDA_PREFIX/conda-bld/broken*; do
+if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
+    for filename in $CONDA_PREFIX/conda-bld/broken/*; do
         anaconda upload $filename -u $ANACONDA_UPLOAD --label broken
     done
 fi
