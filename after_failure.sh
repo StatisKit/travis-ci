@@ -22,6 +22,8 @@
 
 set -ev
 
+echo $TRAVIS_ALLOW_FAILURE
+
 if [[ "$TRAVIS_ALLOW_FAILURE" = "false" ]]; then
     travis cancel
 fi
