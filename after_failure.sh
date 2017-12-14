@@ -34,7 +34,7 @@ if [[ "$ANACONDA_LABEL" = "travis-release" && ! "$TRAVIS_ALLOW_FAILURE" = "true"
     sudo apt-get update -y
     sudo apt-get install ruby2.1 ruby-switch ruby2.1-dev -y
     gem install travis -v 1.8.8 --no-rdoc --no-ri
-    travis login
+    travis login --github-token
     travis cancel
     travis logout
 fi
