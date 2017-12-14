@@ -32,6 +32,11 @@ echo "ANACONDA_LABEL: "$ANACONDA_LABEL
 echo "TRAVIS_ALLOW_FAILURE: "$TRAVIS_ALLOW_FAILURE
 
 if [[ "$ANACONDA_LABEL" = "travis-release" && ! "$TRAVIS_ALLOW_FAILURE" = "true" ]]; then
+    sudo apt-get install python-software-properties
+    sudo apt-add-repository ppa:brightbox/ruby-ng
+    sudo apt-get update
+    sudo apt-get install ruby2.1 ruby-switch ruby2.1-dev
+    gem install travis -v 1.8.8 --no-rdoc --no-ri
     travis cancel
 fi
 
