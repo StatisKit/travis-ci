@@ -20,17 +20,26 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
+set +ev
 
-if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
-    for filename in $CONDA_PREFIX/conda-bld/broken/*; do
-        anaconda upload $filename -u $ANACONDA_UPLOAD --label broken
-    done
-fi
+if [[ ! "$ANACONDA_PASSWORD" = "" &&  "$ANACONDA_USERNAME" = "" ]]; then
 
-if [[ ! "$ANACONDA_UPLOAD" = "" ]]; then
-    anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL broken
-    anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
+    yes | anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
+
+    set -ve
+
+    if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
+        for filename in $CONDA_PREFIX/conda-bld/broken/*; do
+            anaconda upload $filename -u $ANACONDA_UPLOAD --label broken
+        done
+    fi
+
+    if [[ ! "$ANACONDA_UPLOAD" = "" ]]; then
+        anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL broken
+        anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
+    fi
+
+    anaconda logout
 fi
 
 set +ev
