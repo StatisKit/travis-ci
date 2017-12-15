@@ -28,7 +28,9 @@ if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
     done
 fi
 
-anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL broken
-anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
+if [[ ! "$ANACONDA_UPLOAD" = "" ]]; then
+    anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL broken
+    anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
+fi
 
 set +ev
