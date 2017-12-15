@@ -28,15 +28,7 @@ if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
     done
 fi
 
-if [[ "$ANACONDA_LABEL" = "travis-release" && ! "$TRAVIS_ALLOW_FAILURE" = "true" ]]; then
-    sudo apt-get install python-software-properties -y
-    sudo apt-add-repository ppa:brightbox/ruby-ng -y
-    sudo apt-get update -y
-    sudo apt-get install ruby2.1 ruby-switch ruby2.1-dev -y
-    gem install travis -v 1.8.8 --no-rdoc --no-ri
-    travis login --auto
-    travis cancel
-    travis logout
-fi
+anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL broken
+anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
 
 set +ev
