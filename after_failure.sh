@@ -34,11 +34,6 @@ if [[ ! "$ANACONDA_PASSWORD" = "" &&  "$ANACONDA_USERNAME" = "" ]]; then
         done
     fi
 
-    if [[ ! "$ANACONDA_UPLOAD" = "" ]]; then
-        anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL broken
-        anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
-    fi
-
     anaconda logout
 fi
 
