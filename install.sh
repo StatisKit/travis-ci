@@ -100,7 +100,7 @@ conda config --set always_yes yes
 source config.sh
 
 conda update conda
-conda install conda-build=3.0.30 anaconda-client
+conda install conda-build anaconda-client
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
