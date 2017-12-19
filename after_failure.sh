@@ -23,18 +23,13 @@
 set +ev
 
 if [[ ! "$ANACONDA_PASSWORD" = "" &&  "$ANACONDA_USERNAME" = "" ]]; then
-
-    yes | anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
-
-    set -ve
-
+    source before_deploy.sh
     if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
         for filename in $CONDA_PREFIX/conda-bld/broken/*.tar.bz2; do
             anaconda upload $filename -u $ANACONDA_UPLOAD --label broken
         done
     fi
-
-    anaconda logout
+    source after_deploy.sh
 fi
 
 set +ev
