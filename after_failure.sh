@@ -20,7 +20,7 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set +ev
+set -ev
 
 if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
     source before_deploy.sh
