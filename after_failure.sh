@@ -22,7 +22,7 @@
 
 set +ev
 
-if [[ ! "$ANACONDA_PASSWORD" = "" &&  "$ANACONDA_USERNAME" = "" ]]; then
+if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
     source before_deploy.sh
     if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
         for filename in $CONDA_PREFIX/conda-bld/broken/*.tar.bz2; do
