@@ -101,7 +101,11 @@ source config.sh
 
 conda update conda
 conda install conda-build anaconda-client
-conda install python=2.7.14=*_26
+if [[ "$CONDA_VERSION" = 2 ]]; then
+  conda install python=2.7.14=*_26
+else
+  conda install python=3.6.3=*_4
+fi
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
