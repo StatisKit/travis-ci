@@ -65,10 +65,11 @@ fi
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
   set +e
   curl -i -H "Accept: application/vnd.travis-ci.2+json" "https://api.travis-ci.org/repos/${TRAVIS_REPO_SLUG}/builds/${TRAVIS_BUILD_ID}" | grep "failed"
-  STATUS=$?
+  TRAVIS_BUILD_STATUS=$?
   set -e
-  if [[ "$STATUS" = "0" ]]; then
+  if [[ "$TRAVIS_BUILD_STATUS" = "0" ]]; then
     exit 1
+  fi
 fi
   
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
