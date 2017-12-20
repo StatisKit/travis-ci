@@ -62,6 +62,15 @@ if [[ "$DOCKER_DEPLOY" = "" ]]; then
     fi
 fi
 
+if [[ "$ANACONDA_LABEL" = "release" ]]; then
+  set +e
+  curl -i -H "Accept: application/vnd.travis-ci.2+json" "https://api.travis-ci.org/repos/${TRAVIS_REPO_SLUG}/builds/${TRAVIS_BUILD_ID}" | grep "failed"
+  STATUS=$?
+  set -e
+  if [[ "$STATUS" = "0" ]]; then
+    exit 1
+fi
+  
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   if [[ "$DOCKER_CONTAINER" = "" ]]; then
     export DOCKER_CONTAINER=`basename $(dirname ..\$DOCKER_CONTEXT)`
