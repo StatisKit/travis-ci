@@ -32,6 +32,4 @@ if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
     source after_deploy.sh
 fi
 
-source release_status.sh
-
 set +ve
