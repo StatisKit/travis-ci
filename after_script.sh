@@ -22,4 +22,6 @@
 
 set -ev
 
+rm -rf $HOME/miniconda
+
 set +ev
