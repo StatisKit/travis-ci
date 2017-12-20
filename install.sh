@@ -108,10 +108,11 @@ conda config --set always_yes yes
 source config.sh
 
 conda update conda
+conda install conda-build anaconda-client
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
+  conda install requests
   python release.py
 fi
-conda install conda-build anaconda-client
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
