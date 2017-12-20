@@ -23,7 +23,7 @@
 set -ev
 
 if [[ "$ARCH" = "" ]]; then
-  export ARCH=32
+  export ARCH=x86_64
 fi
 
 if [[ "$CONDA_VERSION" = "" ]]; then
