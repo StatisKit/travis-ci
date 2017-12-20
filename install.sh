@@ -63,13 +63,7 @@ if [[ "$DOCKER_DEPLOY" = "" ]]; then
 fi
 
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
-  set +e
-  curl -i -H "Accept: application/vnd.travis-ci.2+json" "https://api.travis-ci.org/repos/${TRAVIS_REPO_SLUG}/builds/${TRAVIS_BUILD_ID}" | grep "failed"
-  TRAVIS_BUILD_STATUS=$?
-  set -e
-  if [[ "$TRAVIS_BUILD_STATUS" = "0" ]]; then
-    exit 1
-  fi
+  python release.py
 fi
   
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
@@ -110,6 +104,9 @@ conda config --set always_yes yes
 source config.sh
 
 conda update conda
+if [[ "$ANACONDA_LABEL" = "release" ]]; then
+  python release.py
+fi
 conda install conda-build anaconda-client
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
