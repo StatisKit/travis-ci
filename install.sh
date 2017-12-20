@@ -22,6 +22,10 @@
 
 set -ev
 
+if [[ "$ARCH" = "" ]]; then
+  export ARCH=32
+fi
+
 if [[ "$CONDA_VERSION" = "" ]]; then
   export CONDA_VERSION=2
 fi
