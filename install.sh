@@ -105,7 +105,6 @@ if [[ ! "$ANACONDA_CHANNELS" = "" ]]; then
   conda config --add channels $ANACONDA_CHANNELS
 fi
 conda config --set always_yes yes
-source config.sh
 
 conda update conda
 conda install conda-build anaconda-client
@@ -113,6 +112,7 @@ if [[ "$ANACONDA_LABEL" = "release" ]]; then
   conda install requests
   python release.py
 fi
+source config.sh
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
