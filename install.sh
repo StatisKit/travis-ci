@@ -99,8 +99,9 @@ fi
 conda config --set always_yes yes
 source config.sh
 
-# conda update conda
-conda install conda-build=3.0.30 anaconda-client
+conda update conda
+conda install conda-build anaconda-client
+conda install python=2.7.14=*_26
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
 
