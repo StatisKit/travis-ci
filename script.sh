@@ -30,6 +30,14 @@ elif [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   mv ../$DOCKER_CONTEXT DockerContext
   eval $TRAVIS_WAIT" docker build --build-arg CONDA_VERSION=$CONDA_VERSION -t $DOCKER_UPLOAD/"$DOCKER_CONTAINER":"$TRAVIS_TAG"-py"$CONDA_VERSION"k DockerContext"
   mv DockerContext ../$DOCKER_CONTEXT
+elif [[ ! "$ANACONDA_RELABEL = "" ]]; then
+  set +e
+  curl -i -H "Accept: application/vnd.travis-ci.2+json" "https://api.travis-ci.org/repos/"$TRAVIS_REPO_SLUG"/builds/"$TRAVIS_BUILD_ID | grep "failed"
+  STATUS=$?
+  set -e
+  if [[ "$STATUS" = "0" ]]; then
+    exit 1
+  fi
 fi
 
 set +ev
