@@ -65,10 +65,6 @@ if [[ "$DOCKER_DEPLOY" = "" ]]; then
         export DOCKER_DEPLOY=false
     fi
 fi
-
-if [[ "$ANACONDA_LABEL" = "release" ]]; then
-  python release.py
-fi
   
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   if [[ "$DOCKER_CONTAINER" = "" ]]; then
