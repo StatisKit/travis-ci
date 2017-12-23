@@ -110,6 +110,7 @@ if [[ "$ANACONDA_LABEL" = "release" ]]; then
 fi
 source config.sh
 
-export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + str(sys.version_info.minor))"`
+export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) 
+ '.' + str(sys.version_info.minor))"`
 
 set +ev
