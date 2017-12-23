@@ -110,8 +110,7 @@ echo $ANACONDA_LABEL
 source config.sh
 echo $ANACONDA_LABEL
 
-export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) 
- '.' + str(sys.version_info.minor))"`
+export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
 conda install conda-build anaconda-client
 
