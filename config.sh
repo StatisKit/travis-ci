@@ -22,9 +22,7 @@
 
 export TEST_LEVEL=1
 conda config --add channels r
-if [[ "$ANACONDA_UPLOAD" = "statiskit" && "$ANACONDA_LABEL" = "release" && ! "$TRAVIS_BRANCH" = "master" ]]; then
-  export ANACONDA_LABEL="unstable"
-fi
+
 if [[ "$ANACONDA_UPLOAD" = "statiskit" && ! "$ANACONDA_LABEL" = "release" && ! "$ANACONDA_LABEL" = "unstable" ]]; then
   echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'release' or 'unstable'"
   exit 1

@@ -39,12 +39,14 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
 fi
 
 if [[ "$ANACONDA_RELEASE" = "true" ]]; then
+  if [[ "$TRAVIS_BRANCH" = "master" ]]; then
     if [[ "$TRAVIS_EVENT_TYPE" = "cron" ]]; then
       anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL cron
     else
       anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL main
     fi
     anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
+  fi
 fi
 
 set +ev
