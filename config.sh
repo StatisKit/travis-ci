@@ -32,7 +32,10 @@ if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
   conda config --add channels statiskit
   conda config --add channels statiskit/label/unstable
   conda config --add channels $ANACONDA_UPLOAD
-  if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
+  if [[ ! "$ANACONDA_LABEL" = "main" ]]; 
+      if [[ "$ANACONDA_LABEL" = "release" ]]; then
+         export ANACONDA_LABEL=$TRAVIS_OS_NAME-$ARCH"_release"
+      fi
       conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL
   fi
 else
