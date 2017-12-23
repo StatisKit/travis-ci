@@ -106,7 +106,9 @@ conda update conda
 conda install requests
 python release.py
 
+echo $ANACONDA_LABEL
 source config.sh
+echo $ANACONDA_LABEL
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) 
  '.' + str(sys.version_info.minor))"`

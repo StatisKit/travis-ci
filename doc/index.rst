@@ -17,10 +17,10 @@ For example, in the **StatisKit** software suite :math:`3` kins of **GitHub** re
 .. toctree::
     :maxdepth: 1
 
-    github_release.rst
     github_source.rst
     github_tutorial.rst
-
+    github_release.rst
+    
 .. warning::
 
    If a job failed on a given OS, all flowwing jobs on the same OS will fail.

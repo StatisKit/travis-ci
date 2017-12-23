@@ -38,7 +38,7 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   fi
 fi
 
-if [[ ! "$ANACONDA_RELEASE" = "true" ]]; then
+if [[ "$ANACONDA_RELEASE" = "true" ]]; then
     if [[ "$TRAVIS_EVENT_TYPE" = "cron" ]]; then
       anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL cron
     else
