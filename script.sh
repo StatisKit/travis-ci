@@ -55,7 +55,7 @@ travis_jigger() {
 }
 
 if [[ ! "$CONDA_RECIPE" = "" ]]; then
-  $TRAVIS_WAIT conda build --old-build-string --python=$PYTHON_VERSION ../$CONDA_RECIPE
+  $TRAVIS_WAIT conda build --old-build-string --python=$CONDA_VERSION ../$CONDA_RECIPE
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=0 --to notebook --execute ../$JUPYTER_NOTEBOOK --output ../$JUPYTER_NOTEBOOK
 elif [[ ! "$DOCKER_CONTEXT" = "" ]]; then
