@@ -41,7 +41,6 @@ else
   conda config --add channels statiskit
   if [[ "$ANACONDA_LABEL" = "release" ]]; then
     export ANACONDA_LABEL=$TRAVIS_OS_NAME-$ARCH"_release"
-    export ANACONDA_RELEASE=true
   fi
   conda config --add channels statiskit/label/$ANACONDA_LABEL
 fi
