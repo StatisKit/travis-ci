@@ -24,24 +24,22 @@ export TEST_LEVEL=1
 conda config --add channels r
 
 if [[ "$ANACONDA_UPLOAD" = "statiskit" && ! "$ANACONDA_LABEL" = "release" && ! "$ANACONDA_LABEL" = "unstable" ]]; then
-  echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'release' or 'unstable'"
-  exit 1
+    echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'release' or 'unstable'"
+    exit 1
 fi
 
 if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
-  conda config --add channels statiskit
-  conda config --add channels statiskit/label/unstable
-  conda config --add channels $ANACONDA_UPLOAD
-  if [[ ! "$ANACONDA_LABEL" = "main" ]]; 
-      if [[ "$ANACONDA_LABEL" = "release" ]]; then
-         export ANACONDA_LABEL=$TRAVIS_OS_NAME-$ARCH"_release"
-      fi
-      conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL
-  fi
-else
-  conda config --add channels statiskit
-  if [[ "$ANACONDA_LABEL" = "release" ]]; then
+    conda config --add channels statiskit
+    if [[ ! "$ANACONDA_LABEL" = "release" ]]; then
+        conda config --add channels statiskit/label/$ANACONDA_LABEL
+    fi
+fi
+
+if [[ "$ANACONDA_LABEL" = "release" ]]; then
     export ANACONDA_LABEL=$TRAVIS_OS_NAME-$ARCH"_release"
-  fi
-  conda config --add channels statiskit/label/$ANACONDA_LABEL
+fi
+
+conda config --add channels $ANACONDA_UPLOAD
+if [[ ! "$ANACONDA_LABEL" = "main" ]]; 
+    conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL
 fi
