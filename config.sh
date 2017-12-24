@@ -40,6 +40,6 @@ if [[ "$ANACONDA_LABEL" = "release" ]]; then
 fi
 
 conda config --add channels $ANACONDA_UPLOAD
-if [[ ! "$ANACONDA_LABEL" = "main" ]]; 
+if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
     conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL
 fi
