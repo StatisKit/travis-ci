@@ -112,6 +112,9 @@ source config.sh
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
 conda install conda-build=3.0.30 anaconda-client
+set +e
 conda install conda=4.3.30
+set -e
+source activate root
 
 set +ev
