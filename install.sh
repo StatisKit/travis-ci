@@ -102,7 +102,6 @@ if [[ ! "$ANACONDA_CHANNELS" = "" ]]; then
 fi
 conda config --set always_yes yes
 
-conda update conda
 conda install requests
 python release.py
 
