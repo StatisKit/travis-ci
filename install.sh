@@ -112,7 +112,11 @@ source config.sh
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
 conda install conda=4.3.30 conda-build=3.0.30 anaconda-client
+set +v
 source activate root
+set -v
+
+anaconda config --set auto_register yes
 
 if [[ "$ANACONDA_FORCE" = "true"]]; then
     export ANACONDA_FORCE="--force"
