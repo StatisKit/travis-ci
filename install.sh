@@ -93,10 +93,15 @@ else
 fi
 
 chmod a+rwx miniconda.sh
+set +v
 ./miniconda.sh -b -p $HOME/miniconda
+set -v
 rm miniconda.sh
+
 export PATH=$HOME/miniconda/bin:$PATH
+set +v
 source activate root
+set -v
 if [[ ! "$ANACONDA_CHANNELS" = "" ]]; then
   conda config --add channels $ANACONDA_CHANNELS
 fi
