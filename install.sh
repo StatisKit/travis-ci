@@ -114,4 +114,10 @@ export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) 
 conda install conda=4.3.30 conda-build=3.0.30 anaconda-client
 source activate root
 
+if [[ "$ANACONDA_FORCE" = "true"]]; then
+    export ANACONDA_FORCE="--force"
+else
+    export ANACONDA_FORCE=
+fi
+
 set +ev

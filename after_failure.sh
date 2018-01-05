@@ -26,7 +26,7 @@ if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
     source before_deploy.sh
     if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
         for filename in $CONDA_PREFIX/conda-bld/broken/*.tar.bz2; do
-            anaconda upload $filename -u $ANACONDA_UPLOAD --label broken
+            anaconda upload $filename -u $ANACONDA_UPLOAD $ANACONDA_FORCE --label broken
         done
     fi
     source after_deploy.sh

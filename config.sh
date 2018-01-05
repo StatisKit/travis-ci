@@ -43,3 +43,9 @@ conda config --add channels $ANACONDA_UPLOAD
 if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
     conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL
 fi
+
+if [[ "$TRAVIS_EVENT_TYPE" = "api" ]]; then
+    export ANACONDA_FORCE="true"
+else
+    export ANACONDA_FORCE="false"
+fi
