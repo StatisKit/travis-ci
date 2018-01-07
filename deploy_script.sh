@@ -34,18 +34,18 @@ fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   if [[ ! "$CONDA_RECIPE" = "" ]]; then
-      anaconda upload `conda build --old-build-string --python=$PYTHON_VERSION ../$CONDA_RECIPE --output` -u $ANACONDA_UPLOAD $ANACONDA_FORCE --label $ANACONDA_LABEL
+      anaconda upload `conda build $OLD_BUILD_STRING_ARG --python=$PYTHON_VERSION ../$CONDA_RECIPE --output` -u $ANACONDA_UPLOAD $ANACONDA_FORCE_ARG --label $ANACONDA_LABEL_ARG
   fi
 fi
 
 if [[ "$ANACONDA_RELEASE" = "true" ]]; then
   if [[ "$TRAVIS_BRANCH" = "master" ]]; then
     if [[ "$TRAVIS_EVENT_TYPE" = "cron" ]]; then
-      anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL cron
+      anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL_ARG cron
     else
-      anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL main
+      anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL_ARG main
     fi
-    anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL
+    anaconda label -o $ANACONDA_UPLOAD --remove $ANACONDA_LABEL_ARG
   fi
 fi
 

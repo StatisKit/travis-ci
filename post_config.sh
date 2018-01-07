@@ -20,36 +20,18 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-if [[ "$TRAVIS_EVENT_TYPE" = "api" ]]; then
-    export ANACONDA_FORCE="true"
+if [[ "$ANACONDA_LABEL_ARG" = "" ]]; then
+  export ANACONDA_LABEL_ARG=$ANACONDA_LABEL
+fi
+
+if [[ "$OLD_BUILD_STRING" = "true" ]]; then
+    export OLD_BUILD_STRING_ARG="--old-build-string"
 else
-    export ANACONDA_FORCE="true"
+    export OLD_BUILD_STRING_ARG=
 fi
 
-if [[ "$ANACONDA_LABEL" = "release" ]]; then
-    export OLD_BUILD_STRING="false"
-    export ANACONDA_LABEL_ARG=$TRAVIS_OS_NAME-$ARCH"_release"
+if [[ "$ANACONDA_FORCE" = "true" ]]; then
+    export ANACONDA_FORCE_ARG="--force"
 else
-    export OLD_BUILD_STRING="true"
-    export ANACONDA_LABEL_ARG=ANACONDA_LABEL
-fi
-
-export TEST_LEVEL=1
-conda config --add channels r
-
-if [[ "$ANACONDA_UPLOAD" = "statiskit" && ! "$ANACONDA_LABEL" = "release" && ! "$ANACONDA_LABEL" = "unstable" ]]; then
-    echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'release' or 'unstable'"
-    exit 1
-fi
-
-if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
-    conda config --add channels statiskit
-    if [[ ! "$ANACONDA_LABEL" = "release" ]]; then
-        conda config --add channels statiskit/label/$ANACONDA_LABEL
-    fi
-fi
-
-conda config --add channels $ANACONDA_UPLOAD
-if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
-    conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL_ARG
+    export ANACONDA_FORCE_ARG=
 fi

@@ -123,10 +123,6 @@ set -v
 
 anaconda config --set auto_register yes
 
-if [[ "$ANACONDA_FORCE" = "true" ]]; then
-    export ANACONDA_FORCE="--force"
-else
-    export ANACONDA_FORCE=
-fi
+source post_config.sh
 
 set +ev
