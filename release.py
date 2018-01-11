@@ -9,5 +9,5 @@ TRAVIS_JOB_NUMBER = int(os.environ["TRAVIS_JOB_NUMBER"][len(os.environ["TRAVIS_B
 
 status = requests.get(url, headers=headers).json()
 for job in status['jobs'][:TRAVIS_JOB_NUMBER]:
-    if job["config"]["os"] == os.environ["TRAVIS_OS_NAME"] and not job["allow_failure"] and job["state"] in ['failed', 'errored', 'canceled']:
+    if job["config"]["os"] == os.environ["TRAVIS_OS_NAME"] and not job["allow_failure"] and job["state"] in ['failed', 'errored']:
         raise Exception("A previous job failed !")
