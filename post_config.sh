@@ -20,6 +20,8 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
+anaconda config --set auto_register yes
+
 if [[ "$ANACONDA_LABEL_ARG" = "" ]]; then
   export ANACONDA_LABEL_ARG=$ANACONDA_LABEL
 fi
