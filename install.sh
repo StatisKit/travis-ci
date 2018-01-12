@@ -121,6 +121,7 @@ set +v
 source activate root
 set -v
 
+conda config --set remote_read_timeout_secs 600
 anaconda config --set auto_register yes
 
 source post_config.sh
