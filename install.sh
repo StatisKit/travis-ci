@@ -100,29 +100,30 @@ rm miniconda.sh
 
 export PATH=$HOME/miniconda/bin:$PATH
 set +v
-source activate root
+source activate $CONDA_DEFAULT_ENV
 set -v
 if [[ ! "$ANACONDA_CHANNELS" = "" ]]; then
   conda config --add channels $ANACONDA_CHANNELS
 fi
 conda config --set always_yes yes
+conda config --set remote_read_timeout_secs 600
 
-conda install conda=4.3.30
+conda install -n $CONDA_DEFAULT_ENV conda=4.3.30 conda-build=3.0.30 anaconda-client 
+set +v
+source activate $CONDA_DEFAULT_ENV
+set -v
+
+source config.sh
 
 conda install requests
 python release.py
 
-source config.sh
-
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
-conda install conda=4.3.30 conda-build=3.0.30 anaconda-client $CONDA_PACKAGES
-set +v
-source activate root
-set -v
-
-conda config --set remote_read_timeout_secs 600
-anaconda config --set auto_register yes
+if [[ ! "$CONDA_PACKAGES" = "" ]]; then
+  conda install -n $CONDA_DEFAULT_ENV  $CONDA_PACKAGES
+  source activate $CONDA_DEFAULT_ENV
+fi
 
 source post_config.sh
 
