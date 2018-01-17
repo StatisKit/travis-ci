@@ -24,10 +24,10 @@ set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
     if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
-        eval "docker push "$DOCKER_UPLOAD"/"$DOCKER_CONTAINER":"$TRAVIS_TAG"-py"$CONDA_VERSION"k"
+        docker push ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k
         if [[ ! "$TRAVIS_TAG" = "latest" ]]; then
-            eval "docker tag "$DOCKER_UPLOAD"/"$DOCKER_CONTAINER":"$TRAVIS_TAG"-py"$CONDA_VERSION"k"$DOCKER_UPLOAD"/"$DOCKER_CONTAINER":latest-py"$CONDA_VERSION"k"
-            eval "docker push "$DOCKER_UPLOAD"/"$DOCKER_CONTAINER":latest-py"$CONDA_VERSION"k"
+            docker tag ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
+            docker push ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
         fi
     fi
 fi
