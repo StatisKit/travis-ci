@@ -27,10 +27,10 @@ if [[ ! "$CONDA_RECIPE" = "" ]]; then
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=0 --to notebook --execute ../$JUPYTER_NOTEBOOK --output ../$JUPYTER_NOTEBOOK
 elif [[ ! "$DOCKER_CONTEXT" = "" ]]; then
-  mv ../$DOCKER_CONTEXT DockerContext
-  cp $HOME/.condarc DockerContext/.condarc
-  eval $TRAVIS_WAIT" docker build --build-arg CONDA_VERSION=$CONDA_VERSION -t $DOCKER_UPLOAD/"$DOCKER_CONTAINER":"$TRAVIS_TAG"-py"$CONDA_VERSION"k DockerContext"
-  mv DockerContext ../$DOCKER_CONTEXT
+  mv ../$DOCKER_CONTEXT $DOCKER_CONTAINER
+  cp $HOME/.condarc $DOCKER_CONTAINER/.condarc
+  $TRAVIS_WAIT docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_CONTAINER}
+  mv $DOCKER_CONTAINER ../$DOCKER_CONTEXT
 fi
 
 set +ev
