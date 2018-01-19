@@ -115,8 +115,10 @@ source activate
 set -v
 source config.sh
 
-conda install requests
-python release.py
+if [[ "$CI" == "true" ]]; then
+  conda install requests
+  python release.py
+fi
 
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
