@@ -24,7 +24,7 @@ set -e
 set +v
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  $SUDO_CMD docker login -p $DOCKER_PASSWORD -u $DOCKER_USERNAME
+  docker login -p $DOCKER_PASSWORD -u $DOCKER_USERNAME
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
