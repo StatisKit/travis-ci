@@ -87,7 +87,7 @@ if [[ "$TRAVIS_TAG" = "" ]]; then
 fi
 
 
-if [[ "$CI" = "true" ]];
+if [[ "$CI" = "true" ]]; then
   if [[ "$TRAVIS_WAIT" = "true" ]]; then
     export TRAVIS_WAIT=travis_wait
   elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
