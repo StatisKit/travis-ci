@@ -22,8 +22,10 @@
 
 set -ev
 
-if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  docker logout
+if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
+  if [[ "$DOCKER_DEPLOY" = "true" ]]; then
+    docker logout
+  fi
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
