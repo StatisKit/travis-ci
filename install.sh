@@ -66,7 +66,7 @@ if [[ "$DOCKER_DEPLOY" = "" ]]; then
     fi
 fi
  
-if [[ "$TRAVIS_SUDO" = "false" ]]; then
+if [[ ! "$TRAVIS_SUDO" = "true" ]]; then
   export SUDO_CMD=sudo
 else
   export SUDO_CMD=
