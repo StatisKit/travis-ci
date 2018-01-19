@@ -65,12 +65,6 @@ if [[ "$DOCKER_DEPLOY" = "" ]]; then
         export DOCKER_DEPLOY=false
     fi
 fi
- 
-if [[ ! "$TRAVIS_SUDO" = "true" ]]; then
-  export SUDO_CMD=sudo
-else
-  export SUDO_CMD=
-fi
 
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   if [[ "$DOCKER_CONTAINER" = "" ]]; then
