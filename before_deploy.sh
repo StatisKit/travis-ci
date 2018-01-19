@@ -23,8 +23,10 @@
 set -e
 set +v
 
-if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  docker login -p $DOCKER_PASSWORD -u $DOCKER_USERNAME
+if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
+  if [[ "$DOCKER_DEPLOY" = "true" ]]; then
+    docker login -p $DOCKER_PASSWORD -u $DOCKER_USERNAME
+  fi
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
