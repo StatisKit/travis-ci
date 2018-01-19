@@ -86,10 +86,15 @@ if [[ "$TRAVIS_TAG" = "" ]]; then
   export TRAVIS_TAG="latest"
 fi
 
-if [[ "$TRAVIS_WAIT" = "true" ]]; then
-  TRAVIS_WAIT=travis_wait
-elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
-  TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
+
+if [[ "$CI" = "true" ]];
+  if [[ "$TRAVIS_WAIT" = "true" ]]; then
+    export TRAVIS_WAIT=travis_wait
+  elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
+    export TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
+  fi
+else
+  export TRAVIS_WAIT=
 fi
 
 if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
