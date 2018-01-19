@@ -23,7 +23,7 @@
 set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-  $SUDO_CMD docker logout
+  docker logout
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
