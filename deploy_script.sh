@@ -24,10 +24,10 @@ set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
     if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
-        $SUDO_CMD docker push ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k
+       docker push ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k
         if [[ ! "$TRAVIS_TAG" = "latest" ]]; then
-            $SUDO_CMD docker tag ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
-            $SUDO_CMD docker push ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
+            docker tag ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
+            docker push ${DOCKER_UPLOAD}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
         fi
     fi
 fi
