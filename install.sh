@@ -22,6 +22,11 @@
 
 set -ev
 
+
+if [[ "$CI" = "false" ]]; then
+  git submodule update --init
+fi
+
 if [[ "$ARCH" = "" ]]; then
   export ARCH=x86_64
 fi
