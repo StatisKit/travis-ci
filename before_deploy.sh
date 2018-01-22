@@ -30,7 +30,9 @@ if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
+  set +e
   yes | anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
+  set -e
 fi
 
 set +ev
