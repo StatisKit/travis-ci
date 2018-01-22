@@ -121,8 +121,7 @@ conda config --set always_yes yes
 conda config --set remote_read_timeout_secs 600
 conda config --set auto_update_conda False
 
-# conda install conda=4.3.30 conda-build=3.0.30 anaconda-client 
-conda install conda conda-build anaconda-client 
+conda install conda=4.3.30 conda-build=3.0.30 anaconda-client 
 set +v
 source activate
 set -v
