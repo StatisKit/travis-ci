@@ -20,8 +20,8 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -e
-set +v
+set -ev
+# set +v
 
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   if [[ "$DOCKER_DEPLOY" = "true" ]]; then
