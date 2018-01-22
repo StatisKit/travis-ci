@@ -20,8 +20,8 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
-# set +v
+set -e
+set +v
 
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   if [[ "$DOCKER_DEPLOY" = "true" ]]; then
@@ -30,9 +30,7 @@ if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
-  set +e
   yes | anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_USERNAME
-  set -e
 fi
 
 set +ev
