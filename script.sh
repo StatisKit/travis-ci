@@ -22,8 +22,6 @@
 
 set -ev
 
-echo $PWD
-
 if [[ ! "$CONDA_RECIPE" = "" ]]; then
   $TRAVIS_WAIT conda build $OLD_BUILD_STRING_ARG --python=$PYTHON_VERSION ../$CONDA_RECIPE
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
