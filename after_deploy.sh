@@ -24,7 +24,7 @@ set -ev
 
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-    docker logout
+    sudo docker logout
   fi
 fi
 
