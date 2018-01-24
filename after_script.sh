@@ -23,7 +23,5 @@
 set -ev
 
 rm -rf $HOME/miniconda
-cd ..
-rm -rf travis-ci
 
 set +ev
