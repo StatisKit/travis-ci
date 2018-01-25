@@ -21,7 +21,5 @@
 ## permissions and limitations under the License.                        ##
 
 set -ev
-
-rm -rf $HOME/miniconda
  
 set +ev

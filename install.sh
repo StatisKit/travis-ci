@@ -22,7 +22,6 @@
 
 set -ev
 
-
 if [[ "$CI" = "false" ]]; then
   git submodule update --init
 fi
@@ -73,7 +72,7 @@ fi
 
 if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   if [[ "$DOCKER_CONTAINER" = "" ]]; then
-    export DOCKER_CONTAINER=`basename $(dirname ..\$DOCKER_CONTEXT)`
+    export DOCKER_CONTAINER=`basename $DOCKER_CONTEXT`
   fi
   if [[ "$CI" = "true" ]]; then
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -98,19 +97,29 @@ else
   export TRAVIS_WAIT=
 fi
 
-if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
-  curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
+if [[ "$CONDA_PREFIX" = "" || ! -d "$CONDA_PREFIX" ]]; then
+  if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
+    curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
+  else
+    curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-MacOSX-x86_64.sh -o miniconda.sh
+  fi
+
+  chmod a+rwx miniconda.sh
+  set +v
+  if [[ "$CONDA_PREFIX" = "" ]]; then
+    ./miniconda.sh -b -p $HOME/miniconda
+  else
+    ./miniconda.sh -b -p $CONDA_PREFIX
+  fi
+  set -v
+  rm miniconda.sh
+fi
+if [[ "$CONDA_PREFIX" = "" ]]; then
+  export PATH=$HOME/miniconda/bin:$PATH
 else
-  curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-MacOSX-x86_64.sh -o miniconda.sh
+  export PATH=$CONDA_PREFIX/bin:$PATH
 fi
 
-chmod a+rwx miniconda.sh
-set +v
-./miniconda.sh -b -p $HOME/miniconda
-set -v
-rm miniconda.sh
-
-export PATH=$HOME/miniconda/bin:$PATH
 set +v
 source activate
 set -v
