@@ -150,19 +150,17 @@ fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
-  conda install $CONDA_PACKAGES --use-local
-  source activate
-fi
-if [[ "$CI" == "true" ]]; then
-    conda install $CONDA_PACKAGES --use-local
-    set +v
-    source activate
-    set -v
-else
-    conda install -n py${CONDA_VERSION}k $CONDA_PACKAGES --use-local
-    set +v
-    source activate py${CONDA_VERSION}k
-    set -v
+    if [[ "$CI" == "true" ]]; then
+        conda install $CONDA_PACKAGES --use-local
+        set +v
+        source activate
+        set -v
+    else
+        conda install -n py${CONDA_VERSION}k $CONDA_PACKAGES --use-local
+        set +v
+        source activate py${CONDA_VERSION}k
+        set -v
+    fi
 fi
 
 source post_config.sh
