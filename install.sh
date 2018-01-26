@@ -141,15 +141,16 @@ if [[ "$CI" == "true" ]]; then
   python release.py
 fi
 
-set +v
-conda create -n py${CONDA_VERSION}k python=$CONDA_VERSION
-source activate py${CONDA_VERSION}k
-set -v
+if [[ "$CI" == "false" ]]; then
+    conda create -n py${CONDA_VERSION}k python=$CONDA_VERSION
+    source activate py${CONDA_VERSION}k
+fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
-set +v
-source deactivate
-source activate
-set -v
+if [[ "$CI" == "false" ]]; then
+    source deactivate
+    source activate
+    conda env remove -n py${CONDA_VERSION}k
+fi
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
   conda install $CONDA_PACKAGES
