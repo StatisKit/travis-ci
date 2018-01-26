@@ -49,7 +49,9 @@ if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
     fi
 fi
 
-conda config --add channels $ANACONDA_UPLOAD
-if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
-    conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL_ARG
+if [[ ! "$ANACONDA_UPLOAD" == "" ]]; then
+    conda config --add channels $ANACONDA_UPLOAD
+    if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
+        conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL_ARG
+    fi
 fi
