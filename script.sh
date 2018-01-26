@@ -23,7 +23,7 @@
 set -ev
 
 if [[ ! "$CONDA_RECIPE" = "" ]]; then
-  $TRAVIS_WAIT conda build $OLD_BUILD_STRING_ARG --python=$CONDA_VERSION ../$CONDA_RECIPE
+  $TRAVIS_WAIT conda build $OLD_BUILD_STRING_ARG --python=$PYTHON_VERSION ../$CONDA_RECIPE
 elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
   $TRAVIS_WAIT jupyter nbconvert --ExecutePreprocessor.kernel_name='python'$CONDA_VERSION --ExecutePreprocessor.timeout=0 --to notebook --execute --inplace ../$JUPYTER_NOTEBOOK
 elif [[ ! "$DOCKER_CONTEXT" = "" ]]; then
