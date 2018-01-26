@@ -22,4 +22,12 @@
 
 set -ev
  
+if [[ "$CI" == "false" ]]; then
+    set +v
+    source deactivate
+    source activate
+    set -v
+    conda env remove -n py${CONDA_VERSION}k
+fi
+
 set +ev
