@@ -157,7 +157,7 @@ if [[ "$CI" == "false" ]]; then
 fi
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
-  conda install $CONDA_PACKAGES
+  conda install $CONDA_PACKAGES --use-local
   source activate
 fi
 
