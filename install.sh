@@ -143,12 +143,16 @@ fi
 
 if [[ "$CI" == "false" ]]; then
     conda create -n py${CONDA_VERSION}k python=$CONDA_VERSION
+    set +v
     source activate py${CONDA_VERSION}k
+    set -v
 fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 if [[ "$CI" == "false" ]]; then
+    set +v
     source deactivate
     source activate
+    set -v
     conda env remove -n py${CONDA_VERSION}k
 fi
 
