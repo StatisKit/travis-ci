@@ -34,7 +34,7 @@ fi
 
 if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
   if [[ ! "$CONDA_RECIPE" = "" ]]; then
-      anaconda upload `conda build $OLD_BUILD_STRING_ARG --python=$PYTHON_VERSION ../$CONDA_RECIPE --output` -u $ANACONDA_UPLOAD $ANACONDA_FORCE_ARG --label $ANACONDA_LABEL_ARG
+      anaconda upload `conda build $OLD_BUILD_STRING_ARG --python=$PYTHON_VERSION ../$CONDA_RECIPE --output` -u $ANACONDA_UPLOAD $ANACONDA_FORCE_ARG --label $ANACONDA_LABEL_ARG --no-progress
   fi
 fi
 
