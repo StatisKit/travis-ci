@@ -115,12 +115,10 @@ if [[ "$CONDA_PREFIX" = "" || ! -d "$CONDA_PREFIX" ]]; then
   rm miniconda.sh
 fi
 if [[ "$CONDA_PREFIX" = "" ]]; then
-  export CONDA_PATH=$HOME/miniconda/bin
+  export PATH=$HOME/miniconda/bin:$PATH
 else
-  export CONDA_PATH=$CONDA_PREFIX/bin
+  export PATH=$CONDA_PREFIX/bin:$PATH
 fi
-export PATH=$CONDA_PATH:$PATH
-echo $CONDA_PATH
 
 set +v
 source activate
@@ -138,24 +136,21 @@ source activate
 set -v
 source config.sh
 
-if [[ "$CI" == "true" ]]; then
+if [[ "$CI" = "true" ]]; then
   conda install requests
   python release.py
 fi
-echo $PATH
 
-if [[ "$CI" == "false" ]]; then
+if [[ "$CI" = "false" ]]; then
     conda create -n py${CONDA_VERSION}k python=$CONDA_VERSION
     set +v
     source activate py${CONDA_VERSION}k
     set -v
-    export PATH=$PATH:$CONDA_PATH
 fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
-echo $PATH
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
-    if [[ "$CI" == "true" ]]; then
+    if [[ "$CI" = "true" ]]; then
         conda install $CONDA_PACKAGES --use-local
         set +v
         source activate
@@ -166,7 +161,6 @@ if [[ ! "$CONDA_PACKAGES" = "" ]]; then
         source activate py${CONDA_VERSION}k
         set -v
     fi
-    export PATH=$PATH:$CONDA_PATH
 fi
 
 echo $PATH
