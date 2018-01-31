@@ -163,6 +163,7 @@ if [[ ! "$CONDA_PACKAGES" = "" ]]; then
     fi
 fi
 
+echo $PATH
 source post_config.sh
 
 set +ev
