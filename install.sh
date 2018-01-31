@@ -115,10 +115,11 @@ if [[ "$CONDA_PREFIX" = "" || ! -d "$CONDA_PREFIX" ]]; then
   rm miniconda.sh
 fi
 if [[ "$CONDA_PREFIX" = "" ]]; then
-  export PATH=$HOME/miniconda/bin:$PATH
+  export CONDA_PATH=$HOME/miniconda/bin
 else
-  export PATH=$CONDA_PREFIX/bin:$PATH
+  export CONDA_PATH=$CONDA_PREFIX/bin
 fi
+export PATH=$CONDA_PATH:$PATH
 
 set +v
 source activate
@@ -147,11 +148,7 @@ if [[ "$CI" == "false" ]]; then
     set +v
     source activate py${CONDA_VERSION}k
     set -v
-    if [[ "$CONDA_PREFIX" = "" ]]; then
-      export PATH=$PATH:$HOME/miniconda/bin
-    else
-      export PATH=$PATH:$CONDA_PREFIX/bin
-    fi
+    export PATH=$PATH:$CONDA_PATH
 fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 echo $PATH
@@ -168,11 +165,7 @@ if [[ ! "$CONDA_PACKAGES" = "" ]]; then
         source activate py${CONDA_VERSION}k
         set -v
     fi
-    if [[ "$CONDA_PREFIX" = "" ]]; then
-      export PATH=$PATH:$HOME/miniconda/bin
-    else
-      export PATH=$PATH:$CONDA_PREFIX/bin
-    fi
+    export PATH=$PATH:$CONDA_PATH
 fi
 
 echo $PATH
