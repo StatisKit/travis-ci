@@ -120,6 +120,7 @@ else
   export CONDA_PATH=$CONDA_PREFIX/bin
 fi
 export PATH=$CONDA_PATH:$PATH
+echo $CONDA_PATH
 
 set +v
 source activate
