@@ -119,6 +119,7 @@ if [[ "$CONDA_PREFIX" = "" ]]; then
 else
   export PATH=$CONDA_PREFIX/bin:$PATH
 fi
+export CONDA_PATH_BACKUP=$PATH
 
 set +v
 source activate
