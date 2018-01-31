@@ -141,6 +141,7 @@ if [[ "$CI" == "true" ]]; then
   python release.py
 fi
 
+echo $PATH
 if [[ "$CI" == "false" ]]; then
     conda create -n py${CONDA_VERSION}k python=$CONDA_VERSION
     set +v
@@ -148,6 +149,7 @@ if [[ "$CI" == "false" ]]; then
     set -v
 fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
+echo $PATH
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
     if [[ "$CI" == "true" ]]; then
