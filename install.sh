@@ -121,6 +121,9 @@ else
 fi
 export CONDA_PATH_BACKUP=$PATH
 
+echo $PATH
+echo $CONDA_PATH_BACKUP
+
 set +v
 source activate
 set -v
@@ -141,7 +144,6 @@ if [[ "$CI" == "true" ]]; then
   conda install requests
   python release.py
 fi
-
 echo $PATH
 echo $CONDA_PATH_BACKUP
 
