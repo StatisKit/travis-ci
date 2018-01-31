@@ -147,6 +147,7 @@ if [[ "$CI" = "false" ]]; then
     source activate py${CONDA_VERSION}k
     set -v
 fi
+conda install anaconda-client=1.6.5
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
