@@ -142,6 +142,8 @@ if [[ "$CI" == "true" ]]; then
 fi
 
 echo $PATH
+echo $CONDA_PATH_BACKUP
+
 if [[ "$CI" == "false" ]]; then
     conda create -n py${CONDA_VERSION}k python=$CONDA_VERSION
     set +v
@@ -150,6 +152,7 @@ if [[ "$CI" == "false" ]]; then
 fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 echo $PATH
+echo $CONDA_PATH_BACKUP
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
     if [[ "$CI" == "true" ]]; then
@@ -166,6 +169,8 @@ if [[ ! "$CONDA_PACKAGES" = "" ]]; then
 fi
 
 echo $PATH
+echo $CONDA_PATH_BACKUP
+
 source post_config.sh
 
 set +ev
