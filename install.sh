@@ -119,10 +119,6 @@ if [[ "$CONDA_PREFIX" = "" ]]; then
 else
   export PATH=$CONDA_PREFIX/bin:$PATH
 fi
-export CONDA_PATH_BACKUP=$PATH
-
-echo $PATH
-echo $CONDA_PATH_BACKUP
 
 set +v
 source activate
@@ -145,17 +141,20 @@ if [[ "$CI" == "true" ]]; then
   python release.py
 fi
 echo $PATH
-echo $CONDA_PATH_BACKUP
 
 if [[ "$CI" == "false" ]]; then
     conda create -n py${CONDA_VERSION}k python=$CONDA_VERSION
     set +v
     source activate py${CONDA_VERSION}k
     set -v
+    if [[ "$CONDA_PREFIX" = "" ]]; then
+      export PATH=$PATH:$HOME/miniconda/bin
+    else
+      export PATH=$PATH:$CONDA_PREFIX/bin
+    fi
 fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 echo $PATH
-echo $CONDA_PATH_BACKUP
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
     if [[ "$CI" == "true" ]]; then
@@ -169,10 +168,14 @@ if [[ ! "$CONDA_PACKAGES" = "" ]]; then
         source activate py${CONDA_VERSION}k
         set -v
     fi
+    if [[ "$CONDA_PREFIX" = "" ]]; then
+      export PATH=$PATH:$HOME/miniconda/bin
+    else
+      export PATH=$PATH:$CONDA_PREFIX/bin
+    fi
 fi
 
 echo $PATH
-echo $CONDA_PATH_BACKUP
 
 source post_config.sh
 
