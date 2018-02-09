@@ -86,6 +86,10 @@ if [[ "$TRAVIS_TAG" = "" ]]; then
   export TRAVIS_TAG="latest"
 fi
 
+if [[ "JUPYTER_KERNEL" = "" ]]; then
+  export JUPYTER_KERNEL='python'$CONDA_VERSION 
+fi
+
 
 if [[ "$CI" = "true" ]]; then
   if [[ "$TRAVIS_WAIT" = "true" ]]; then
