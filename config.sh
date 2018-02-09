@@ -28,7 +28,7 @@ fi
 
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
     export OLD_BUILD_STRING="false"
-    export ANACONDA_LABEL_ARG=$TRAVIS_OS_NAME-$ARCH"_release"
+    export ANACONDA_LABEL_ARG=$TRAVIS_OS_NAME-$ARCH"_release-"$TRAVIS_BUILD_ID
 else
     export OLD_BUILD_STRING="true"
     export ANACONDA_LABEL_ARG=$ANACONDA_LABEL
