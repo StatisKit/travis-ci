@@ -20,8 +20,8 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-if [[ "$TRAVIS_EVENT_TYPE" = "api" ]]; then
-    export ANACONDA_FORCE="true"
+if [[ "$ANACONDA_LABEL" = "release" ]]; then
+    export ANACONDA_FORCE="false"
 else
     export ANACONDA_FORCE="true"
 fi
