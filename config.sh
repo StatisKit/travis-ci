@@ -20,6 +20,9 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
+echo $TRAVIS_BRANCH
+echo $TRAVIS_TAG
+
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
     if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "" ]]; then
         export ANACONDA_FORCE="false"
@@ -42,6 +45,9 @@ else
     export OLD_BUILD_STRING="true"
     export ANACONDA_LABEL_ARG=$ANACONDA_LABEL
 fi
+
+echo $OLD_BUILD_STRING
+echo $ANACONDA_LABEL_ARG
 
 export TEST_LEVEL=1
 conda config --add channels r
