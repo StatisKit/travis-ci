@@ -24,7 +24,7 @@ echo $TRAVIS_BRANCH
 echo $TRAVIS_TAG
 
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
-    if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "" ]]; then
+    if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "latest" ]]; then
         export ANACONDA_FORCE="false"
     else
         export ANACONDA_FORCE="true"
@@ -34,7 +34,7 @@ else
 fi
 
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
-    if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "" ]]; then
+    if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "latest" ]]; then
         export OLD_BUILD_STRING="false"
         export ANACONDA_LABEL_ARG=$TRAVIS_OS_NAME-$ARCH"_release"
     else
