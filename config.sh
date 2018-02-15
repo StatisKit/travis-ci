@@ -54,7 +54,7 @@ fi
 if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
     conda config --add channels statiskit
     if [[ ! "$ANACONDA_LABEL_ARG" = "release" ]]; then
-        conda config --add channels statiskit/label/$ANACONDA_LABEL
+        conda config --add channels statiskit/label/$ANACONDA_LABEL_ARG
     fi
 fi
 
