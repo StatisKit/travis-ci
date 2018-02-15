@@ -21,14 +21,23 @@
 ## permissions and limitations under the License.                        ##
 
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
-    export ANACONDA_FORCE="false"
+    if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "" ]]; then
+        export ANACONDA_FORCE="false"
+    else
+        export ANACONDA_FORCE="true"
+    fi
 else
     export ANACONDA_FORCE="true"
 fi
 
 if [[ "$ANACONDA_LABEL" = "release" ]]; then
-    export OLD_BUILD_STRING="false"
-    export ANACONDA_LABEL_ARG=$TRAVIS_OS_NAME-$ARCH"_release-"$TRAVIS_BUILD_ID
+    if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "" ]]; then
+        export OLD_BUILD_STRING="false"
+        export ANACONDA_LABEL_ARG=$TRAVIS_OS_NAME-$ARCH"_release"
+    else
+        export OLD_BUILD_STRING="true"
+        export ANACONDA_LABEL_ARG="unstable"
+    fi
 else
     export OLD_BUILD_STRING="true"
     export ANACONDA_LABEL_ARG=$ANACONDA_LABEL
@@ -44,14 +53,14 @@ fi
 
 if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
     conda config --add channels statiskit
-    if [[ ! "$ANACONDA_LABEL" = "release" ]]; then
+    if [[ ! "$ANACONDA_LABEL_ARG" = "release" ]]; then
         conda config --add channels statiskit/label/$ANACONDA_LABEL
     fi
 fi
 
 if [[ ! "$ANACONDA_UPLOAD" = "" ]]; then
     conda config --add channels $ANACONDA_UPLOAD
-    if [[ ! "$ANACONDA_LABEL" = "main" ]]; then
+    if [[ ! "$ANACONDA_LABEL_ARG" = "main" ]]; then
         conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL_ARG
     fi
 fi
