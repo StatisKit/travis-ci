@@ -39,7 +39,7 @@ if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
 fi
 
 if [[ "$ANACONDA_RELEASE" = "true" ]]; then
-  if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "" ]]; then
+  if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "latest" ]]; then
     if [[ "$TRAVIS_EVENT_TYPE" = "cron" ]]; then
       anaconda label -o $ANACONDA_UPLOAD --copy $ANACONDA_LABEL_ARG cron
     else
