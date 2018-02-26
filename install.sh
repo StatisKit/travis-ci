@@ -34,14 +34,14 @@ if [[ "$CONDA_VERSION" = "" ]]; then
   export CONDA_VERSION=2
 fi
 
-if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
-  if [[ "$ANACONDA_UPLOAD" = "" ]]; then
-    export ANACONDA_UPLOAD=$ANACONDA_USERNAME
+if [[ ! "$ANACONDA_LOGIN" = "" ]]; then
+  if [[ "$ANACONDA_OWNER" = "" ]]; then
+    export ANACONDA_OWNER=$ANACONDA_LOGIN
   fi
 fi
 
 if [[ "$ANACONDA_DEPLOY" = "" ]]; then
-    if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
+    if [[ ! "$ANACONDA_LOGIN" = "" ]]; then
         export ANACONDA_DEPLOY=true
     else
         export ANACONDA_DEPLOY=false
@@ -56,14 +56,14 @@ if [[ "$ANACONDA_LABEL" = "" ]]; then
     export ANACONDA_LABEL=main
 fi
 
-if [[ ! "$DOCKER_USERNAME" = "" ]]; then
-  if [[ "$DOCKER_UPLOAD" = "" ]]; then
-    export DOCKER_UPLOAD=$DOCKER_USERNAME
+if [[ ! "$DOCKER_LOGIN" = "" ]]; then
+  if [[ "$DOCKER_OWNER" = "" ]]; then
+    export DOCKER_OWNER=$DOCKER_LOGIN
   fi
 fi
 
 if [[ "$DOCKER_DEPLOY" = "" ]]; then
-    if [[ ! "$DOCKER_USERNAME" = "" && "$TRAVIS_OS_NAME" = "linux" ]]; then
+    if [[ ! "$DOCKER_LOGIN" = "" && "$TRAVIS_OS_NAME" = "linux" ]]; then
         export DOCKER_DEPLOY=true
     else
         export DOCKER_DEPLOY=false

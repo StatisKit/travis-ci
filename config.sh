@@ -46,21 +46,21 @@ fi
 export TEST_LEVEL=1
 conda config --add channels r
 
-if [[ "$ANACONDA_UPLOAD" = "statiskit" && ! "$ANACONDA_LABEL" = "release" && ! "$ANACONDA_LABEL" = "unstable" ]]; then
+if [[ "$ANACONDA_OWNER" = "statiskit" && ! "$ANACONDA_LABEL" = "release" && ! "$ANACONDA_LABEL" = "unstable" ]]; then
     echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'release' or 'unstable'"
     exit 1
 fi
 
-if [[ ! "$ANACONDA_UPLOAD" = "statiskit" ]]; then
+if [[ ! "$ANACONDA_OWNER" = "statiskit" ]]; then
     conda config --add channels statiskit
     if [[ ! "$ANACONDA_LABEL_ARG" = "release" ]]; then
         conda config --add channels statiskit/label/$ANACONDA_LABEL_ARG
     fi
 fi
 
-if [[ ! "$ANACONDA_UPLOAD" = "" ]]; then
-    conda config --add channels $ANACONDA_UPLOAD
+if [[ ! "$ANACONDA_OWNER" = "" ]]; then
+    conda config --add channels $ANACONDA_OWNER
     if [[ ! "$ANACONDA_LABEL_ARG" = "main" ]]; then
-        conda config --add channels $ANACONDA_UPLOAD/label/$ANACONDA_LABEL_ARG
+        conda config --add channels $ANACONDA_OWNER/label/$ANACONDA_LABEL_ARG
     fi
 fi

@@ -22,14 +22,14 @@
 
 set -ev
 
-if [[ ! "$ANACONDA_USERNAME" = "" ]]; then
+if [[ ! "$ANACONDA_LOGIN" = "" ]]; then
     source before_deploy.sh
     if [[ ! "$CONDA_RECIPE" = "" && -d $CONDA_PREFIX/conda-bld/broken ]]; then
         for filename in $CONDA_PREFIX/conda-bld/broken/*.tar.bz2; do
-            anaconda upload $filename -u $ANACONDA_UPLOAD $ANACONDA_FORCE --label broken
+            anaconda upload $filename -u $ANACONDA_OWNER $ANACONDA_FORCE --label broken
         done
     elif [[ ! "$JYPTER_NOTEBOOK" = "" ]]; then
-        anaconda upload ../$JYPTER_NOTEBOOK -u $ANACONDA_UPLOAD --label $TRAVIS_OS_NAME-broken --force
+        anaconda upload ../$JYPTER_NOTEBOOK -u $ANACONDA_OWNER --label $TRAVIS_OS_NAME-broken --force
     fi
     source after_deploy.sh
 fi

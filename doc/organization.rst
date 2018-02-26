@@ -31,7 +31,7 @@ For example, let us consider the :code:`config.sh` written for the **StatisKit**
 
 5. For uploads on:
 
-   *  Another **Anaconda** channel than :code:`statiskit`, the channels used by **Conda** are :code:`statiskit` (with the :code:`main` label and :code:`unstable` labels) and the one given by the code:`ANACONDA_UPLOAD` environment variable (with the :code:`main` and the label given by the :code:`ANACONDA_LABEL` environment variable if given).
+   *  Another **Anaconda** channel than :code:`statiskit`, the channels used by **Conda** are :code:`statiskit` (with the :code:`main` label and :code:`unstable` labels) and the one given by the code:`ANACONDA_OWNER` environment variable (with the :code:`main` and the label given by the :code:`ANACONDA_LABEL` environment variable if given).
 
       .. literalinclude:: ../config.sh
          :lines: 33-40,47
