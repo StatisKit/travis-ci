@@ -36,7 +36,7 @@ if [[ "$ANACONDA_LABEL" = "release" ]]; then
         export ANACONDA_LABEL_ARG=$TRAVIS_OS_NAME-$ARCH"_release"
     else
         export OLD_BUILD_STRING="true"
-        export ANACONDA_LABEL_ARG="unstable"
+        export ANACONDA_LABEL_ARG="develop"
     fi
 else
     export OLD_BUILD_STRING="true"
@@ -46,8 +46,8 @@ fi
 export TEST_LEVEL=1
 conda config --add channels r
 
-if [[ "$ANACONDA_OWNER" = "statiskit" && ! "$ANACONDA_LABEL" = "release" && ! "$ANACONDA_LABEL" = "unstable" ]]; then
-    echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'release' or 'unstable'"
+if [[ "$ANACONDA_OWNER" = "statiskit" && ! "$ANACONDA_LABEL" = "release" && ! "$ANACONDA_LABEL" = "develop" ]]; then
+    echo "Variable ANACONDA_LABEL set to '"$ANACONDA_LABEL"' instead of 'release' or 'develop'"
     exit 1
 fi
 

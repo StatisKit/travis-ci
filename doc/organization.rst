@@ -19,19 +19,19 @@ For example, let us consider the :code:`config.sh` written for the **StatisKit**
       :lines: 24
 
 3. Uploads made on the :code:`release` label of the **Anaconda** :code:`statiskit` channel are only allowed for :code:`master` branches.
-   Otherwise, the label is changed to :code:`unstable`. 
+   Otherwise, the label is changed to :code:`develop`. 
 
    .. literalinclude:: ../config.sh
       :lines: 25-27
 
-4. :code:`unstable` and :code:`release` are the only accepted labels for uploads made on the **Anaconda** :code:`statiskit` channel. 
+4. :code:`develop` and :code:`release` are the only accepted labels for uploads made on the **Anaconda** :code:`statiskit` channel. 
 
    .. literalinclude:: ../config.sh
       :lines: 28-30
 
 5. For uploads on:
 
-   *  Another **Anaconda** channel than :code:`statiskit`, the channels used by **Conda** are :code:`statiskit` (with the :code:`main` label and :code:`unstable` labels) and the one given by the code:`ANACONDA_OWNER` environment variable (with the :code:`main` and the label given by the :code:`ANACONDA_LABEL` environment variable if given).
+   *  Another **Anaconda** channel than :code:`statiskit`, the channels used by **Conda** are :code:`statiskit` (with the :code:`main` label and :code:`develop` labels) and the one given by the code:`ANACONDA_OWNER` environment variable (with the :code:`main` and the label given by the :code:`ANACONDA_LABEL` environment variable if given).
 
       .. literalinclude:: ../config.sh
          :lines: 33-40,47

@@ -9,7 +9,7 @@ Within the **StatisKit** organization, there exits 2 types of deployment for rep
   The goal of these repositories is to build all source code that is designed to be installed in the same **Conda** environment and to test them together.
   To do so,
   
-  * all **Conda** packages are built and deployed to the :code:`release` label (given the environment variable :code:`ANACONDA_LABEL`) without considering the :code:`unstable` label.
+  * all **Conda** packages are built and deployed to the :code:`release` label (given the environment variable :code:`ANACONDA_LABEL`) without considering the :code:`develop` label.
   * Once all packages are deployed to the :code:`release` label and have been tested, in a last job, packages are moved from the :code:`release` channel to the :code:`main` channel (given by the environment variable :code:`ANACONDA_RELABEL`).
   
   .. warning:: 
