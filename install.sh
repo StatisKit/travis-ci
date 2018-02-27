@@ -22,6 +22,10 @@
 
 set -ev
 
+# export CONDA_PIN=4.3.30
+# export CONDA_BUILD_PIN=3.0.30
+# export ANACONDA_CLIENT_PIN=1.6.5
+
 if [[ "$CI" = "false" ]]; then
   git submodule update --init
 fi
@@ -134,7 +138,14 @@ conda config --set always_yes yes
 conda config --set remote_read_timeout_secs 600
 conda config --set auto_update_conda False
 
-conda install conda=4.3.30 conda-build=3.0.30 anaconda-client=1.6.5
+if [[ ! "$CONDA_PIN" = "" ]]; then
+    conda install conda=$CONDA_PIN
+fi
+if [[ ! "$CONDA_BUILD_PIN" = "" ]]; then
+    conda install conda-build=$CONDA_BUILD_PIN
+else
+    conda install conda-build
+fi
 set +v
 source activate
 set -v
@@ -151,7 +162,11 @@ if [[ "$CI" = "false" ]]; then
     source activate py${CONDA_VERSION}k
     set -v
 fi
-conda install anaconda-client=1.6.5
+if [[ ! "$ANACONDA_CLIENT_PIN" = "" ]]; then
+    conda install anaconda-client=$ANACONDA_CLIENT_PIN
+else
+    conda install anaconda-client
+fi
 export PYTHON_VERSION=`python -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))"`
 
 if [[ ! "$CONDA_PACKAGES" = "" ]]; then
