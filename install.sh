@@ -108,15 +108,15 @@ if [[ "$JUPYTER_KERNEL" = "" ]]; then
 fi
 
 
-if [[ "$CI" = "true" ]]; then
-  if [[ "$TRAVIS_WAIT" = "true" ]]; then
-    export TRAVIS_WAIT=travis_wait
-  elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
-    export TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
-  fi
-else
-  export TRAVIS_WAIT=
-fi
+# if [[ "$CI" = "true" ]]; then
+#   if [[ "$TRAVIS_WAIT" = "true" ]]; then
+#     export TRAVIS_WAIT=travis_wait
+#   elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
+#     export TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
+#   fi
+# else
+#   export TRAVIS_WAIT=
+fi/
 
 if [[ "$CONDA_PREFIX" = "" || ! -d "$CONDA_PREFIX" ]]; then
   if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
