@@ -42,6 +42,7 @@ if [[ ! "$TRAVIS_WAIT" = "" && "$CI" = "true" ]]; then
     export TRAVIS_WAIT=travis_wait 20
   else
     export TRAVIS_WAIT=travis_wait ${TRAVIS_WAIT}
+  fi
 fi
 
 set +ve
