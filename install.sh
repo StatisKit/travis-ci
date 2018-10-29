@@ -30,7 +30,7 @@ if [[ "$CI" = "false" ]]; then
   git submodule update --init
 fi
 
-if [[ "$TRAVIS_OS_NAME" = "" ]]]; then
+if [[ "$TRAVIS_OS_NAME" = "" ]]; then
   if [ "$(uname)" == "Darwin" ]; then
     export TRAVIS_OS_NAME="osx"
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
