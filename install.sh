@@ -30,6 +30,17 @@ if [[ "$CI" = "false" ]]; then
   git submodule update --init
 fi
 
+if [[ "$TRAVIS_OS_NAME" = "" ]]]; then
+  if [ "$(uname)" == "Darwin" ]; then
+    export TRAVIS_OS_NAME="osx"
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    export TRAVIS_OS_NAME="linux"
+  else
+    echo "Invalid OS name for this install script"
+    exit 1
+  fi
+fi
+
 if [[ "$ARCH" = "" ]]; then
   export ARCH=x86_64
 fi
