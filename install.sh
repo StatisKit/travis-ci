@@ -26,6 +26,8 @@ set -ev
 # export CONDA_BUILD_PIN=3.0.30
 # export ANACONDA_CLIENT_PIN=1.6.5
 
+travis_wait -h
+
 source travis_wait_wrapper.sh
 
 if [[ "$CI" = "false" ]]; then
