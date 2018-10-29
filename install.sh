@@ -113,7 +113,7 @@ if [[ "$CONDA_PREFIX" = "" || ! -d "$CONDA_PREFIX" ]]; then
   fi
 
   chmod a+rwx miniconda.sh
-  more miniconda.sh
+  head -n 20 miniconda.sh
   set +v
   if [[ "$CONDA_PREFIX" = "" ]]; then
     ./miniconda.sh -b -p $HOME/miniconda
