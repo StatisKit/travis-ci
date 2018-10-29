@@ -26,6 +26,8 @@ set -ev
 # export CONDA_BUILD_PIN=3.0.30
 # export ANACONDA_CLIENT_PIN=1.6.5
 
+source tools.sh
+
 if [[ "$CI" = "false" ]]; then
   git submodule update --init
 fi
