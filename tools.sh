@@ -21,6 +21,7 @@ if [[ ! "$TRAVIS_WAIT" = "" ]]; then
   fi
   
   travis_jigger() {
+    echo $TRAVIS_WAIT
     local timeout=$TRAVIS_WAIT # in minutes
     local count=0
 
