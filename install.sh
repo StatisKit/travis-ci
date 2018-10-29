@@ -58,7 +58,7 @@ fi
 
 if [[ "$ANACONDA_LABEL" = "" ]]; then
     export ANACONDA_LABEL=main
-fi
+fi curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh
 
 if [[ ! "$DOCKER_LOGIN" = "" ]]; then
   if [[ "$DOCKER_OWNER" = "" ]]; then
@@ -113,6 +113,7 @@ if [[ "$CONDA_PREFIX" = "" || ! -d "$CONDA_PREFIX" ]]; then
   fi
 
   chmod a+rwx miniconda.sh
+  more miniconda.sh
   set +v
   if [[ "$CONDA_PREFIX" = "" ]]; then
     ./miniconda.sh -b -p $HOME/miniconda
