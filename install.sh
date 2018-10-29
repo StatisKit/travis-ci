@@ -26,9 +26,7 @@ set -ev
 # export CONDA_BUILD_PIN=3.0.30
 # export ANACONDA_CLIENT_PIN=1.6.5
 
-travis_wait -h
-
-source travis_wait_wrapper.sh
+source travis_wait.sh
 
 if [[ "$CI" = "false" ]]; then
   git submodule update --init
@@ -108,17 +106,6 @@ fi
 if [[ "$JUPYTER_KERNEL" = "" ]]; then
   export JUPYTER_KERNEL='python'$CONDA_VERSION 
 fi
-
-
-# if [[ "$CI" = "true" ]]; then
-#   if [[ "$TRAVIS_WAIT" = "true" ]]; then
-#     export TRAVIS_WAIT=travis_wait
-#   elif [[ ! "$TRAVIS_WAIT" = "" ]]; then
-#     export TRAVIS_WAIT="travis_wait $TRAVIS_WAIT"
-#   fi
-# else
-#   export TRAVIS_WAIT=
-fi/
 
 if [[ "$CONDA_PREFIX" = "" || ! -d "$CONDA_PREFIX" ]]; then
   if [[ "$TRAVIS_OS_NAME" = "linux" ]]; then
