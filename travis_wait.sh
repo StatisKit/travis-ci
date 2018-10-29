@@ -1,6 +1,6 @@
 set -ve
 
-if [[ ! "$TRAVIS_WAIT" = "" && "$CI" = "true" ]]; then
+if [[ ! "$TRAVIS_WAIT" = "" ]] && [[ "$CI" = "true" ]]; then
 
   travis_wait() {
     local timeout="${1}"
