@@ -29,7 +29,11 @@ elif [[ ! "$JUPYTER_NOTEBOOK" = "" ]]; then
 elif [[ ! "$DOCKER_CONTEXT" = "" ]]; then
   cp -R ../$DOCKER_CONTEXT $DOCKER_CONTAINER
   cp $HOME/.condarc $DOCKER_CONTAINER/.condarc
-  $TRAVIS_WAIT sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_CONTAINER}
+  if [[ ! "$CONDA_VERSION" = "3" ]]; then
+    $TRAVIS_WAIT sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_CONTAINER}
+  else
+    $TRAVIS_WAIT sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG} ${DOCKER_CONTAINER}
+  fi
   rm -rf $DOCKER_CONTAINER
 fi
 
