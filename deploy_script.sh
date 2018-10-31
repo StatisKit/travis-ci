@@ -24,10 +24,19 @@ set -ev
 
 if [[ "$DOCKER_DEPLOY" = "true" ]]; then
     if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
-        sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k
+        if [[ ! "$CONDA_VERSION" = "3" ]]; then
+            sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k
+        else
+            sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}
+        fi
         if [[ ! "$TRAVIS_TAG" = "latest" ]]; then
-            sudo docker tag ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
-            sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
+            if [[ ! "$CONDA_VERSION" = "3" ]]; then
+                sudo docker tag ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
+                sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
+            else
+                sudo docker tag ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG} ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest
+                sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest
+            fi
         fi
     fi
 fi
