@@ -156,6 +156,9 @@ source config.sh
 if [[ "$CI" = "true" ]]; then
   conda install requests
   python release.py
+  if [[ ! "$?" = "0" ]]; then
+    exit 1
+  fi
 fi
 
 if [[ "$CI" = "false" ]]; then
