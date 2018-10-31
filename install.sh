@@ -48,7 +48,7 @@ if [[ "$ARCH" = "" ]]; then
 fi
 
 if [[ "$CONDA_VERSION" = "" ]]; then
-  export CONDA_VERSION=2
+  export CONDA_VERSION=3
 fi
 
 if [[ ! "$ANACONDA_LOGIN" = "" ]]; then
