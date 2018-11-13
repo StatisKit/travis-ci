@@ -114,8 +114,10 @@ def main():
                 "TEST_LEVEL",
                 "OLD_BUILD_STRING",
                 "ANACONDA_TMP_LABEL"]:
-        if not var in os.environ:
+        if var not in os.environ:
+            print("Setting the '" + var + "' environment variable..." )
             exec("set_" + var.lower())
+            print("Done, set to '" + os.environ[var] + "' !")
     print(os.environ)
     if os.environ["ANACONDA_FORCE"] == "true":
         os.environ["ANACONDA_FORCE"] = "--force"
