@@ -120,13 +120,14 @@ def main():
                 "OLD_BUILD_STRING",
                 "ANACONDA_TMP_LABEL"]:
         if key not in environ:
-            print("Setting the '" + key + "' environment variable..." )
             value = eval("get_" + key.lower() + "()")
             if value:
                 environ[key] = value
-                print("Done, set to '" + environ[key] + "' !")
-            else:
-                print("Not done !")
+    if os.environ["ANACONDA_LABEL"] == "release":
+        if os.environ["TRAVIS_EVENT_TYPE"] == "cron":
+            environ["ANACONDA_LABEL"] = "cron"
+        else:
+            environ["ANACONDA_LABEL"] = "main"
     if environ["ANACONDA_FORCE"] == "true":
         environ["ANACONDA_FORCE"] = "--force"
     else:
