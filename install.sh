@@ -24,7 +24,7 @@ set -ev
 
 env
 
-python "import os; print(os.environ)"
+python -c "import os; print(os.environ)"
 
 python configure.py
 source configure.sh
