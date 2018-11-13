@@ -4,11 +4,11 @@ import platform
 import sys
 
 if six.PY2:
-    __PREV__ = {key : value for key, value in os.environ.iteritems()}
+    environ = {key : value for key, value in os.environ.iteritems()}
 else:
-    __PREV__ = {key : value for key, value in os.environ.items()}
+    environ = {key : value for key, value in os.environ.items()}
 
-def set_travis_os_name():
+def get_travis_os_name():
     SYSTEM = platform.system() 
     if SYSTEM == "Linux":
         SYSTEM = "linux"
@@ -18,87 +18,92 @@ def set_travis_os_name():
         SYSTEM = "win"
     else:
         raise NotImplementedError("Travis CI is not meant for '" + SYSTEM + "' operating systems")
-    os.environ["TRAVIS_OS_NAME"] = SYSTEM
+    return SYSTEM
 
-def set_arch():
+def get_ci():
+    return "false"
+
+def get_arch():
     if sys.maxsize > 2**32:
-        os.environ["ARCH"] = "x86_64"
+        return "x86_64"
     else:
-        os.environ["ARCH"] = "x86"
+        return "x86"
 
-def set_conda_version():
-    if "PYTHON_VERSION" in os.environ:
-        os.environ["CONDA_VERSION"] = os.environ["PYTHON_VERSION"].split(".")[0]
+def get_conda_version():
+    if "PYTHON_VERSION" in environ:
+        return environ["PYTHON_VERSION"].split(".")[0]
     else:
-        os.environ["CONDA_VERSION"] = "3"
+        return "3"
 
-def set_anaconda_owner():
+def get_anaconda_owner():
     if "ANACONDA_LOGIN" in os.environ:
-        os.environ["ANACONDA_OWNER"] = os.environ["ANACONDA_LOGIN"]
+        return environ["ANACONDA_LOGIN"]
 
-def set_anaconda_deploy():
-    os.environ["ANACONDA_DEPLOY"] = os.environ["CI"] 
+def get_anaconda_deploy():
+    return environ["CI"]
 
-def set_anaconda_release():
-    if "ANACONDA_LABEL" in os.environ and os.environ["ANACONDA_LABEL"] == "release":
-        os.environ["ANACONDA_RELEASE"] = "true"
+def get_anaconda_release():
+    if "ANACONDA_LABEL" in environ and environ["ANACONDA_LABEL"] == "release":
+        return "true"
     else:
-        os.environ["ANACONDA_RELEASE"] = "false"
+        return "false"
 
-def set_anaconda_label():
-    if "TRAVIS_EVENT_TYPE" in os.environ and os.environ["TRAVIS_EVENT_TYPE"] == "cron":
-        os.environ["ANACONDA_LABEL"] = "cron"
+def get_anaconda_label():
+    if "TRAVIS_EVENT_TYPE" in environ and environ["TRAVIS_EVENT_TYPE"] == "cron":
+        return "cron"
     else:
-        os.environ["ANACONDA_LABEL"] = "main"
+        return "main"
 
-def set_docker_owner():
-    if "DOCKER_LOGIN" in os.environ:
-        os.environ["DOCKER_OWNER"] = os.environ["DOCKER_LOGIN"]
+def get_docker_owner():
+    if "DOCKER_LOGIN" in environ:
+        return environ["DOCKER_LOGIN"]
 
-def set_docker_deploy():
-    if "DOCKER_LOGIN" in os.environ and os.environ["TRAVIS_OS_NAME"] == "linux":
-        os.environ["DOCKER_DEPLOY"] = os.environ["CI"]
+def get_docker_deploy():
+    if "DOCKER_LOGIN" in environ and environ["TRAVIS_OS_NAME"] == "linux":
+        return environ["CI"]
     else:
-        os.environ["DOCKER_DEPLOY"] = "false"
+        return "false"
 
-def set_docker_container():
-    if "DOCKER_CONTEXT" in os.environ:
-        os.environ["DOCKER_CONTAINER"] = os.path.basename(os.environ["DOCKER_CONTEXT"])
+def get_docker_container():
+    if "DOCKER_CONTEXT" in environ:
+        return os.path.basename(environ["DOCKER_CONTEXT"])
 
-def set_travis_tag():
-    os.environ["TRAVIS_TAG"] = "latest"
+def get_travis_tag():
+    return "latest"
 
-def set_jupyter_kernel():
-    os.environ["JUPYTER_KERNEL"] = "python" + os.environ["CONDA_VERSION"]
+def get_jupyter_kernel():
+    return "python" + environ["CONDA_VERSION"]
 
-def set_python_version():
-    os.environ["PYTHON_VERSION"] = os.environ["CONDA_VERSION"]
+def get_python_version():
+    return environ["CONDA_VERSION"]
 
-def set_anaconda_force():
-    if os.environ["ANACONDA_LABEL"] == "release" and os.environ["TRAVIS_BRANCH"] == "master":
-        os.environ["ANACONDA_FORCE"] = "false"
+def get_anaconda_force():
+    if environ["ANACONDA_LABEL"] == "release" and environ["TRAVIS_BRANCH"] == "master":
+        return "false"
     else:
-        os.environ["ANACONDA_FORCE"] = "true"
+        return "true"
 
-def set_test_level():
-    os.environ["TEST_LEVEL"] = "1"
-
-def set_old_build_string():
-    if os.environ["ANACONDA_FORCE"] == "true":
-        os.environ["OLD_BUILD_STRING"] = "true"
+def get_test_level():
+    if environ["CI"] == "true":
+        return "1"
     else:
-        os.environ["OLD_BUILD_STRING"] = "false"    
+        return "3"
 
-def set_anaconda_tmp_label():
-    if os.environ["ANACONDA_LABEL"] == "release":
-        os.environ["ANACONDA_TMP_LABEL"] = os.environ["TRAVIS_OS_NAME"] + "-" + os.environ["ARCH"] + "_release"
-        os.environ.pop("ANACONDA_LABEL")
-        set_anaconda_label()
+def get_old_build_string():
+    if environ["ANACONDA_FORCE"] == "true":
+        return "true"
     else:
-        os.environ["ANACONDA_TMP_LABEL"] = os.environ["ANACONDA_LABEL"]
+        return "false"    
+
+def get_anaconda_tmp_label():
+    if environ["ANACONDA_LABEL"] == "release":
+        return environ["TRAVIS_OS_NAME"] + "-" + environ["ARCH"] + "_release"
+    else:
+        return environ["ANACONDA_LABEL"]
 
 def main():
-    for var in ["TRAVIS_OS_NAME",
+    for key in ["TRAVIS_OS_NAME",
+                "CI",
                 "ARCH",
                 "CONDA_VERSION",
                 "ANACONDA_OWNER",
@@ -110,32 +115,35 @@ def main():
                 "TRAVIS_TAG",
                 "JUPYTER_KERNEL",
                 "PYTHON_VERSION",
-                "ANACONDA_FORCE",
+                "ANACONDA_FORCE", 
                 "TEST_LEVEL",
                 "OLD_BUILD_STRING",
                 "ANACONDA_TMP_LABEL"]:
-        if var not in os.environ:
-            print("Setting the '" + var + "' environment variable..." )
-            exec("set_" + var.lower())
-            print("Done, set to '" + os.environ[var] + "' !")
-    print(os.environ)
-    if os.environ["ANACONDA_FORCE"] == "true":
-        os.environ["ANACONDA_FORCE"] = "--force"
+        if key not in environ:
+            print("Setting the '" + key + "' environment variable..." )
+            value = eval("get_" + key.lower() + "()")
+            if value:
+                environ[key] = value
+                print("Done, set to '" + environ[key] + "' !")
+            else:
+                print("Not done !")
+    if environ["ANACONDA_FORCE"] == "true":
+        environ["ANACONDA_FORCE"] = "--force"
     else:
-        os.environ["ANACONDA_FORCE"] = ""
-    if os.environ["OLD_BUILD_STRING"] == "true":
-        os.environ["OLD_BUILD_STRING"] = "--old-build-string"
+        environ["ANACONDA_FORCE"] = ""
+    if environ["OLD_BUILD_STRING"] == "true":
+        environ["OLD_BUILD_STRING"] = "--old-build-string"
     else:
-        os.environ["OLD_BUILD_STRING"] = ""
+        environ["OLD_BUILD_STRING"] = ""
     with open("configure.sh", "w") as filehandler:
         filehandler.write("set -ev\n\n")
         if six.PY2:
-            for key, value in os.environ.iteritems():
-                if key not in __PREV__ or not __PREV__[key] == os.environ[key]:
+            for key, value in environ.iteritems():
+                if key not in os.environ or not os.environ[key] == environ[key]:
                     filehandler.write("export " + key + "=" + value + "\n")
         else:
-            for key, value in os.environ.items():
-                if key not in __PREV__ or not __PREV__[key] == os.environ[key]:
+            for key, value in environ.items():
+                if key not in os.environ or not os.environ[key] == environ[key]:
                     filehandler.write("export " + key + "=" + value + "\n")
         filehandler.write("\nset +ev")
 
