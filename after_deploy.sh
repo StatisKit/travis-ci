@@ -22,13 +22,13 @@
 
 set -ev
 
-if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
-  if [[ "$DOCKER_DEPLOY" = "true" ]]; then
+if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
+  if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
     sudo docker logout
   fi
 fi
 
-if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
+if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
   anaconda logout
 fi
 

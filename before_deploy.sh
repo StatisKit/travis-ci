@@ -23,14 +23,14 @@
 set -e
 set +v
 
-if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
-  if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-    sudo docker login -p $DOCKER_PASSWORD -u $DOCKER_LOGIN
+if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
+  if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
+    sudo docker login -p ${DOCKER_PASSWORD} -u ${DOCKER_LOGIN}
   fi
 fi
 
-if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
-  yes | anaconda login --password $ANACONDA_PASSWORD --username $ANACONDA_LOGIN
+if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
+  yes | anaconda login --password ${ANACONDA_PASSWORD} --username ${ANACONDA_LOGIN}
 fi
 
 set +ev

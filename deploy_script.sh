@@ -22,15 +22,15 @@
 
 set -ev
 
-if [[ "$DOCKER_DEPLOY" = "true" ]]; then
-    if [[ ! "$DOCKER_CONTEXT" = "" ]]; then
-        if [[ ! "$CONDA_VERSION" = "3" ]]; then
+if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
+    if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
+        if [[ ! "${CONDA_VERSION}" = "3" ]]; then
             sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k
         else
             sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}
         fi
-        if [[ ! "$TRAVIS_TAG" = "latest" ]]; then
-            if [[ ! "$CONDA_VERSION" = "3" ]]; then
+        if [[ ! "${TRAVIS_TAG}" = "latest" ]]; then
+            if [[ ! "${CONDA_VERSION}" = "3" ]]; then
                 sudo docker tag ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
                 sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
             else
@@ -41,20 +41,15 @@ if [[ "$DOCKER_DEPLOY" = "true" ]]; then
     fi
 fi
 
-if [[ "$ANACONDA_DEPLOY" = "true" ]]; then
-  if [[ ! "$CONDA_RECIPE" = "" ]]; then
-      anaconda upload `conda build $OLD_BUILD_STRING_ARG --python=$PYTHON_VERSION ../$CONDA_RECIPE --output` -u $ANACONDA_OWNER $ANACONDA_FORCE_ARG --label $ANACONDA_LABEL_ARG --no-progress
+if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
+  if [[ ! "${CONDA_RECIPE}" = "" ]]; then
+      anaconda upload `conda build ${OLD_BUILD_STRING} --python=${PYTHON_VERSION} ../${CONDA_RECIPE} --output` -u ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label ${ANACONDA_TMP_LABEL} --no-progress
   fi
 fi
 
-if [[ "$ANACONDA_RELEASE" = "true" ]]; then
-  if [[ "$TRAVIS_BRANCH" = "master" || ! "$TRAVIS_TAG" = "latest" ]]; then
-    if [[ "$TRAVIS_EVENT_TYPE" = "cron" ]]; then
-      anaconda label -o $ANACONDA_OWNER --copy $ANACONDA_LABEL_ARG cron
-    else
-      anaconda label -o $ANACONDA_OWNER --copy $ANACONDA_LABEL_ARG main
-    fi
-    anaconda label -o $ANACONDA_OWNER --remove $ANACONDA_LABEL_ARG
+if [[ "${ANACONDA_RELEASE}" = "true" ]]; then
+  if [[ ! "${ANACONDA_TMP_LABEL}" = "${ANACONDA_LABEL}" ]]; then
+      anaconda label -o ${ANACONDA_OWNER} --copy ${ANACONDA_TMP_LABEL} ${ANACONDA_LABEL}
   fi
 fi
 
