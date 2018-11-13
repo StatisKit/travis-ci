@@ -4,9 +4,9 @@ import platform
 import sys
 
 if six.PY2:
-    __PREV__ = {key : value for key. value in os.environ.iteritems()}
+    __PREV__ = {key : value for key, value in os.environ.iteritems()}
 else:
-    __PREV__ = {key : value for key. value in os.environ.items()}
+    __PREV__ = {key : value for key, value in os.environ.items()}
 
 def set_travis_os_name():
     SYSTEM = platform.system() 
