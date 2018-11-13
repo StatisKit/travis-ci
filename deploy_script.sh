@@ -43,7 +43,13 @@ fi
 
 if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
   if [[ ! "${CONDA_RECIPE}" = "" ]]; then
+      if [[ "${ANACONDA_FORCE}" = "" ]]; then
+        set +e
+      fi
       anaconda upload `conda build ${OLD_BUILD_STRING} --python=${PYTHON_VERSION} ../${CONDA_RECIPE} --output` -u ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label ${ANACONDA_TMP_LABEL} --no-progress
+      if [[ "${ANACONDA_FORCE}" = "" ]]; then
+        set -e
+      fi
   fi
 fi
 
