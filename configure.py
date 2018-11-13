@@ -4,9 +4,9 @@ import platform
 import sys
 
 if six.PY2:
-    environ = {key : value for key, value in os.environ.iteritems()}
+    environ = {key : value for key, value in os.environ.iteritems() if value}
 else:
-    environ = {key : value for key, value in os.environ.items()}
+    environ = {key : value for key, value in os.environ.items() if value}
 
 def get_travis_os_name():
     SYSTEM = platform.system() 
