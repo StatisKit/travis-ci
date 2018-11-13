@@ -43,10 +43,7 @@ def get_anaconda_deploy():
     return environ["CI"]
 
 def get_anaconda_release():
-    if "ANACONDA_LABEL" in environ and environ["ANACONDA_LABEL"] == "release":
-        return "true"
-    else:
-        return "false"
+    return "false"
 
 def get_anaconda_label():
     if "TRAVIS_EVENT_TYPE" in environ and environ["TRAVIS_EVENT_TYPE"] == "cron":
