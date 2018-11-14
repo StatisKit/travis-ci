@@ -149,7 +149,8 @@ def main():
         if not environ["ANACONDA_TMP_LABEL"] == environ["ANACONDA_LABEL"]:
             ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_TMP_LABEL"])
     ANACONDA_CHANNELS.reverse()
-    environ["ANACONDA_CHANNELS"] = " --add channels ".join(ANACONDA_CHANNELS + environ.get("ANACONDA_CHANNELS", "").split(" "))
+    for ANACONDA_CHANNEL in ANACONDA_CHANNELS + environ.get("ANACONDA_CHANNELS", "").split(" "):
+        environ["ANACONDA_CHANNELS"] += " --add channels " + ANACONDA_CHANNEL
     with open("configure.sh", "w") as filehandler:
         filehandler.write("set -ev\n\n")
         if six.PY2:

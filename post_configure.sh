@@ -59,7 +59,7 @@ set +v
 source activate
 set -v
 if [[ ! "${ANACONDA_CHANNELS}" = "" ]]; then
-  conda config --add channels ${ANACONDA_CHANNELS}
+  conda config ${ANACONDA_CHANNELS}
 fi
 conda config --set always_yes yes
 conda config --set remote_read_timeout_secs 600
