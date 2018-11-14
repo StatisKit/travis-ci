@@ -20,6 +20,8 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
+more ${HOME}/.condarc
+
 if [[ "${CI}" = "false" ]]; then
   git submodule update --init
 else
