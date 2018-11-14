@@ -104,6 +104,9 @@ def get_anaconda_tmp_label():
     else:
         return environ["ANACONDA_LABEL"]
 
+def get_conda_prefix():
+    return "${HOME}/miniconda"
+    
 def main():
     for key in ["TRAVIS_OS_NAME",
                 "TRAVIS_EVENT_TYPE",
@@ -123,7 +126,8 @@ def main():
                 "ANACONDA_FORCE", 
                 "TEST_LEVEL",
                 "OLD_BUILD_STRING",
-                "ANACONDA_TMP_LABEL"]:
+                "ANACONDA_TMP_LABEL",
+                "CONDA_PREFIX"]:
         if key not in environ:
             value = eval("get_" + key.lower() + "()")
             if value:

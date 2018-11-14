@@ -34,7 +34,7 @@ else
   fi
 fi
 
-if [[ "${CONDA_PREFIX}" = "" || ! -d "${CONDA_PREFIX}" ]]; then
+if [[ ! -d "${CONDA_PREFIX}" ]]; then
   if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
     curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
   else
@@ -43,18 +43,11 @@ if [[ "${CONDA_PREFIX}" = "" || ! -d "${CONDA_PREFIX}" ]]; then
 
   chmod a+rwx miniconda.sh
   set +v
-  if [[ "${CONDA_PREFIX}" = "" ]]; then
-    ./miniconda.sh -b -p ${HOME}/miniconda
-  else
-    ./miniconda.sh -b -p ${CONDA_PREFIX}
-  fi
+  ./miniconda.sh -b -p ${CONDA_PREFIX}
   set -v
   rm miniconda.sh
 fi
 if [[ ! "${TRAVIS_OS_NAME}" = "linux" ]]; then
-  if [[ "${CONDA_PREFIX}" = "" ]]; then
-    export PATH=${HOME}/miniconda/bin:${PATH}
-  else
     export PATH=${CONDA_PREFIX}/bin:${PATH}
   fi
 fi
