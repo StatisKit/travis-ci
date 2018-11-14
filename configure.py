@@ -148,9 +148,8 @@ def main():
             ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_LABEL"])
         if not environ["ANACONDA_TMP_LABEL"] == environ["ANACONDA_LABEL"]:
             ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_TMP_LABEL"])
-    ANACONDA_CHANNELS.reverse()
     environ["ANACONDA_CHANNELS"] = ""
-    for ANACONDA_CHANNEL in ANACONDA_CHANNELS + environ.get("ANACONDA_CHANNELS", "").split(" "):
+    for ANACONDA_CHANNEL in list(reversed(environ.get("ANACONDA_CHANNELS", "").split(" "))) + ANACONDA_CHANNELS:
         if ANACONDA_CHANNEL:
             environ["ANACONDA_CHANNELS"] += " --add channels " + ANACONDA_CHANNEL
     with open("configure.sh", "w") as filehandler:
