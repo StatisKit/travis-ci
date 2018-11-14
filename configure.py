@@ -20,6 +20,12 @@ def get_travis_os_name():
         raise NotImplementedError("Travis CI is not meant for '" + SYSTEM + "' operating systems")
     return SYSTEM
 
+def get_travis_event_type():
+    return "api"
+
+def get_travis_branch():
+    return "master"
+
 def get_ci():
     return "false"
 
@@ -35,6 +41,9 @@ def get_conda_version():
     else:
         return "3"
 
+def get_anaconda_label():
+    return "develop"
+    
 def get_anaconda_owner():
     if "ANACONDA_LOGIN" in os.environ:
         return environ["ANACONDA_LOGIN"]
@@ -100,9 +109,12 @@ def get_anaconda_tmp_label():
 
 def main():
     for key in ["TRAVIS_OS_NAME",
+                "TRAVIS_EVENT_TYPE",
+                "TRAVIS_BRANCH",
                 "CI",
                 "ARCH",
                 "CONDA_VERSION",
+                "ANACONDA_LABEL",
                 "ANACONDA_OWNER",
                 "ANACONDA_DEPLOY",
                 "ANACONDA_LABEL",
