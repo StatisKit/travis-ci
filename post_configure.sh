@@ -20,6 +20,8 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
+set -ve
+
 if [[ "${CI}" = "false" ]]; then
   git submodule update --init
 else
@@ -55,9 +57,8 @@ else
   export PATH=${CONDA_PREFIX}/bin:${PATH}
 fi
 
-set +v
-source activate
-set -v
+conda activate
+
 if [[ ! "${ANACONDA_CHANNELS}" = "" ]]; then
   conda config ${ANACONDA_CHANNELS}
 fi
@@ -89,12 +90,11 @@ fi
 anaconda config --set auto_register yes
 
 conda create -n py${CONDA_VERSION}k python=${PYTHON_VERSION}
-source activate py${CONDA_VERSION}k
-
 
 if [[ ! "${CONDA_PACKAGES}" = "" ]]; then
     conda install -n py${CONDA_VERSION}k ${CONDA_PACKAGES} --use-local
-    source activate py${CONDA_VERSION}k
 fi
 
-more ${HOME}/.condarc
+conda activate py${CONDA_VERSION}k
+
+set +ve
