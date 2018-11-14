@@ -49,7 +49,6 @@ if [[ ! -d "${CONDA_PREFIX}" ]]; then
 fi
 if [[ ! "${TRAVIS_OS_NAME}" = "linux" ]]; then
     export PATH=${CONDA_PREFIX}/bin:${PATH}
-  fi
 fi
 
 if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
