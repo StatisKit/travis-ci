@@ -51,12 +51,19 @@ if [[ "${CONDA_PREFIX}" = "" || ! -d "${CONDA_PREFIX}" ]]; then
   set -v
   rm miniconda.sh
 fi
-if [[ "${CONDA_PREFIX}" = "" ]]; then
-  export PATH=${HOME}/miniconda/bin:${PATH}
-else
-  export PATH=${CONDA_PREFIX}/bin:${PATH}
+if [[ ! "${TRAVIS_OS_NAME}" = "linux" ]]; then
+  if [[ "${CONDA_PREFIX}" = "" ]]; then
+    export PATH=${HOME}/miniconda/bin:${PATH}
+  else
+    export PATH=${CONDA_PREFIX}/bin:${PATH}
+  fi
 fi
 
+if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
+  echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bashrc
+else
+  echo "passed"
+fi
 conda activate
 
 if [[ ! "${ANACONDA_CHANNELS}" = "" ]]; then
