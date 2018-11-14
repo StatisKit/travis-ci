@@ -40,7 +40,7 @@ def get_conda_version():
         return environ["PYTHON_VERSION"].split(".")[0]
     else:
         return "3"
-    
+
 def get_anaconda_owner():
     if "ANACONDA_LOGIN" in os.environ:
         return environ["ANACONDA_LOGIN"]
@@ -55,7 +55,7 @@ def get_anaconda_label():
     if "TRAVIS_EVENT_TYPE" in environ and environ["TRAVIS_EVENT_TYPE"] == "cron":
         return "cron"
     else:
-        return "main"
+        return "develop"
 
 def get_docker_owner():
     if "DOCKER_LOGIN" in environ:
@@ -141,6 +141,15 @@ def main():
         environ["OLD_BUILD_STRING"] = "--old-build-string"
     else:
         environ["OLD_BUILD_STRING"] = ""
+    ANACONDA_CHANNELS = []
+    if "ANACONDA_ORGANIZATION" in environ:
+        ANACONDA_CHANNELS.append(environ["ANACONDA_ORGANIZATION"])
+        if not environ["ANACONDA_LABEL"] == "main":
+            ANACONDA_CHANNELS.append(environ["ANACONDA_ORGANIZATION"] + "/label/" + environ["ANACONDA_LABEL"])
+        if not environ["ANACONDA_TMP_LABEL"] == environ["ANACONDA_LABEL"]:
+            ANACONDA_CHANNELS.append(environ["ANACONDA_ORGANIZATION"] + "/label/" + environ["ANACONDA_TMP_LABEL"])
+    ANACONDA_CHANNELS.reverse()
+    environ["ANACONDA_CHANNELS"] = " ".join(ANACONDA_CHANNELS + environ.get("ANACONDA_CHANNELS", "").split(" "))
     with open("configure.sh", "w") as filehandler:
         filehandler.write("set -ev\n\n")
         if six.PY2:
