@@ -42,7 +42,7 @@ def get_conda_version():
         return "3"
 
 def get_anaconda_owner():
-    if "ANACONDA_LOGIN" in os.environ:
+    if "ANACONDA_LOGIN" in environ:
         return environ["ANACONDA_LOGIN"]
 
 def get_anaconda_deploy():
@@ -142,12 +142,12 @@ def main():
     else:
         environ["OLD_BUILD_STRING"] = ""
     ANACONDA_CHANNELS = []
-    if "ANACONDA_ORGANIZATION" in environ:
-        ANACONDA_CHANNELS.append(environ["ANACONDA_ORGANIZATION"])
+    if "ANACONDA_OWNER" in environ:
+        ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"])
         if not environ["ANACONDA_LABEL"] == "main":
-            ANACONDA_CHANNELS.append(environ["ANACONDA_ORGANIZATION"] + "/label/" + environ["ANACONDA_LABEL"])
+            ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_LABEL"])
         if not environ["ANACONDA_TMP_LABEL"] == environ["ANACONDA_LABEL"]:
-            ANACONDA_CHANNELS.append(environ["ANACONDA_ORGANIZATION"] + "/label/" + environ["ANACONDA_TMP_LABEL"])
+            ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_TMP_LABEL"])
     ANACONDA_CHANNELS.reverse()
     environ["ANACONDA_CHANNELS"] = " ".join(ANACONDA_CHANNELS + environ.get("ANACONDA_CHANNELS", "").split(" "))
     with open("configure.sh", "w") as filehandler:
