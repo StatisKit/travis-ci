@@ -151,7 +151,8 @@ def main():
     ANACONDA_CHANNELS.reverse()
     environ["ANACONDA_CHANNELS"] = ""
     for ANACONDA_CHANNEL in ANACONDA_CHANNELS + environ.get("ANACONDA_CHANNELS", "").split(" "):
-        environ["ANACONDA_CHANNELS"] += " --add channels " + ANACONDA_CHANNEL
+        if ANACONDA_CHANNEL:
+            environ["ANACONDA_CHANNELS"] += " --add channels " + ANACONDA_CHANNEL
     with open("configure.sh", "w") as filehandler:
         filehandler.write("set -ev\n\n")
         if six.PY2:
