@@ -145,6 +145,8 @@ def main():
     if "ANACONDA_OWNER" in environ:
         ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"])
         if not environ["ANACONDA_LABEL"] == "main":
+            if not environ["ANACONDA_LABEL"] == "develop":
+                ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_LABEL"])
             ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_LABEL"])
         if not environ["ANACONDA_TMP_LABEL"] == environ["ANACONDA_LABEL"]:
             ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_TMP_LABEL"])
