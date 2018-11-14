@@ -40,9 +40,6 @@ def get_conda_version():
         return environ["PYTHON_VERSION"].split(".")[0]
     else:
         return "3"
-
-def get_anaconda_label():
-    return "develop"
     
 def get_anaconda_owner():
     if "ANACONDA_LOGIN" in os.environ:
@@ -117,7 +114,6 @@ def main():
                 "ANACONDA_LABEL",
                 "ANACONDA_OWNER",
                 "ANACONDA_DEPLOY",
-                "ANACONDA_LABEL",
                 "ANACONDA_RELEASE",
                 "DOCKER_OWNER",
                 "DOCKER_CONTAINER",
@@ -132,8 +128,8 @@ def main():
             value = eval("get_" + key.lower() + "()")
             if value:
                 environ[key] = value
-    if os.environ["ANACONDA_LABEL"] == "release":
-        if os.environ["TRAVIS_EVENT_TYPE"] == "cron":
+    if environ["ANACONDA_LABEL"] == "release":
+        if environ["TRAVIS_EVENT_TYPE"] == "cron":
             environ["ANACONDA_LABEL"] = "cron"
         else:
             environ["ANACONDA_LABEL"] = "main"
