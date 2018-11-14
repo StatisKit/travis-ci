@@ -73,10 +73,6 @@ if [[ ! "${CONDA_BUILD_PIN}" = "" ]]; then
 else
     conda install conda-build
 fi
-set +v
-source activate
-set -v
-source config.sh
 
 if [[ "${CI}" = "true" ]]; then
   conda install requests
@@ -85,13 +81,6 @@ if [[ "${CI}" = "true" ]]; then
     exit 1
   fi
 fi
-
-if [[ "${CI}" = "false" ]]; then
-    conda create -n py${CONDA_VERSION}k python=${PYTHON_VERSION}
-    set +v
-    source activate py${CONDA_VERSION}k
-    set -v
-fi
 if [[ ! "${ANACONDA_CLIENT_PIN}" = "" ]]; then
     conda install anaconda-client=${ANACONDA_CLIENT_PIN}
 else
@@ -99,16 +88,11 @@ else
 fi
 anaconda config --set auto_register yes
 
+conda create -n py${CONDA_VERSION}k python=${PYTHON_VERSION}
+source activate py${CONDA_VERSION}k
+
+
 if [[ ! "${CONDA_PACKAGES}" = "" ]]; then
-    if [[ "${CI}" = "true" ]]; then
-        conda install ${CONDA_PACKAGES} --use-local
-        set +v
-        source activate
-        set -v
-    else
-        conda install -n py${CONDA_VERSION}k ${CONDA_PACKAGES} --use-local
-        set +v
-        source activate py${CONDA_VERSION}k
-        set -v
-    fi
+    conda install -n py${CONDA_VERSION}k ${CONDA_PACKAGES} --use-local
+    source activate py${CONDA_VERSION}k
 fi
