@@ -128,19 +128,6 @@ def main():
             value = eval("get_" + key.lower() + "()")
             if value:
                 environ[key] = value
-    if environ["ANACONDA_LABEL"] == "release":
-        if environ["TRAVIS_EVENT_TYPE"] == "cron":
-            environ["ANACONDA_LABEL"] = "cron"
-        else:
-            environ["ANACONDA_LABEL"] = "main"
-    if environ["ANACONDA_FORCE"] == "true":
-        environ["ANACONDA_FORCE"] = "--force"
-    else:
-        environ["ANACONDA_FORCE"] = ""
-    if environ["OLD_BUILD_STRING"] == "true":
-        environ["OLD_BUILD_STRING"] = "--old-build-string"
-    else:
-        environ["OLD_BUILD_STRING"] = ""
     ANACONDA_CHANNELS = []
     if "ANACONDA_OWNER" in environ:
         ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"])
@@ -154,6 +141,19 @@ def main():
     for ANACONDA_CHANNEL in list(reversed(environ.get("ANACONDA_CHANNELS", "").split(" "))) + ANACONDA_CHANNELS:
         if ANACONDA_CHANNEL:
             environ["ANACONDA_CHANNELS"] += " --add channels " + ANACONDA_CHANNEL
+    if environ["ANACONDA_LABEL"] == "release":
+        if environ["TRAVIS_EVENT_TYPE"] == "cron":
+            environ["ANACONDA_LABEL"] = "cron"
+        else:
+            environ["ANACONDA_LABEL"] = "main"
+    if environ["ANACONDA_FORCE"] == "true":
+        environ["ANACONDA_FORCE"] = "--force"
+    else:
+        environ["ANACONDA_FORCE"] = ""
+    if environ["OLD_BUILD_STRING"] == "true":
+        environ["OLD_BUILD_STRING"] = "--old-build-string"
+    else:
+        environ["OLD_BUILD_STRING"] = ""
     with open("configure.sh", "w") as filehandler:
         filehandler.write("set -ev\n\n")
         if six.PY2:

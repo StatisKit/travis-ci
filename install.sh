@@ -23,7 +23,6 @@
 set -ev
 
 python configure.py
-more configure.sh
 source configure.sh
 source post_configure.sh
 
