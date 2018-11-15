@@ -19,7 +19,7 @@ def main():
         CONDA_PREFIX += "32"
     else:
         CONDA_PREFIX += "64"
-    environ["ANACONDA_PACKAGES"] = " ".join(package for package in os.path.listdir(CONDA_PREFIX) if package.endswidth(".tar.bz2"))
+    environ["ANACONDA_PACKAGES"] = " ".join(package for package in os.listdir(CONDA_PREFIX) if package.endswidth(".tar.bz2"))
     with open("anaconda_packages.sh", "w") as filehandler:
         filehandler.write("set -ve\n\n")
         if PY2:
@@ -31,6 +31,6 @@ def main():
                 if key not in os.environ or not os.environ[key] == environ[key]:
                     filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
         filehandler.write("\nset +ve")
-        
+
 if __name__ == "__main__":
     main()
