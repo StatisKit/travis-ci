@@ -1,9 +1,15 @@
 import os
-import six
 import platform
 import sys
 
-if six.PY2:
+if sys.versin_info[0] == 2:
+    PY2 = True
+    PY3 = False
+else:
+    PY3 = True
+    PY2 = False
+
+if PY2:
     environ = {key : value for key, value in os.environ.iteritems() if value}
 else:
     environ = {key : value for key, value in os.environ.items() if value}
@@ -160,7 +166,7 @@ def main():
         environ["OLD_BUILD_STRING"] = ""
     with open("configure.sh", "w") as filehandler:
         filehandler.write("set -ev\n\n")
-        if six.PY2:
+        if PY2:
             for key, value in environ.iteritems():
                 if key not in os.environ or not os.environ[key] == environ[key]:
                     filehandler.write("export " + key + "=\"" + value + "\"\n")
