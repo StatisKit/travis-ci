@@ -30,7 +30,10 @@ if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
 fi
 
 if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
+  conda activate
   yes | anaconda login --password ${ANACONDA_PASSWORD} --username ${ANACONDA_LOGIN}
+  python anaconda_packages.py
+  source anaconda_packages.sh
 fi
 
 set +ev

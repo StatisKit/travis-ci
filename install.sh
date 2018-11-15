@@ -25,5 +25,7 @@ set -ev
 python configure.py
 source configure.sh
 source post_configure.sh
+python python_version.py
+source python_version.sh
 
 set +ev
