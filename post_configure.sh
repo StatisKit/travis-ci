@@ -58,7 +58,10 @@ if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
   source ${HOME}/.bashrc
   set -v
 else
-  echo "passed"
+  echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bash_profile
+  set +v
+  source ${HOME}/.bash_profile
+  set -v
 fi
 conda activate
 
