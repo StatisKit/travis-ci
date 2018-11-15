@@ -2,7 +2,7 @@ import os
 import platform
 import sys
 
-if sys.versin_info[0] == 2:
+if sys.version_info[0] == 2:
     PY2 = True
     PY3 = False
 else:
