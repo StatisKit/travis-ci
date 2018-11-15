@@ -169,11 +169,11 @@ def main():
         if PY2:
             for key, value in environ.iteritems():
                 if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value + "\"\n")
+                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
         else:
             for key, value in environ.items():
                 if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value + "\"\n")
+                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
         filehandler.write("\nset +ev")
 
 if __name__ == "__main__":
