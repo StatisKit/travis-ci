@@ -19,7 +19,7 @@ def main():
         CONDA_PREFIX += "32"
     else:
         CONDA_PREFIX += "64"
-    environ["ANACONDA_PACKAGES"] = " ".join(package for package in os.listdir(CONDA_PREFIX) if package.endswidth(".tar.bz2"))
+    environ["ANACONDA_PACKAGES"] = " ".join(os.path.join(CONDA_PREFIX, package) for package in os.listdir(CONDA_PREFIX) if package.endswith(".tar.bz2"))
     with open("anaconda_packages.sh", "w") as filehandler:
         filehandler.write("set -ve\n\n")
         if PY2:

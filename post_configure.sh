@@ -95,12 +95,12 @@ else
 fi
 anaconda config --set auto_register yes
 
-conda create -n py${CONDA_VERSION}k python=${PYTHON_VERSION}
+conda create -n travis-ci python=${PYTHON_VERSION}
 
 if [[ ! "${CONDA_PACKAGES}" = "" ]]; then
     conda install -n py${CONDA_VERSION}k ${CONDA_PACKAGES} --use-local
 fi
 
-conda activate py${CONDA_VERSION}k
+conda activate travis-ci
 
 set +ve

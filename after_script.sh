@@ -24,9 +24,9 @@ set -ev
  
 if [[ "${CI}" == "false" ]]; then
     set +v
-    source activate
+    conda activate
     set -v
-    conda env remove -n py${CONDA_VERSION}k
+    conda env remove -n travis-ci
 fi
 
 set +ev
