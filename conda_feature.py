@@ -36,3 +36,6 @@ def main():
         else:
             with open(CONDA_RECIPE, "wb") as filehandler:
                 CONDA_META = yaml.dump(CONDA_META, filehandler)
+
+if __name__ == "__main__":
+    main()
