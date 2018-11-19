@@ -17,7 +17,7 @@ else:
 
 def main():
     if "CONDA_RECIPE" in environ and "CONDA_FEATURE" in environ:
-        CONDA_RECIPE = os.path.join("..", CONDA_RECIPE, "meta.yaml")
+        CONDA_RECIPE = os.path.join("..", environ["CONDA_RECIPE"], "meta.yaml")
         if PY2:
             with open(CONDA_RECIPE, "r") as filehandler:
                 CONDA_META = yaml.load(filehandler)
