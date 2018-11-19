@@ -34,10 +34,10 @@ def main():
         CONDA_META["build"] = build
         if PY2:
             with open(CONDA_RECIPE, "w") as filehandler:
-                CONDA_META = yaml.dump(CONDA_META, filehandler)
+                CONDA_META = yaml.dump(CONDA_META, filehandler, default_flow_style=False)
         else:
             with open(CONDA_RECIPE, "w") as filehandler:
-                CONDA_META = yaml.dump(CONDA_META, filehandler)
+                CONDA_META = yaml.dump(CONDA_META, filehandler, default_flow_style=False)
 
 if __name__ == "__main__":
     main()
