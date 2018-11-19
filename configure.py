@@ -115,7 +115,7 @@ def get_conda_prefix():
     return "${HOME}/miniconda"
     
 def get_conda_feature():
-    if environ['ANACONDA_FORCE']:
+    if environ['ANACONDA_FORCE'] == "true":
         return "unstable"
 
 def main():
