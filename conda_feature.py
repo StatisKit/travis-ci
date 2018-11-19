@@ -26,8 +26,11 @@ def main():
                 CONDA_META = yaml.load(filehandler)
         print(CONDA_META)
         build = CONDA_META.get("build", dict())
-        build["features"] = build.get("features", []) + [environ["CONDA_FEATURE"]]
-        build["track_features"] = build.get("track_features", []) + [environ["CONDA_FEATURE"]]
+        build["features"] = build.get("features", [])
+        if environ["CONDA_FEATURE"] not in build["features"]:
+            build["features"].append(environ["CONDA_FEATURE"])
+        if environ["CONDA_FEATURE"] not in build["track_features"]:
+            build["track_features"].append(environ["CONDA_FEATURE"])
         CONDA_META["build"] = build
         print(CONDA_META)
         if PY2:
