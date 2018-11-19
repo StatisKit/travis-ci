@@ -99,11 +99,12 @@ def get_test_level():
         return "3"
 
 def get_old_build_string():
-    if environ["ANACONDA_FORCE"] == "true":
-        return "true"
-    else:
-        return "false"    
-
+    # if environ["ANACONDA_FORCE"] == "true":
+    #     return "true"
+    # else:
+    #     return "false"
+    return "true"
+    
 def get_anaconda_tmp_label():
     if environ["ANACONDA_LABEL"] == "release":
         return environ["TRAVIS_OS_NAME"] + "-" + environ["ARCH"] + "_release"
@@ -113,6 +114,10 @@ def get_anaconda_tmp_label():
 def get_conda_prefix():
     return "${HOME}/miniconda"
     
+def get_conda_feature():
+    if environ['ANACONDA_FORCE']:
+        return "unstable"
+
 def main():
     for key in ["TRAVIS_OS_NAME",
                 "TRAVIS_EVENT_TYPE",
@@ -133,7 +138,8 @@ def main():
                 "TEST_LEVEL",
                 "OLD_BUILD_STRING",
                 "ANACONDA_TMP_LABEL",
-                "CONDA_PREFIX"]:
+                "CONDA_PREFIX",
+                "CONDA_FEATURE"]:
         if key not in environ:
             value = eval("get_" + key.lower() + "()")
             if value:

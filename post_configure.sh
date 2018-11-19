@@ -88,6 +88,9 @@ if [[ "${CI}" = "true" ]]; then
     exit 1
   fi
 fi
+conda install pyyaml
+python conda_feature.py
+
 if [[ ! "${ANACONDA_CLIENT_PIN}" = "" ]]; then
     conda install anaconda-client=${ANACONDA_CLIENT_PIN}
 else
