@@ -92,6 +92,7 @@ if [[ "${CI}" = "true" ]]; then
 fi
 if [[ ! "${CONDA_RECIPE}" = "" ]]; then
   python conda_feature.py
+  more ../${CONDA_RECIPE}/meta.yaml
 fi
 
 if [[ ! "${ANACONDA_CLIENT_PIN}" = "" ]]; then
