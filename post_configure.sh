@@ -89,7 +89,6 @@ if [[ "${CI}" = "true" ]]; then
   fi
 fi
 if [[ ! "${CONDA_RECIPE}" = "" ]]; then
-  conda install pyyaml
   python conda_feature.py
 fi
 
