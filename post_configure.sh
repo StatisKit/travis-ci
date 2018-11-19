@@ -88,10 +88,6 @@ if [[ "${CI}" = "true" ]]; then
     exit 1
   fi
 fi
-if [[ ! "${CONDA_RECIPE}" = "" ]]; then
-  python conda_feature.py
-  more ../${CONDA_RECIPE}/meta.yaml
-fi
 
 if [[ ! "${ANACONDA_CLIENT_PIN}" = "" ]]; then
     conda install anaconda-client=${ANACONDA_CLIENT_PIN}

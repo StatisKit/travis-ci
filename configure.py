@@ -113,6 +113,8 @@ def get_conda_prefix():
 def get_conda_feature():
     if environ['ANACONDA_FORCE'] == "true":
         return "unstable"
+    else:
+        return "stable"
 
 def main():
     for key in ["TRAVIS_OS_NAME",
