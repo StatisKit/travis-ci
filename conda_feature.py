@@ -24,15 +24,14 @@ def main():
         else:
             with open(CONDA_RECIPE, "rb") as filehandler:
                 CONDA_META = yaml.load(filehandler)
-        print(CONDA_META)
         build = CONDA_META.get("build", dict())
         build["features"] = build.get("features", [])
         if environ["CONDA_FEATURE"] not in build["features"]:
             build["features"].append(environ["CONDA_FEATURE"])
+        build["track_features"] = build.get("track_features", [])
         if environ["CONDA_FEATURE"] not in build["track_features"]:
             build["track_features"].append(environ["CONDA_FEATURE"])
         CONDA_META["build"] = build
-        print(CONDA_META)
         if PY2:
             with open(CONDA_RECIPE, "w") as filehandler:
                 CONDA_META = yaml.dump(CONDA_META, filehandler)
