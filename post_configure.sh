@@ -22,7 +22,7 @@
 
 set -ve
 
-export CONDA_BUILD_PIN=3.15
+export CONDA_BUILD_PIN=3.14
 
 if [[ "${CI}" = "false" ]]; then
   git submodule update --init
