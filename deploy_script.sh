@@ -43,14 +43,8 @@ fi
 
 if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
   if [[ ! "${CONDA_RECIPE}" = "" ]]; then
-      if [[ "${ANACONDA_FORCE}" = "" ]]; then
-        set +e
-      fi
       anaconda upload ${ANACONDA_PACKAGES} -u ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label ${ANACONDA_TMP_LABEL} --no-progress
       rm ${ANACONDA_PACKAGES}
-      if [[ "${ANACONDA_FORCE}" = "" ]]; then
-        set -e
-      fi
   fi
 fi
 

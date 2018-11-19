@@ -99,10 +99,6 @@ def get_test_level():
         return "3"
 
 def get_old_build_string():
-    # if environ["ANACONDA_FORCE"] == "true":
-    #     return "true"
-    # else:
-    #     return "false"
     return "true"
     
 def get_anaconda_tmp_label():
