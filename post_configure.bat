@@ -1,8 +1,8 @@
 echo ON
 
-git -C %APPVEYOR_BUILD_FOLDER% submodule update --init --recursive
+if "%CI%" == "true" git submodule update --init
 
-if "%CI%" == "True" rmdir /s /q C:\Miniconda
+if "%CI%" == "true" rmdir /s /q C:\Miniconda
 if errorlevel 1 exit 1
 curl https://repo.continuum.io/miniconda/Miniconda%CONDA_VERSION%-latest-Windows-%ARCH%.exe -o miniconda.exe
 if errorlevel 1 exit 1
@@ -34,7 +34,7 @@ if not "%CONDA_BUILD_PIN%" == "" (
   if errorlevel 1 exit 1
 )
 
-if "%CI%" == "True" (
+if "%CI%" == "true" (
   python release.py
   if errorlevel 1 exit 1
 )
