@@ -19,17 +19,32 @@ def get_python_version():
 def main():
     if not environ['PYTHON_VERSION'].count('.') == 1 or environ['PYTHON_VERSION'].endswith('.x'):
         environ["PYTHON_VERSION"] = get_python_version()
-    with open("python_version.sh", "w") as filehandler:
-        filehandler.write("set -ve\n\n")
-        if PY2:
-            for key, value in environ.iteritems():
-                if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-        else:
-            for key, value in environ.items():
-                if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-        filehandler.write("\nset +ve")
+    if environ["TRAVIS_OS_NAME"] == "windows":
+        with open("python_version.bat", "w") as filehandler:
+            filehandler.write("echo ON\n\n")
+            if PY2:
+                for key, value in environ.iteritems():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("set " + key + "=" value.strip() + "\n")
+                        filehandler.write("if errorlevel 1 exit 1\n")
+            else:
+                for key, value in environ.items():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("set " + key + "=" + value.strip() + "\n")
+                        filehandler.write("if errorlevel 1 exit 1\n")
+            filehandler.write("\necho OFF")
+    else:
+        with open("python_version.sh", "w") as filehandler:
+            filehandler.write("set -ve\n\n")
+            if PY2:
+                for key, value in environ.iteritems():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            else:
+                for key, value in environ.items():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            filehandler.write("\nset +ve")
 
 if __name__ == "__main__":
     main()
