@@ -21,7 +21,7 @@ def get_travis_os_name():
     elif SYSTEM == "Darwin":
         SYSTEM = "osx"
     elif SYSTEM == "Windows":
-        SYSTEM = "win"
+        SYSTEM = "windows"
     else:
         raise NotImplementedError("Travis CI is not meant for '" + SYSTEM + "' operating systems")
     return SYSTEM
@@ -168,17 +168,32 @@ def main():
         environ["OLD_BUILD_STRING"] = "--old-build-string"
     else:
         environ["OLD_BUILD_STRING"] = ""
-    with open("configure.sh", "w") as filehandler:
-        filehandler.write("set -ev\n\n")
-        if PY2:
-            for key, value in environ.iteritems():
-                if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-        else:
-            for key, value in environ.items():
-                if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-        filehandler.write("\nset +ev")
+    if environ["TRAVIS_OS_NAME"] == "windows":
+    with open("configure.bat", "w") as filehandler:
+            filehandler.write("echo ON\n\n")
+            if PY2:
+                for key, value in environ.iteritems():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("set " + key + "=" + value.strip() + "\n")
+                        filehandler.write("if errorlevel 1 exit 1\n")
+            else:
+                for key, value in environ.items():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("set " + key + "=" + value.strip() + "\n")
+                        filehandler.write("if errorlevel 1 exit 1\n")
+            filehandler.write("\necho OFF")
+    else:
+        with open("configure.sh", "w") as filehandler:
+            filehandler.write("set -ev\n\n")
+            if PY2:
+                for key, value in environ.iteritems():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            else:
+                for key, value in environ.items():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            filehandler.write("\nset +ev")
 
 if __name__ == "__main__":
     main()
