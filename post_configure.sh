@@ -34,6 +34,10 @@ else
   fi
 fi
 
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+  cmd "/C /K echo %CONDA_PREFIX%"
+fi
+
 if [[ ! -d "${CONDA_PREFIX}" ]]; then
   if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
     curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
@@ -49,9 +53,7 @@ if [[ ! -d "${CONDA_PREFIX}" ]]; then
     set -v
     rm miniconda.sh
   else
-    set +v
     cmd "/C miniconda.exe  /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda"
-    set -v
     rm miniconda.exe
   fi
 fi
