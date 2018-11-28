@@ -68,10 +68,12 @@ else
   export PATH=${CONDA_PREFIX}:${CONDA_PREFIX}/Scripts:${PATH}
   cmd "/C echo %PATH% > C:\log.txt"  
   cat /c/log.txt
+  ls ${CONDA_PREFIX}
+  ls ${CONDA_PREFIX}/Scripts
 fi
 
 if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
-  cmd "/C conda activate"
+  cmd "/C conda.exe activate"
 else
   conda activate
 fi
