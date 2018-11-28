@@ -169,7 +169,7 @@ def main():
     else:
         environ["OLD_BUILD_STRING"] = ""
     if environ["TRAVIS_OS_NAME"] == "windows":
-    with open("configure.bat", "w") as filehandler:
+        with open("configure.bat", "w") as filehandler:
             filehandler.write("echo ON\n\n")
             if PY2:
                 for key, value in environ.iteritems():
