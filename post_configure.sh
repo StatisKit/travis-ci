@@ -49,9 +49,11 @@ if [[ ! -d "${CONDA_PREFIX}" || "${TRAVIS_OS_NAME}" = "windows" ]]; then
     set -v
     rm miniconda.sh
   else
-    cmd "/C miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda > C:\log.txt"
+    ls
+    cmd "/C miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%CONDA_PREFIX% > C:\log.txt"
     cat /c/log.txt
     rm miniconda.exe
+    ls 
   fi
 fi
 
