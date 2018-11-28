@@ -65,54 +65,121 @@ elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
   source ${HOME}/.bash_profile
   set -v
 else
-  export PATH=${CONDA_PREFIX}/Miniconda:${CONDA_PREFIX}/Miniconda/Scripts:${PATH}
+  export PATH=${CONDA_PREFIX}:${CONDA_PREFIX}/Scripts:${PATH}
   cmd "/C echo %PATH% > C:\log.txt"  
   cat /c/log.txt
 fi
 
-conda activate
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+  cmd "/C conda activate"
+else
+  conda activate
+fi
 
 if [[ ! "${ANACONDA_CHANNELS}" = "" ]]; then
   conda config ${ANACONDA_CHANNELS}
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda config %ANACONDA_CHANNELS%"
+  else
+    conda config ${ANACONDA_CHANNELS}
+  fi
 fi
-conda config --set always_yes yes
-conda config --set remote_read_timeout_secs 600
-conda config --set auto_update_conda False
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+  cmd "/C conda config --set always_yes yes"
+  cmd "/C conda config --set remote_read_timeout_secs 600"
+  cmd "/C conda config --set auto_update_conda False"
+else
+  conda config --set always_yes yes
+  conda config --set remote_read_timeout_secs 600
+  conda config --set auto_update_conda False
+fi
 
 if [[ ! "${CONDA_PIN}" = "" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install conda=%CONDA_PIN%"
+  else
     conda install conda=${CONDA_PIN}
+  fi
 fi
+
 if [[ ! "${CONDA_BUILD_PIN}" = "" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install conda-build=%CONDA_BUILD_PIN%"
+  else
     conda install conda-build=${CONDA_BUILD_PIN}
+  fi 
 else
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install conda-build"
+  else
     conda install conda-build
+  fi
 fi
+
 if [[ ! "${CONDA_VERIFY_PIN}" = "" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install conda-verify=${CONDA_BUILD_PIN}"
+  else
     conda install conda-verify=${CONDA_BUILD_PIN}
+  fi
 else
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install conda-verify"
+  else
     conda install conda-verify
+  fi
 fi
 if [[ ! "${ANACONDA_CLIENT_PIN}" = "" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install anaconda-client=%ANACONDA_CLIENT_PIN%"
+  else
     conda install anaconda-client=${ANACONDA_CLIENT_PIN}
+  fi
 else
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install anaconda-client"
+  else
     conda install anaconda-client
+  fi
 fi
-anaconda config --set auto_register yes
+
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+  cmd "/C anaconda config --set auto_register yes"
+else
+  anaconda config --set auto_register yes
+fi
 
 if [[ "${CI}" = "true" ]]; then
-  conda install requests
-  python release.py
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install requests"
+    cmd "/C python release.py"
+  else
+    conda install requests
+    python release.py
+  fi
   if [[ ! "$?" = "0" ]]; then
     exit 1
   fi
 fi
 
-conda create -n travis-ci python=${PYTHON_VERSION}
-
-if [[ ! "${CONDA_PACKAGES}" = "" ]]; then
-    conda install -n travis-ci ${CONDA_PACKAGES} --use-local
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+  cmd "/C conda create -n travis-ci python=%PYTHON_VERSION%"
+else
+  conda create -n travis-ci python=${PYTHON_VERSION}
 fi
 
-conda activate travis-ci
+if [[ ! "${CONDA_PACKAGES}" = "" ]]; then
+  if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    cmd "/C conda install -n travis-ci %CONDA_PACKAGES% --use-local"
+  else
+    conda install -n travis-ci ${CONDA_PACKAGES} --use-local
+  fi
+fi
+
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+  cmd "/C conda activate travis-ci"
+else
+  conda activate travis-ci
+fi
 
 set +ve
