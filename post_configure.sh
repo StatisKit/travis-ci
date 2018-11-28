@@ -34,10 +34,6 @@ else
   fi
 fi
 
-if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
-  cmd "/C /K echo %CONDA_PREFIX%"
-fi
-
 if [[ ! -d "${CONDA_PREFIX}" ]]; then
   if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
     curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
@@ -53,13 +49,9 @@ if [[ ! -d "${CONDA_PREFIX}" ]]; then
     set -v
     rm miniconda.sh
   else
-    cmd "/C miniconda.exe  /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda"
+    cmd "/C miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda"
     rm miniconda.exe
   fi
-fi
-
-if [[ ! "${TRAVIS_OS_NAME}" = "linux" ]]; then
-    export PATH=${CONDA_PREFIX}/bin:${PATH}
 fi
 
 if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
@@ -67,12 +59,17 @@ if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
   set +v
   source ${HOME}/.bashrc
   set -v
-else
+elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
   echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bash_profile
   set +v
   source ${HOME}/.bash_profile
   set -v
+else
+  export PATH=${CONDA_PREFIX}/Miniconda:${CONDA_PREFIX}/Miniconda/Scripts:${PATH}
+  cmd "/C echo %PATH% > C:\log.txt"  
+  more /c/log.txt
 fi
+
 conda activate
 
 if [[ ! "${ANACONDA_CHANNELS}" = "" ]]; then
@@ -90,6 +87,17 @@ if [[ ! "${CONDA_BUILD_PIN}" = "" ]]; then
 else
     conda install conda-build
 fi
+if [[ ! "${CONDA_VERIFY_PIN}" = "" ]]; then
+    conda install conda-verify=${CONDA_BUILD_PIN}
+else
+    conda install conda-verify
+fi
+if [[ ! "${ANACONDA_CLIENT_PIN}" = "" ]]; then
+    conda install anaconda-client=${ANACONDA_CLIENT_PIN}
+else
+    conda install anaconda-client
+fi
+anaconda config --set auto_register yes
 
 if [[ "${CI}" = "true" ]]; then
   conda install requests
@@ -98,13 +106,6 @@ if [[ "${CI}" = "true" ]]; then
     exit 1
   fi
 fi
-
-if [[ ! "${ANACONDA_CLIENT_PIN}" = "" ]]; then
-    conda install anaconda-client=${ANACONDA_CLIENT_PIN}
-else
-    conda install anaconda-client
-fi
-anaconda config --set auto_register yes
 
 conda create -n travis-ci python=${PYTHON_VERSION}
 
