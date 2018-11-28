@@ -66,6 +66,7 @@ elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
   source ${HOME}/.bash_profile
   set -v
 else
+  cat /c/log.txt
   export PATH=${CONDA_PREFIX}:${CONDA_PREFIX}/Scripts:${PATH}
   cmd "/C echo %PATH% > C:\log.txt"  
   cat /c/log.txt
