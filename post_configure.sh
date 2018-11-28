@@ -67,7 +67,7 @@ elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
 else
   export PATH=${CONDA_PREFIX}/Miniconda:${CONDA_PREFIX}/Miniconda/Scripts:${PATH}
   cmd "/C echo %PATH% > C:\log.txt"  
-  more /c/log.txt
+  cat /c/log.txt
 fi
 
 conda activate
