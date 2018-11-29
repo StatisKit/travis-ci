@@ -1,5 +1,5 @@
 echo ON
 
-call environ
+call environ.bat
 
 echo OFF

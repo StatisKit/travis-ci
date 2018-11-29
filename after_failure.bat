@@ -22,7 +22,7 @@
 
 echo ON
 
-call environ
+call environ.bat
 
 if not "%ANACONDA_LOGIN%" == "" (
   if not "%CONDA_RECIPE%" == "" (

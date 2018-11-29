@@ -22,7 +22,7 @@
 
 set -ev
 
-source environ
+source environ.sh
 
 if [[ "${CI}" = "false" ]]; then
   git submodule update --init

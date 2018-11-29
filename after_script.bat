@@ -22,7 +22,7 @@
 
 echo ON
 
-call environ
+call environ.bat
 
 if "%CI%" == "false" (
     conda activate

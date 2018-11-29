@@ -22,7 +22,7 @@
 
 echo ON
 
-call environ
+call environ.bat
 
 if not "%CONDA_RECIPE%" == "" (
   %CMD_IN_ENV% conda build %OLD_BUILD_STRING% --python=%PYTHON_VERSION% ..\%CONDA_RECIPE%

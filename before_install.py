@@ -195,7 +195,7 @@ def main():
     else:
         environ["OLD_BUILD_STRING"] = ""
     if environ["TRAVIS_OS_NAME"] == "windows":
-        with open("environ", "w") as filehandler:
+        with open("environ.bat", "w") as filehandler:
             if PY2:
                 for key, value in environ.iteritems():
                     if key not in os.environ or not os.environ[key] == environ[key]:
@@ -209,7 +209,7 @@ def main():
             filehandler.write("set PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\\Scripts;%PATH%")
             filehandler.write("if \"%TRAVIS_SKIP%\" == \"true\" (\n  exit 0\n)\n")
     else:
-        with open("environ", "w") as filehandler:
+        with open("environ.sh", "w") as filehandler:
             if PY2:
                 for key, value in environ.iteritems():
                     if key not in os.environ or not os.environ[key] == environ[key]:

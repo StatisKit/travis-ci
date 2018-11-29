@@ -22,6 +22,6 @@
 
 set -ev
 
-source environ
+source environ.sh
 
 set +ev

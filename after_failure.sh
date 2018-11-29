@@ -22,7 +22,7 @@
 
 set -ev
 
-source environ
+source environ.sh
 
 if [[ ! "${ANACONDA_LOGIN}" = "" ]]; then
     source before_deploy.sh

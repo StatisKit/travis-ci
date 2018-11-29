@@ -22,7 +22,7 @@
 
 set -ev
 
-source environ
+source environ.sh
 
 if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
     if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then

@@ -22,7 +22,7 @@
 
 set -ev
 
-source environ
+source environ.sh
 
 if [[ ! "${CONDA_RECIPE}" = "" ]]; then
   ${TRAVIS_WAIT} conda build ${OLD_BUILD_STRING} --python=${PYTHON_VERSION} ../${CONDA_RECIPE}

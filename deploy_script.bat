@@ -22,7 +22,7 @@
 
 echo ON
 
-call environ
+call environ.bat
 
 if "%ANACONDA_DEPLOY%" == "true" (
     if not "%CONDA_RECIPE%" == "" (

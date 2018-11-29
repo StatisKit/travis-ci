@@ -22,7 +22,7 @@
 
 echo OFF
 
-call environ
+call environ.bat
 
 if "%ANACONDA_DEPLOY%" == "true" (
     conda activate

@@ -23,7 +23,7 @@
 set -e
 set +v
 
-source environ
+source environ.sh
 
 if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
   if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
