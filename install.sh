@@ -118,4 +118,6 @@ conda activate travis-ci
 python python_version.py
 source python_version.sh
 
+echo "conda activate travis-ci" >> environ.sh
+
 set +ev

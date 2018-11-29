@@ -218,12 +218,12 @@ def main():
                 for key, value in environ.items():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-            if environ["TRAVIS_OS_NAME"] == "linux":
-                filehandler.write("set +v\necho source ${HOME}/.bashrc\nsource ${HOME}/.bashrc\nset -v\n")
-            else:
-                filehandler.write("source ${HOME}/.bash_profile\n")
+            # if environ["TRAVIS_OS_NAME"] == "linux":
+            #     filehandler.write("set +v\necho source ${HOME}/.bashrc\nsource ${HOME}/.bashrc\nset -v\n")
+            # else:
+            #     filehandler.write("source ${HOME}/.bash_profile\n")
                 # filehandler.write("set +v\necho source ${HOME}/.bash_profile\nsource ${HOME}/.bash_profile\nset -v\n")
-            filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 0\nfi\n")
+            # filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 0\nfi\n")
         if PY2:
             os.chmod("environ.sh", 0o755) 
         else:
