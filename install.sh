@@ -52,6 +52,7 @@ fi
 
 if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
   echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bashrc
+  export PS1='$ '
   source ${HOME}/.bashrc
 elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
   echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bash_profile
