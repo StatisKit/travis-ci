@@ -209,9 +209,6 @@ def main():
                         filehandler.write("if errorlevel 1 exit 1\n")
             filehandler.write("if \"%TRAVIS_SKIP%\" == \"true\" (\n  exit 1\n)\n")
             filehandler.write("\necho OFF")
-        for filepath in os.listdir('.'):
-            if filepath.endswith(".bat"):
-                shutil.move(filepath, filepath[:-4])
     else:
         with open("before_install", "w") as filehandler:
             filehandler.write("set -ev\n\n")
@@ -229,9 +226,6 @@ def main():
             os.chmod("before_install", 0o755) 
         else:
             os.chmod("before_install", 0o755) 
-        for filepath in os.listdir('.'):
-            if filepath.endswith(".sh"):
-                shutil.move(filepath, filepath[:-3])
 
 if __name__ == "__main__":
     main()

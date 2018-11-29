@@ -1,0 +1,6 @@
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]
+then
+  ./before_script.bat
+else
+  ./before_script.sh
+fi

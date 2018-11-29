@@ -1,0 +1,6 @@
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]
+then
+  ./install.bat
+else
+  ./install.sh
+fi
