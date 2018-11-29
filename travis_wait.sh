@@ -1,4 +1,3 @@
-set +v
 set -e
 
 if [[ ! "$TRAVIS_WAIT" = "" ]] && [[ "$CI" = "true" ]]; then
