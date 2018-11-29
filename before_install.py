@@ -206,6 +206,7 @@ def main():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("set " + key + "=" + value.strip() + "\n")
                         filehandler.write("if errorlevel 1 exit 1\n")
+            filehandler.write("set PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\\Scripts;%PATH%")
             filehandler.write("if \"%TRAVIS_SKIP%\" == \"true\" (\n  exit 0\n)\n")
     else:
         with open("environ", "w") as filehandler:
@@ -217,6 +218,10 @@ def main():
                 for key, value in environ.items():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            if environ["TRAVIS_OS_NAME"] == "linux":
+                filehandler.write("set +v\nsource ~/.bashrc\nset -v\n")
+            else:
+                filehandler.write("set +v\nsource ~/.bash_profile\nset -v\n")
             filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 0\nfi\n")
         if PY2:
             os.chmod("environ", 0o755) 

@@ -34,8 +34,6 @@ miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%CON
 if errorlevel 1 exit 1
 del miniconda.exe
 if errorlevel 1 exit 1
-set PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
-if errorlevel 1 exit 1
 conda.exe activate
 if errorlevel 1 exit 1
 if not "%ANACONDA_CHANNELS%" == "" (
