@@ -35,6 +35,7 @@ else
 fi
 
 if [[ ! -d "${CONDA_PREFIX}" ]]; then
+  echo https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh
   if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
     curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
   elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
