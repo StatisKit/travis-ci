@@ -14,7 +14,7 @@ if PY2:
     environ = {key : value for key, value in os.environ.iteritems() if value}
 else:
     environ = {key : value for key, value in os.environ.items() if value}
-print(environ)
+
 def get_travis_os_name():
     SYSTEM = platform.system() 
     if SYSTEM == "Linux":
