@@ -22,7 +22,7 @@
 
 set -ev
  
-if [[ "${CI}" == "false" ]]; then
+if [[ "${CI}" = "false" ]]; then
     set +v
     conda activate
     set -v

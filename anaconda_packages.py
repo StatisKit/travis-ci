@@ -15,22 +15,38 @@ else:
 
 def main():
     CONDA_PREFIX = os.path.join(os.path.abspath(environ["CONDA_PREFIX"]), 'conda-bld', environ["TRAVIS_OS_NAME"] + "-")
+    CONDA_PREFIX = CONDA_PREFIX.replace("windows", "win")
     if environ["ARCH"] == "x86":
         CONDA_PREFIX += "32"
     else:
         CONDA_PREFIX += "64"
     environ["ANACONDA_PACKAGES"] = " ".join(os.path.join(CONDA_PREFIX, package) for package in os.listdir(CONDA_PREFIX) if package.endswith(".tar.bz2"))
-    with open("anaconda_packages.sh", "w") as filehandler:
-        filehandler.write("set -ve\n\n")
-        if PY2:
-            for key, value in environ.iteritems():
-                if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-        else:
-            for key, value in environ.items():
-                if key not in os.environ or not os.environ[key] == environ[key]:
-                    filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-        filehandler.write("\nset +ve")
+    if environ["TRAVIS_OS_NAME"] == "windows":
+        with open("anaconda_packages.bat", "w") as filehandler:
+            filehandler.write("echo ON\n\n")
+            if PY2:
+                for key, value in environ.iteritems():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("set " + key + "=" + value.strip() + "\n")
+                        filehandler.write("if errorlevel 1 exit 1")
+            else:
+                for key, value in environ.items():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("set " + key + "=" + value.strip() + "\n")
+                        filehandler.write("if errorlevel 1 exit 1")
+            filehandler.write("\necho OFF")
+    else:
+        with open("anaconda_packages.sh", "w") as filehandler:
+            filehandler.write("set -ve\n\n")
+            if PY2:
+                for key, value in environ.iteritems():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            else:
+                for key, value in environ.items():
+                    if key not in os.environ or not os.environ[key] == environ[key]:
+                        filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            filehandler.write("\nset +ve")
 
 if __name__ == "__main__":
     main()

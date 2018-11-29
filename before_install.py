@@ -1,4 +1,5 @@
 import os
+import shutil
 import platform
 import sys
 
@@ -116,6 +117,29 @@ def get_conda_feature():
     else:
         return "stable"
 
+def get_travis_commit_message():
+    return ""
+
+def get_travis_skip():
+    if environ["TRAVIS_OS_NAME"] == "windows":
+        if "[skip win]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[win skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+            return "true"
+        else:
+            return "false"
+    else:
+        if "[skip unix]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[unix skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+            return "true"
+        elif environ["TRAVIS_OS_NAME"] == "osx":
+            if "[skip osx]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[osx skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+                return "true"
+            else:
+                return "false"
+        else:
+            if "[skip linux]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[linux skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+                return "true"
+            else:
+                return "false"            
+
 def main():
     for key in ["TRAVIS_OS_NAME",
                 "TRAVIS_EVENT_TYPE",
@@ -137,7 +161,9 @@ def main():
                 "OLD_BUILD_STRING",
                 "ANACONDA_TMP_LABEL",
                 "CONDA_PREFIX",
-                "CONDA_FEATURE"]:
+                "CONDA_FEATURE",
+                "TRAVIS_COMMIT_MESSAGE",
+                "TRAVIS_SKIP"]:
         if key not in environ:
             value = eval("get_" + key.lower() + "()")
             if value:
@@ -169,7 +195,7 @@ def main():
     else:
         environ["OLD_BUILD_STRING"] = ""
     if environ["TRAVIS_OS_NAME"] == "windows":
-        with open("configure.bat", "w") as filehandler:
+        with open("before_install", "w") as filehandler:
             filehandler.write("echo ON\n\n")
             if PY2:
                 for key, value in environ.iteritems():
@@ -181,9 +207,13 @@ def main():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("set " + key + "=" + value.strip() + "\n")
                         filehandler.write("if errorlevel 1 exit 1\n")
+            filehandler.write("if \"%TRAVIS_SKIP%\" == \"true\" (\n  exit 1\n)\n")
             filehandler.write("\necho OFF")
+        for filepath in os.listdir('.'):
+            if filepath.endswidth(".bat"):
+                shutil.move(filepath, filepath[:-4])
     else:
-        with open("configure.sh", "w") as filehandler:
+        with open("before_install", "w") as filehandler:
             filehandler.write("set -ev\n\n")
             if PY2:
                 for key, value in environ.iteritems():
@@ -193,7 +223,15 @@ def main():
                 for key, value in environ.items():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
+            filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 1\nfi\n")
             filehandler.write("\nset +ev")
+        if PY2:
+            os.chmod("before_install", 0o755) 
+        else:
+            os.chmod("before_install", 0o755) 
+        for filepath in os.listdir('.'):
+            if filepath.endswidth(".sh"):
+                shutil.move(filepath, filepath[:-3])
 
 if __name__ == "__main__":
     main()

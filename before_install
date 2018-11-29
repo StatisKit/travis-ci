@@ -1,0 +1,60 @@
+python skip.py
+if [[ ! "$?" = "0" ]]; then
+    exit 0
+fi
+./configure
+
+echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[skip travis]"
+if [[ "$?" = "0" ]]; then
+    exit 0
+fi
+echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[travis skip]"
+if [[ "${?}" = "0" ]]; then
+    exit 0
+fi
+if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[skip linux]"
+    if [[ "$?" = "0" ]]; then
+        exit 0
+    fi
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[linux skip]"
+    if [[ "${?}" = "0" ]]; then
+        exit 0
+    fi
+fi
+if [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[skip osx]"
+    if [[ "$?" = "0" ]]; then
+        exit 0
+    fi
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[osx skip]"
+    if [[ "${?}" = "0" ]]; then
+        exit 0
+    fi
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[skip unix]"
+    if [[ "$?" = "0" ]]; then
+        exit 0
+    fi
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[unix skip]"
+    if [[ "${?}" = "0" ]]; then
+        exit 0
+    fi
+fi
+if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[skip win]"
+    if [[ "$?" = "0" ]]; then
+        exit 0
+    fi
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[win skip]"
+    if [[ "${?}" = "0" ]]; then
+        exit 0
+    fi
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[skip unix]"
+    if [[ "$?" = "0" ]]; then
+        exit 0
+    fi
+    echo "${TRAVIS_COMMIT_MESSAGE}" | grep -F -q "[unix skip]"
+    if [[ "${?}" = "0" ]]; then
+        exit 0
+    fi
+fi
