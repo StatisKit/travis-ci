@@ -2,6 +2,7 @@
 
 if [[ "${TRAVIS_OS_NAME}" = "windows" ]]
 then
+  cat environ.bat
   ./install.bat
 else
   ./install.sh
