@@ -22,6 +22,8 @@
 
 echo OFF
 
+call environ
+
 if "%ANACONDA_DEPLOY%" == "true" (
     conda activate
     if errorlevel 1 exit 1

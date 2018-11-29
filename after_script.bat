@@ -22,6 +22,8 @@
 
 echo ON
 
+call environ
+
 if "%CI%" == "false" (
     conda activate
     conda env remove -n travis-ci

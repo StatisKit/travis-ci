@@ -22,6 +22,8 @@
 
 echo ON
 
+call environ
+
 if not "%ANACONDA_LOGIN%" == "" (
   if not "%CONDA_RECIPE%" == "" (
     call before_deploy.bat

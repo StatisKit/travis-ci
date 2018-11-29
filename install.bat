@@ -22,6 +22,8 @@
 
 echo ON
 
+call environ
+
 if "%CI%" == "true" git submodule update --init
 
 if "%CI%" == "true" rmdir /s /q C:\Miniconda

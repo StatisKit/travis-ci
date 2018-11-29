@@ -22,6 +22,8 @@
 
 set -ev
 
+source environ
+
 if [[ ! "${ANACONDA_LOGIN}" = "" ]]; then
     source before_deploy.sh
     if [[ ! "${CONDA_RECIPE}" = "" && -d ${CONDA_PREFIX}/conda-bld/broken ]]; then

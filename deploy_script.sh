@@ -22,6 +22,8 @@
 
 set -ev
 
+source environ
+
 if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
     if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
         if [[ ! "${CONDA_VERSION}" = "3" ]]; then

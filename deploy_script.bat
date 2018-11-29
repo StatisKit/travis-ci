@@ -22,6 +22,8 @@
 
 echo ON
 
+call environ
+
 if "%ANACONDA_DEPLOY%" == "true" (
     if not "%CONDA_RECIPE%" == "" (
         anaconda upload %ANACONDA_PACKAGES% --user %ANACONDA_OWNER% %ANACONDA_FORCE% --label %ANACONDA_TMP_LABEL% --no-progress

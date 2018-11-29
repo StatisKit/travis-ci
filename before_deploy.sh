@@ -23,6 +23,8 @@
 set -e
 set +v
 
+source environ
+
 if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
   if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
     sudo docker login -p ${DOCKER_PASSWORD} -u ${DOCKER_LOGIN}

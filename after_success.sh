@@ -22,4 +22,6 @@
 
 set -ev
 
+source environ
+
 set +ev

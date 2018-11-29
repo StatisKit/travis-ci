@@ -22,6 +22,8 @@
 
 set -ev
 
+source environ
+
 if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
   if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
     sudo docker logout

@@ -195,7 +195,7 @@ def main():
     else:
         environ["OLD_BUILD_STRING"] = ""
     if environ["TRAVIS_OS_NAME"] == "windows":
-        with open("before_install", "w") as filehandler:
+        with open("environ", "w") as filehandler:
             filehandler.write("echo ON\n\n")
             if PY2:
                 for key, value in environ.iteritems():
@@ -207,10 +207,10 @@ def main():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("set " + key + "=" + value.strip() + "\n")
                         filehandler.write("if errorlevel 1 exit 1\n")
-            filehandler.write("if \"%TRAVIS_SKIP%\" == \"true\" (\n  exit 1\n)\n")
+            filehandler.write("if \"%TRAVIS_SKIP%\" == \"true\" (\n  exit 0\n)\n")
             filehandler.write("\necho OFF")
     else:
-        with open("before_install", "w") as filehandler:
+        with open("environ", "w") as filehandler:
             filehandler.write("set -ev\n\n")
             if PY2:
                 for key, value in environ.iteritems():
@@ -223,9 +223,9 @@ def main():
             filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 0\nfi\n")
             filehandler.write("\nset +ev")
         if PY2:
-            os.chmod("before_install", 0o755) 
+            os.chmod("environ", 0o755) 
         else:
-            os.chmod("before_install", 0o755) 
+            os.chmod("environ", 0o755) 
 
 if __name__ == "__main__":
     main()

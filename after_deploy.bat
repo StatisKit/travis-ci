@@ -22,6 +22,8 @@
 
 echo ON
 
+call environ
+
 if "%ANACONDA_DEPLOY%" == "true" (
     anaconda logout
     if errorlevel 1 exit 1
