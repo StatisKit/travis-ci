@@ -220,7 +220,7 @@ def main():
                 for key, value in environ.items():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-            filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 1\nfi\n")
+            filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 0\nfi\n")
             filehandler.write("\nset +ev")
         if PY2:
             os.chmod("before_install", 0o755) 
