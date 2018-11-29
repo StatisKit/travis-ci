@@ -36,6 +36,8 @@ del miniconda.exe
 if errorlevel 1 exit 1
 call %CONDA_PREFIX%\Scripts\activate.bat
 if errorlevel 1 exit 1
+conda.exe --help
+
 if not "%ANACONDA_CHANNELS%" == "" (
   conda config %ANACONDA_CHANNELS%
   if errorlevel 1 exit 1
