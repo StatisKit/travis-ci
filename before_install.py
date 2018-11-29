@@ -209,7 +209,7 @@ def main():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("set " + key + "=" + value.strip() + "\n")
                         filehandler.write("if errorlevel 1 exit 1\n")
-            filehandler.write("set PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\\Scripts;%PATH%\n")
+            filehandler.write("set \"PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\\Scripts;%PATH%\"\n")
             filehandler.write("if \"%TRAVIS_SKIP%\" == \"true\" (\n  exit 0\n)\n")
     else:
         with open("environ.sh", "w") as filehandler:
