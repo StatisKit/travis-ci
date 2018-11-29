@@ -38,57 +38,57 @@ call %CONDA_PREFIX%\Scripts\activate.bat
 if errorlevel 1 exit 1
 conda.exe --help
 
-if not "%ANACONDA_CHANNELS%" == "" (
-  conda config %ANACONDA_CHANNELS%
-  if errorlevel 1 exit 1
-)
-conda config --set always_yes yes
-if errorlevel 1 exit 1
-conda config --set remote_read_timeout_secs 600
-if errorlevel 1 exit 1
-conda config --set auto_update_conda False
-if errorlevel 1 exit 1
+rem if not "%ANACONDA_CHANNELS%" == "" (
+rem   conda config %ANACONDA_CHANNELS%
+rem   if errorlevel 1 exit 1
+rem )
+rem conda config --set always_yes yes
+rem if errorlevel 1 exit 1
+rem conda config --set remote_read_timeout_secs 600
+rem if errorlevel 1 exit 1
+rem conda config --set auto_update_conda False
+rem if errorlevel 1 exit 1
 
-if not "%CONDA_PIN%" == "" conda install conda=%CONDA_PIN%
-if not "%CONDA_BUILD_PIN%" == "" (
-  conda install conda-build=%CONDA_BUILD_PIN%
-  if errorlevel 1 exit 1 
-) else (
-  conda install conda-build
-  if errorlevel 1 exit 1
-)
+rem if not "%CONDA_PIN%" == "" conda install conda=%CONDA_PIN%
+rem if not "%CONDA_BUILD_PIN%" == "" (
+rem   conda install conda-build=%CONDA_BUILD_PIN%
+rem   if errorlevel 1 exit 1 
+rem ) else (
+rem   conda install conda-build
+rem   if errorlevel 1 exit 1
+rem )
 
-if "%CI%" == "true" (
-  python release.py
-  if errorlevel 1 exit 1
-)
-if not "%ANACONDA_CLIENT_PIN%" == "" (
-    conda install anaconda-client=$ANACONDA_CLIENT_PIN
-    if errorlevel 1 exit 1
-) else (
-    conda install anaconda-client
-    if errorlevel 1 exit 1
-)
-anaconda config --set auto_register yes
-if errorlevel 1 exit 1
+rem if "%CI%" == "true" (
+rem   python release.py
+rem   if errorlevel 1 exit 1
+rem )
+rem if not "%ANACONDA_CLIENT_PIN%" == "" (
+rem     conda install anaconda-client=$ANACONDA_CLIENT_PIN
+rem     if errorlevel 1 exit 1
+rem ) else (
+rem     conda install anaconda-client
+rem     if errorlevel 1 exit 1
+rem )
+rem anaconda config --set auto_register yes
+rem if errorlevel 1 exit 1
 
-set CMD_IN_ENV=cmd /E:ON /V:ON /C %cd%\\cmd_in_env.cmd
-if errorlevel 1 exit 1
+rem set CMD_IN_ENV=cmd /E:ON /V:ON /C %cd%\\cmd_in_env.cmd
+rem if errorlevel 1 exit 1
 
-conda create -n travis-ci python=%PYTHON_VERSION%
-if errorlevel 1 exit 1
+rem conda create -n travis-ci python=%PYTHON_VERSION%
+rem if errorlevel 1 exit 1
 
-if not "%CONDA_PACKAGES%" == "" (
-  conda install -n travis-ci %CONDA_PACKAGES% --use-local
-  if errorlevel 1 exit 1
-)
+rem if not "%CONDA_PACKAGES%" == "" (
+rem   conda install -n travis-ci %CONDA_PACKAGES% --use-local
+rem   if errorlevel 1 exit 1
+rem )
 
-conda activate travis-ci
-if errorlevel 1 exit 1
+rem conda activate travis-ci
+rem if errorlevel 1 exit 1
 
-python python_version.py
-if errorlevel 1 exit 1
+rem python python_version.py
+rem if errorlevel 1 exit 1
 
-echo conda activate travis-ci >> environ.bat
+rem echo conda activate travis-ci >> environ.bat
 
 echo OFF
