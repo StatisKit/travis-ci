@@ -22,10 +22,6 @@
 
 set -ev
 
-if [[ "${TRAVIS_OS_NAME}" = "windows" ]]; then
-  exit 1
-fi
-
 if [[ "${CI}" = "false" ]]; then
   git submodule update --init
 else
@@ -43,26 +39,18 @@ if [[ ! -d "${CONDA_PREFIX}" ]]; then
     curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
   elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
     curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-MacOSX-${ARCH}.sh -o miniconda.sh
-  else
-    curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Windows-${ARCH}.exe -o miniconda.exe
   fi
   chmod a+rwx miniconda.sh
-  set +v
   ./miniconda.sh -b -p ${CONDA_PREFIX}
-  set -v
   rm miniconda.sh
 fi
 
 if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
   echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bashrc
-  set +v
   source ${HOME}/.bashrc
-  set -v
 elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
   echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bash_profile
-  set +v
   source ${HOME}/.bash_profile
-  set -v
 fi
 
 conda activate
