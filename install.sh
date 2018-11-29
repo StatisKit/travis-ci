@@ -45,6 +45,7 @@ if [[ ! -d "${CONDA_PREFIX}" ]]; then
   fi
   chmod a+rwx miniconda.sh
   set +v
+  echo ./miniconda.sh -b -p ${CONDA_PREFIX}
   ./miniconda.sh -b -p ${CONDA_PREFIX}
   set -v
   rm miniconda.sh
@@ -53,10 +54,16 @@ fi
 if [[ "${TRAVIS_OS_NAME}" = "linux" ]]; then
   echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bashrc
   export PS1='$ '
+  set +v
+  echo ${HOME}/.bashrc
   source ${HOME}/.bashrc
+  set -v
 elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]; then
   echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bash_profile
+  set +v
+  echo ${HOME}/.bash_profile
   source ${HOME}/.bash_profile
+  set -v
 fi
 
 conda activate
