@@ -44,7 +44,9 @@ if [[ ! -d "${CONDA_PREFIX}" ]]; then
     curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-MacOSX-${ARCH}.sh -o miniconda.sh
   fi
   chmod a+rwx miniconda.sh
+  set +v
   ./miniconda.sh -b -p ${CONDA_PREFIX}
+  set -v
   rm miniconda.sh
 fi
 
