@@ -24,17 +24,17 @@ echo ON
 
 call environ
 
-if "%CI%" == "true" git submodule update --init
+if "%CI%" == "false" git submodule update --init
 
 if "%CI%" == "true" rmdir /s /q C:\Miniconda
-if errorlevel 1 exit 1
+
 curl https://repo.continuum.io/miniconda/Miniconda%CONDA_VERSION%-latest-Windows-%ARCH%.exe -o miniconda.exe
 if errorlevel 1 exit 1
-miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%HOMEDRIVE%\Miniconda 
+miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%CONDA_PREFIX% 
 if errorlevel 1 exit 1
 del miniconda.exe
 if errorlevel 1 exit 1
-set PATH=%HOMEDRIVE%\Miniconda;%HOMEDRIVE%\Miniconda\Scripts;%PATH%
+set PATH=%CONDA_PREFIX%;%CONDA_PREFIX%\Scripts;%PATH%
 if errorlevel 1 exit 1
 conda.exe activate
 if errorlevel 1 exit 1
