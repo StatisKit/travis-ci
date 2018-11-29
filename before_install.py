@@ -221,7 +221,8 @@ def main():
             if environ["TRAVIS_OS_NAME"] == "linux":
                 filehandler.write("set +v\necho source ${HOME}/.bashrc\nsource ${HOME}/.bashrc\nset -v\n")
             else:
-                filehandler.write("set +v\necho source ${HOME}/.bash_profile\nsource ${HOME}/.bash_profile\nset -v\n")
+                filehandler.write("source ${HOME}/.bash_profile\n")
+                # filehandler.write("set +v\necho source ${HOME}/.bash_profile\nsource ${HOME}/.bash_profile\nset -v\n")
             filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 0\nfi\n")
         if PY2:
             os.chmod("environ.sh", 0o755) 
