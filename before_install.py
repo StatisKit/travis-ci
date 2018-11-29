@@ -109,7 +109,10 @@ def get_anaconda_tmp_label():
         return environ["ANACONDA_LABEL"]
 
 def get_conda_prefix():
-    return "${HOME}/miniconda"
+    if environ["TRAVIS_OS_NAME"] == "windows":
+        return "%HOMEDRIVE%\\miniconda"
+    else:
+        return "${HOME}/miniconda"
     
 def get_conda_feature():
     if environ['ANACONDA_FORCE'] == "true":
