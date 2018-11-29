@@ -35,6 +35,7 @@ if "%ANACONDA_DEPLOY%" == "true" (
         call anaconda_packages.bat
         if errorlevel 1 exit 1
     )
+    echo conda activate >> environ.bat
 )
 
 echo OFF

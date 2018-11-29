@@ -38,6 +38,7 @@ if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
       python anaconda_packages.py
       source anaconda_packages.sh
   fi
+  echo "conda activate" >> environ.sh
 fi
 
 set +ev

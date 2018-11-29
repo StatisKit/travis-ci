@@ -86,7 +86,7 @@ if errorlevel 1 exit 1
 
 python python_version.py
 if errorlevel 1 exit 1
-call python_version.bat
-if errorlevel 1 exit 1
+
+echo conda activate travis-ci >> environ.bat
 
 echo OFF
