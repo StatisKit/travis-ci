@@ -36,7 +36,6 @@ if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
   yes | anaconda login --password ${ANACONDA_PASSWORD} --username ${ANACONDA_LOGIN}
   if [[ ! "${CONDA_RECIPE}" = "" ]]; then
       python anaconda_packages.py
-      source anaconda_packages.sh
   fi
   echo "conda activate" >> environ.sh
 fi

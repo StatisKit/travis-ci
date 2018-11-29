@@ -32,8 +32,6 @@ if "%ANACONDA_DEPLOY%" == "true" (
     if not "%CONDA_RECIPE%" == "" (
         python anaconda_packages.py
         if errorlevel 1 exit 1
-        call anaconda_packages.bat
-        if errorlevel 1 exit 1
     )
     echo conda activate >> environ.bat
 )
