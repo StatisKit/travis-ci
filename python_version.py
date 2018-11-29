@@ -25,7 +25,7 @@ def main():
             if PY2:
                 for key, value in environ.iteritems():
                     if key not in os.environ or not os.environ[key] == environ[key]:
-                        filehandler.write("set " + key + "=" value.strip() + "\n")
+                        filehandler.write("set " + key + "=" + value.strip() + "\n")
                         filehandler.write("if errorlevel 1 exit 1\n")
             else:
                 for key, value in environ.items():
