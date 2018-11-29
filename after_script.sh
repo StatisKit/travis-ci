@@ -20,7 +20,7 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ex
+set -ev
  
 source environ.sh
 
@@ -31,4 +31,4 @@ if [[ "${CI}" = "false" ]]; then
     conda env remove -n travis-ci
 fi
 
-set +ex
+set +ev

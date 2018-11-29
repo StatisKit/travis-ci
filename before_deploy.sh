@@ -21,7 +21,7 @@
 ## permissions and limitations under the License.                        ##
 
 set -e
-set +x
+set +v
 
 source environ.sh
 
@@ -40,4 +40,4 @@ if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
   fi
 fi
 
-set +ex
+set +ev

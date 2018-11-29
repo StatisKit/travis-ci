@@ -37,7 +37,7 @@ def main():
             filehandler.write("\necho OFF")
     else:
         with open("anaconda_packages.sh", "w") as filehandler:
-            filehandler.write("set -ex\n\n")
+            filehandler.write("set -ev\n\n")
             if PY2:
                 for key, value in environ.iteritems():
                     if key not in os.environ or not os.environ[key] == environ[key]:
@@ -46,7 +46,7 @@ def main():
                 for key, value in environ.items():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
-            filehandler.write("\nset +ex")
+            filehandler.write("\nset +ev")
 
 if __name__ == "__main__":
     main()

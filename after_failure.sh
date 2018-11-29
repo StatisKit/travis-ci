@@ -20,7 +20,7 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ex
+set -ev
 
 source environ.sh
 
@@ -36,4 +36,4 @@ if [[ ! "${ANACONDA_LOGIN}" = "" ]]; then
     source after_deploy.sh
 fi
 
-set +ex
+set +ev
