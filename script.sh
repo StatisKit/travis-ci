@@ -20,7 +20,7 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
+set -ex
 
 source environ.sh
 
@@ -39,4 +39,4 @@ elif [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
   rm -rf ${DOCKER_CONTAINER}
 fi
 
-set +ev
+set +ex

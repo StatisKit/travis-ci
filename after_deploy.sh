@@ -20,9 +20,9 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
+set -ex
 
-source environ
+source environ.sh
 
 if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
   if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
@@ -34,4 +34,4 @@ if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
   anaconda logout
 fi
 
-set +ev
+set +ex
