@@ -219,7 +219,7 @@ def main():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
             if environ["TRAVIS_OS_NAME"] == "linux":
-                filehandler.write("set +x\nexport PS1='$ '\necho source ${HOME}/.bashrc\nsource ${HOME}/.bashrc\nset -x\n")
+                filehandler.write("set -x\nexport PS1='$ '\necho source ${HOME}/.bashrc\nsource ${HOME}/.bashrc\nset -x\n")
             else:
                 filehandler.write("set +e\nsource ${HOME}/.bash_profile\nset -e\n")
                 # filehandler.write("set +x\necho source ${HOME}/.bash_profile\nsource ${HOME}/.bash_profile\nset -x\n")
