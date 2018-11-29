@@ -23,7 +23,6 @@
 echo ON
 
 call environ.bat
-dir %CONDA_PREFIX%\Scripts
 
 if "%CI%" == "false" git submodule update --init
 
@@ -35,6 +34,8 @@ miniconda.exe /AddToPath=1 /InstallationType=JustMe /RegisterPython=0 /S /D=%CON
 if errorlevel 1 exit 1
 del miniconda.exe
 if errorlevel 1 exit 1
+dir %CONDA_PREFIX%\Scripts
+
 rem %CONDA_PREFIX%\Scripts\activate.exe
 rem if errorlevel 1 exit 1
 rem if not "%ANACONDA_CHANNELS%" == "" (
