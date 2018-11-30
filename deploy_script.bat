@@ -38,7 +38,7 @@ if "%ANACONDA_DEPLOY%" == "true"
     (
         anaconda upload %ANACONDA_SUCCESS_PACKAGES% --user %ANACONDA_OWNER% %ANACONDA_FORCE% --label %ANACONDA_TMP_LABEL% --no-progress
         if errorlevel 1 exit 1
-        del /q /s %CONDA_PREFIX%\conda-bld
+        del /q /s %ANACONDA_SUCCESS_PACKAGES%
         if errorlevel 1 exit 1
     )
 )
