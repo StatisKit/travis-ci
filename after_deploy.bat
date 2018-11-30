@@ -29,8 +29,7 @@ echo ON
 call %CONDA_PREFIX%\Scripts\activate.bat
 if errorlevel 1 exit 1
 
-if "%ANACONDA_DEPLOY%" == "true"
-(
+if "%ANACONDA_DEPLOY%" == "true" (
     anaconda logout
     if errorlevel 1 exit 1
 )

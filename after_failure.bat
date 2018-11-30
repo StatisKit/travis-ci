@@ -29,10 +29,8 @@ if errorlevel 1 exit 1
 
 echo ON
 
-if "%ANACONDA_DEPLOY%" == "true"
-(
-    if not "%ANACONDA_FAILURE_PACKAGES%" == "" 
-    (
+if "%ANACONDA_DEPLOY%" == "true" (
+    if not "%ANACONDA_FAILURE_PACKAGES%" == "" (
         anaconda upload %ANACONDA_FAILURE_PACKAGES% --user %ANACONDA_OWNER% %ANACONDA_FORCE% --label broken --no-progress
         if errorlevel 1 exit 1
         del /q /s %ANACONDA_FAILURE_PACKAGES%

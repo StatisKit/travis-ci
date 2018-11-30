@@ -32,10 +32,8 @@ python anaconda_packages.py
 call anaconda_packages.bat
 del anaconda_packages.bat
 
-if "%ANACONDA_DEPLOY%" == "true"
-(
-    if not "%CONDA_RECIPE%" == ""
-    (
+if "%ANACONDA_DEPLOY%" == "true" (
+    if not "%CONDA_RECIPE%" == "" (
         anaconda upload %ANACONDA_SUCCESS_PACKAGES% --user %ANACONDA_OWNER% %ANACONDA_FORCE% --label %ANACONDA_TMP_LABEL% --no-progress
         if errorlevel 1 exit 1
         del /q /s %ANACONDA_SUCCESS_PACKAGES%
@@ -43,10 +41,8 @@ if "%ANACONDA_DEPLOY%" == "true"
     )
 )
 
-if "%ANACONDA_RELEASE%" == "true"
-(
-    if not "%ANACONDA_TMP_LABEL%" == "%ANACONDA_LABEL%"
-    (
+if "%ANACONDA_RELEASE%" == "true" (
+    if not "%ANACONDA_TMP_LABEL%" == "%ANACONDA_LABEL%" (
         anaconda label -o %ANACONDA_OWNER% --copy %ANACONDA_TMP_LABEL% %ANACONDA_LABEL%
         if errorlevel 1 exit 1
     )
