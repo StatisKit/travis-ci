@@ -2,6 +2,7 @@
 
 if [[ "${TRAVIS_OS_NAME}" = "windows" ]]
 then
+  cat /c/miniconda/lib/site-packages/libarchive/ffi.py
   ./script.bat
 else
   ./script.sh

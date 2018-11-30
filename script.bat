@@ -33,6 +33,8 @@ if errorlevel 1 exit 1
 call python_version.bat
 if errorlevel 1 exit 1
 
+type C:\miniconda\lib\site-packages\libarchive\ffi.py
+
 if not "%CONDA_RECIPE%" == "" (
   %CMD_IN_ENV% conda.exe build %OLD_BUILD_STRING% --python=%PYTHON_VERSION% %CONDA_RECIPE%
   if errorlevel 1 exit 1
