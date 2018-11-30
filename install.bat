@@ -85,5 +85,7 @@ if not "%CONDA_PACKAGES%" == "" (
     conda.exe install -n travis-ci %CONDA_PACKAGES% --use-local
     if errorlevel 1 exit 1
 )
+conda.exe install -n travis-ci libarchive --use-local
+
 
 echo OFF

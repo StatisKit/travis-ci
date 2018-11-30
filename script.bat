@@ -33,7 +33,6 @@ if errorlevel 1 exit 1
 call python_version.bat
 if errorlevel 1 exit 1
 
-echo %PYTHONPATH%
 echo %PATH%
 
 if not "%CONDA_RECIPE%" == "" (
