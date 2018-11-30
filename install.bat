@@ -39,8 +39,7 @@ if errorlevel 1 exit 1
 call %CONDA_PREFIX%\Scripts\activate.bat
 if errorlevel 1 exit 1
 
-if not "%ANACONDA_CHANNELS%" == "" 
-(
+if not "%ANACONDA_CHANNELS%" == "" (
     conda config %ANACONDA_CHANNELS%
     if errorlevel 1 exit 1
 )
