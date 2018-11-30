@@ -20,7 +20,7 @@ def main():
     if not environ['PYTHON_VERSION'].count('.') == 1 or environ['PYTHON_VERSION'].endswith('.x'):
         environ["PYTHON_VERSION"] = get_python_version()
     if environ["TRAVIS_OS_NAME"] == "windows":
-        with open("environ.bat", "a+") as filehandler:
+        with open("python_version.bat", "w") as filehandler:
             filehandler.write("\n")
             if PY2:
                 for key, value in environ.iteritems():
@@ -34,7 +34,7 @@ def main():
                         filehandler.write("if errorlevel 1 exit 1\n")
             filehandler.write("\n")
     else:
-        with open("environ.sh", "a+") as filehandler:
+        with open("python_version.sh", "w") as filehandler:
             filehandler.write("\n")
             if PY2:
                 for key, value in environ.iteritems():

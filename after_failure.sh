@@ -20,20 +20,28 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
+set -e
+set +v
 
 source environ.sh
 
-if [[ ! "${ANACONDA_LOGIN}" = "" ]]; then
-    source before_deploy.sh
-    if [[ ! "${CONDA_RECIPE}" = "" && -d ${CONDA_PREFIX}/conda-bld/broken ]]; then
-        for filename in ${CONDA_PREFIX}/conda-bld/broken/*.tar.bz2; do
-            anaconda upload $filename -u ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label broken
-        done
-    elif [[ ! "${JYPTER_NOTEBOOK}" = "" ]]; then
-        anaconda upload ../${JYPTER_NOTEBOOK} -u ${ANACONDA_OWNER} --label ${TRAVIS_OS_NAME}-broken --force
+source before_deploy.sh
+
+set -ev
+
+python anaconda_packages.py
+source anaconda_packages.sh
+rm anaconda_packages.sh
+
+if [[ ! "${ANACONDA_DEPLOY}" = "true" ]]
+then
+    if [[ ! "${ANACONDA_FAILURE_PACKAGES}" = "" ]]
+    then
+        anaconda upload %{ANACONDA_FAILURE_PACKAGES} --user ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label broken --no-progress
+        rm -rf ${CONDA_PREFIX}/conda-bld
     fi
-    source after_deploy.sh
 fi
 
 set +ev
+
+source after_deploy.sh

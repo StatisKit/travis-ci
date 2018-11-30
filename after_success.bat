@@ -20,8 +20,10 @@
 :: mplied. See the License for the specific language governing           ::
 :: permissions and limitations under the License.                        ::
 
-echo ON
+echo OFF
 
 call environ.bat
+
+echo ON
 
 echo OFF

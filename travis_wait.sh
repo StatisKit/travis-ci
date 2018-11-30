@@ -1,4 +1,5 @@
 set -e
+set +v
 
 if [[ ! "$TRAVIS_WAIT" = "" ]] && [[ "$CI" = "true" ]]; then
 
@@ -64,4 +65,4 @@ if [[ ! "$TRAVIS_WAIT" = "" ]] && [[ "$CI" = "true" ]]; then
   fi
 fi
 
-set +e
+set +ev

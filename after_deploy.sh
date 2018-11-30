@@ -20,18 +20,26 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
+set -e
+set +v
 
 source environ.sh
 
-if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
-  if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
-    sudo docker logout
-  fi
+set -ev
+
+conda activate 
+
+if [[ ! "${DOCKER_CONTEXT}" = "" ]]
+then
+    if [[ "${DOCKER_DEPLOY}" = "true" ]]
+    then
+        sudo docker logout
+    fi
 fi
 
-if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
-  anaconda logout
+if [[ "${ANACONDA_DEPLOY}" = "true" ]]
+then
+    anaconda logout
 fi
 
 set +ev

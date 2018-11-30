@@ -20,23 +20,32 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
+set -e
+set +v
 
 source environ.sh
 
-if [[ ! "${CONDA_RECIPE}" = "" ]]; then
-  ${TRAVIS_WAIT} conda build ${OLD_BUILD_STRING} --python=${PYTHON_VERSION} ${CONDA_RECIPE}
-elif [[ ! "${JUPYTER_NOTEBOOK}" = "" ]]; then
-  ${TRAVIS_WAIT} jupyter nbconvert --ExecutePreprocessor.kernel_name=${JUPYTER_KERNEL} --ExecutePreprocessor.timeout=0 --to notebook --execute --inplace ${JUPYTER_NOTEBOOK}
-elif [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
-  cp -R ${DOCKER_CONTEXT} ${DOCKER_CONTAINER}
-  cp ${HOME}/.condarc ${DOCKER_CONTAINER}/.condarc
-  if [[ ! "${CONDA_VERSION}" = "3" ]]; then
-    ${TRAVIS_WAIT} sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_CONTAINER}
-  else
-    ${TRAVIS_WAIT} sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG} ${DOCKER_CONTAINER}
-  fi
-  rm -rf ${DOCKER_CONTAINER}
+set -ev
+
+source travis_wait.sh
+
+if [[ ! "${CONDA_RECIPE}" = "" ]]
+then
+    ${TRAVIS_WAIT} conda build ${OLD_BUILD_STRING} --python=${PYTHON_VERSION} ${CONDA_RECIPE}
+elif [[ ! "${JUPYTER_NOTEBOOK}" = "" ]]
+then
+    ${TRAVIS_WAIT} jupyter nbconvert --ExecutePreprocessor.kernel_name=${JUPYTER_KERNEL} --ExecutePreprocessor.timeout=0 --to notebook --execute --inplace ${JUPYTER_NOTEBOOK}
+elif [[ ! "${DOCKER_CONTEXT}" = "" ]]
+then
+    cp -R ${DOCKER_CONTEXT} ${DOCKER_CONTAINER}
+    cp ${HOME}/.condarc ${DOCKER_CONTAINER}/.condarc
+    if [[ ! "${CONDA_VERSION}" = "3" ]]
+    then
+        ${TRAVIS_WAIT} sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_CONTAINER}
+    else
+        ${TRAVIS_WAIT} sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG} ${DOCKER_CONTAINER}
+    fi
+    rm -rf ${DOCKER_CONTAINER}
 fi
 
 set +ev

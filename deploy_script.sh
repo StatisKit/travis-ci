@@ -20,19 +20,33 @@
 ## mplied. See the License for the specific language governing           ##
 ## permissions and limitations under the License.                        ##
 
-set -ev
+set -e
+set +v
 
 source environ.sh
 
-if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
-    if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
-        if [[ ! "${CONDA_VERSION}" = "3" ]]; then
+set -ev
+
+conda activate
+
+python anaconda_packages.py
+source anaconda_packages.sh
+rm anaconda_packages.sh
+
+if [[ "${DOCKER_DEPLOY}" = "true" ]]
+then
+    if [[ ! "${DOCKER_CONTEXT}" = "" ]]
+    then
+        if [[ ! "${CONDA_VERSION}" = "3" ]]
+        then
             sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k
         else
             sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}
         fi
-        if [[ ! "${TRAVIS_TAG}" = "latest" ]]; then
-            if [[ ! "${CONDA_VERSION}" = "3" ]]; then
+        if [[ ! "${TRAVIS_TAG}" = "latest" ]]
+        then
+            if [[ ! "${CONDA_VERSION}" = "3" ]]
+            then
                 sudo docker tag ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
                 sudo docker push ${DOCKER_OWNER}/${DOCKER_CONTAINER}:latest-py${CONDA_VERSION}k
             else
@@ -43,17 +57,21 @@ if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
     fi
 fi
 
-if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
-  if [[ ! "${CONDA_RECIPE}" = "" ]]; then
-      anaconda upload ${ANACONDA_PACKAGES} -u ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label ${ANACONDA_TMP_LABEL} --no-progress
-      rm ${ANACONDA_PACKAGES}
-  fi
+if [[ "${ANACONDA_DEPLOY}" = "true" ]]
+then
+    if [[ ! "${CONDA_RECIPE}" = "" ]]
+    then
+        anaconda upload ${ANACONDA_PACKAGES} -u ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label ${ANACONDA_TMP_LABEL} --no-progress
+        rm ${ANACONDA_PACKAGES}
+    fi
 fi
 
-if [[ "${ANACONDA_RELEASE}" = "true" ]]; then
-  if [[ ! "${ANACONDA_TMP_LABEL}" = "${ANACONDA_LABEL}" ]]; then
-      anaconda label -o ${ANACONDA_OWNER} --copy ${ANACONDA_TMP_LABEL} ${ANACONDA_LABEL}
-  fi
+if [[ "${ANACONDA_RELEASE}" = "true" ]]
+then
+    if [[ ! "${ANACONDA_TMP_LABEL}" = "${ANACONDA_LABEL}" ]]
+    then
+        anaconda label -o ${ANACONDA_OWNER} --copy ${ANACONDA_TMP_LABEL} ${ANACONDA_LABEL}
+    fi
 fi
 
 set +ev

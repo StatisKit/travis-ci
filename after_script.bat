@@ -20,12 +20,16 @@
 :: mplied. See the License for the specific language governing           ::
 :: permissions and limitations under the License.                        ::
 
-echo ON
+echo OFF
 
 call environ.bat
 
-if "%CI%" == "false" (
-    conda activate
+echo ON
+
+call %CONDA_PREFIX%\Scripts\activate.bat
+
+if "%CI%" == "false"
+(
     conda env remove -n travis-ci
 )
 

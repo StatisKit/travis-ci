@@ -25,19 +25,23 @@ set +v
 
 source environ.sh
 
-if [[ ! "${DOCKER_CONTEXT}" = "" ]]; then
-  if [[ "${DOCKER_DEPLOY}" = "true" ]]; then
-    sudo docker login -p ${DOCKER_PASSWORD} -u ${DOCKER_LOGIN}
-  fi
+set -e
+set +v
+
+conda activate 
+
+if [[ ! "${DOCKER_CONTEXT}" = "" ]]
+then
+    if [[ "${DOCKER_DEPLOY}" = "true" ]]
+    then
+        sudo docker login -p ${DOCKER_PASSWORD} -u ${DOCKER_LOGIN}
+    fi
 fi
 
-if [[ "${ANACONDA_DEPLOY}" = "true" ]]; then
-  conda activate
-  yes | anaconda login --password ${ANACONDA_PASSWORD} --username ${ANACONDA_LOGIN}
-  if [[ ! "${CONDA_RECIPE}" = "" ]]; then
-      python anaconda_packages.py
-  fi
-  echo "conda activate" >> environ.sh
+if [[ "${ANACONDA_DEPLOY}" = "true" ]]
+then
+    conda activate
+    yes | anaconda login --password ${ANACONDA_PASSWORD} --username ${ANACONDA_LOGIN}
 fi
 
 set +ev
