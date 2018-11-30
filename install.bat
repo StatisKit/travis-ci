@@ -82,12 +82,12 @@ if not "%CONDA_PACKAGES%" == "" (
   if errorlevel 1 exit 1
 )
 
-call %CONDA_PREFIX%\Scripts\travis-ci
+call %CONDA_PREFIX%\Scripts\activate.bat travis-ci
 if errorlevel 1 exit 1
 
 python python_version.py
 if errorlevel 1 exit 1
 
-echo call %CONDA_PREFIX%\Scripts\travis-ci >> environ.bat
+echo call %CONDA_PREFIX%\Scripts\activate.bat travis-ci >> environ.bat
 
 echo OFF
