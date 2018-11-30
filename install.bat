@@ -22,6 +22,9 @@
 
 echo ON
 
+dir %ProgramFiles%
+dir %ProgramFiles(x86)%
+
 call environ.bat
 
 if "%CI%" == "false" git submodule update --init
