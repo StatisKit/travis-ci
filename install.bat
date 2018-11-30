@@ -22,8 +22,8 @@
 
 echo ON
 
-dir %ProgramFiles%
-dir %ProgramFiles(x86)%
+dir "%ProgramFiles%"
+dir "%ProgramFiles(x86)%"
 
 call environ.bat
 
