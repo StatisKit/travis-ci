@@ -26,6 +26,13 @@ call environ.bat
 
 echo ON
 
+call %CONDA_PREFIX%\Scripts\activate.bat travis-ci
+if errorlevel 1 exit 1
+python python_version.py
+if errorlevel 1 exit 1
+call python_version.bat
+if errorlevel 1 exit 1
+
 if not "%CONDA_RECIPE%" == "" (
   %CMD_IN_ENV% conda build %OLD_BUILD_STRING% --python=%PYTHON_VERSION% %CONDA_RECIPE%
   if errorlevel 1 exit 1

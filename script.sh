@@ -29,6 +29,10 @@ set -ev
 
 source travis_wait.sh
 
+conda activate travis-ci
+python python_version.py
+source python_version.sh
+
 if [[ ! "${CONDA_RECIPE}" = "" ]]
 then
     ${TRAVIS_WAIT} conda build ${OLD_BUILD_STRING} --python=${PYTHON_VERSION} ${CONDA_RECIPE}
