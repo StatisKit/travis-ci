@@ -50,12 +50,10 @@ if errorlevel 1 exit 1
 conda config --set auto_update_conda False
 if errorlevel 1 exit 1
 
-if not "%CONDA_PIN%" == ""
-(
+if not "%CONDA_PIN%" == "" (
     conda install conda=%CONDA_PIN%
 )
-if not "%CONDA_BUILD_PIN%" == "" 
-(
+if not "%CONDA_BUILD_PIN%" == "" (
     conda install conda-build=%CONDA_BUILD_PIN%
     if errorlevel 1 exit 1 
 ) else (
@@ -63,13 +61,11 @@ if not "%CONDA_BUILD_PIN%" == ""
     if errorlevel 1 exit 1
 )
 
-if "%CI%" == "true" 
-(
+if "%CI%" == "true" (
     python release.py
     if errorlevel 1 exit 1
 )
-if not "%ANACONDA_CLIENT_PIN%" == ""
-(
+if not "%ANACONDA_CLIENT_PIN%" == "" (
     conda install anaconda-client=$ANACONDA_CLIENT_PIN
     if errorlevel 1 exit 1
 ) else (
@@ -85,8 +81,7 @@ if errorlevel 1 exit 1
 conda create -n travis-ci python=%PYTHON_VERSION%
 if errorlevel 1 exit 1
 
-if not "%CONDA_PACKAGES%" == "" 
-(
+if not "%CONDA_PACKAGES%" == "" (
     conda install -n travis-ci %CONDA_PACKAGES% --use-local
     if errorlevel 1 exit 1
 )

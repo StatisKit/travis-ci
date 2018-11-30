@@ -37,8 +37,8 @@ if [[ ! "${ANACONDA_DEPLOY}" = "true" ]]
 then
     if [[ ! "${ANACONDA_FAILURE_PACKAGES}" = "" ]]
     then
-        anaconda upload %{ANACONDA_FAILURE_PACKAGES} --user ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label broken --no-progress
-        rm -rf ${CONDA_PREFIX}/conda-bld
+        anaconda upload ${ANACONDA_FAILURE_PACKAGES} --user ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label broken --no-progress
+        rm ${ANACONDA_FAILURE_PACKAGES}
     fi
 fi
 

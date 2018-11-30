@@ -62,7 +62,7 @@ then
     if [[ ! "${CONDA_RECIPE}" = "" ]]
     then
         anaconda upload ${ANACONDA_SUCCESS_PACKAGES} -u ${ANACONDA_OWNER} ${ANACONDA_FORCE} --label ${ANACONDA_TMP_LABEL} --no-progress
-        rm ${ANACONDA_PACKAGES}
+        rm ${ANACONDA_SUCCESS_PACKAGES}
     fi
 fi
 
