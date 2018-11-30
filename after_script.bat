@@ -29,7 +29,7 @@ echo ON
 call %CONDA_PREFIX%\Scripts\activate.bat
 
 if "%CI%" == "false" (
-    conda env remove -n travis-ci
+    conda.exe env remove -n travis-ci
 )
 
 echo OFF
