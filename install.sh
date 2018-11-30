@@ -113,10 +113,11 @@ if [[ ! "${CONDA_PACKAGES}" = "" ]]; then
   conda install -n travis-ci ${CONDA_PACKAGES} --use-local
 fi
 
+echo "conda activate travis-ci" >> environ.sh
+
 conda activate travis-ci
 
 python python_version.py
 
-echo "conda activate travis-ci" >> environ.sh
 
 set +ev
