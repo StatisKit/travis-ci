@@ -143,6 +143,18 @@ def get_travis_skip():
             else:
                 return "false"            
 
+def set_conda_recipe():
+    if "CONDA_RECIPE" in environ:
+        return ("../" + environ["CONDA_RECIPE"]).replace("/", os.sep)
+
+def set_docker_context():
+    if "DOCKER_CONTEXT" in environ:
+        return ("../" + environ["DOCKER_CONTEXT"]).replace("/", os.sep)
+
+def set_jupyter_notebook():
+    if "JUPYTER_NOTEBOOK" in environ:
+        return ("../" + environ["JUPYTER_NOTEBOOK"]).replace("/", os.sep)
+
 def main():
     for key in ["TRAVIS_OS_NAME",
                 "TRAVIS_EVENT_TYPE",
@@ -169,6 +181,13 @@ def main():
                 "TRAVIS_SKIP"]:
         if key not in environ:
             value = eval("get_" + key.lower() + "()")
+            if value:
+                environ[key] = value
+    for key in ["CONDA_RECIPE",
+                "DOCKER_CONTEXT",
+                "JUPYTER_NOTEBOOK"]:
+        if key in environ:
+            value = eval("set_" + key.lower() + "()")
             if value:
                 environ[key] = value
     ANACONDA_CHANNELS = []

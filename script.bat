@@ -25,12 +25,12 @@ echo ON
 call environ.bat
 
 if not "%CONDA_RECIPE%" == "" (
-  %CMD_IN_ENV% conda build %OLD_BUILD_STRING% --python=%PYTHON_VERSION% ..\%CONDA_RECIPE%
+  %CMD_IN_ENV% conda build %OLD_BUILD_STRING% --python=%PYTHON_VERSION% %CONDA_RECIPE%
   if errorlevel 1 exit 1
 )
 
 if not "%JUPYTER_NOTEBOOK%" == "" (
-  jupyter nbconvert --ExecutePreprocessor.kernel_name=%JUPYTER_KERNEL% --ExecutePreprocessor.timeout=0 --to notebook --execute --inplace ..\%JUPYTER_NOTEBOOK%
+  jupyter nbconvert --ExecutePreprocessor.kernel_name=%JUPYTER_KERNEL% --ExecutePreprocessor.timeout=0 --to notebook --execute --inplace %JUPYTER_NOTEBOOK%
   if errorlevel 1 exit 1
 )
 
