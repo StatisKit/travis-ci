@@ -61,17 +61,17 @@ if [[ "${TRAVIS_OS_NAME}" = "linux" ]]
 then
     echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bashrc
     export PS1='$ '
-    set +v
+    set +ev
     echo ${HOME}/.bashrc
     source ${HOME}/.bashrc
-    set -v
+    set -ev
 elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]
 then
     echo ". ${CONDA_PREFIX}/etc/profile.d/conda.sh" >> ${HOME}/.bash_profile
-    set +v
+    set +ev
     echo ${HOME}/.bash_profile
     source ${HOME}/.bash_profile
-    set -v
+    set -ev
 fi
 
 conda activate
