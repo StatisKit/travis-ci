@@ -62,7 +62,7 @@ def get_anaconda_label():
     if "TRAVIS_EVENT_TYPE" in environ and environ["TRAVIS_EVENT_TYPE"] == "cron":
         return "cron"
     else:
-        return "develop"
+        return "main"
 
 def get_docker_owner():
     if "DOCKER_LOGIN" in environ:
@@ -202,6 +202,7 @@ def main():
                 "GIT_DESCRIBE_NUMBER"]:
         if key in environ:
             value = eval("set_" + key.lower() + "()")
+            print(key, value)
             if value:
                 environ[key] = value
     ANACONDA_CHANNELS = []
@@ -255,10 +256,9 @@ def main():
                     if key not in os.environ or not os.environ[key] == environ[key]:
                         filehandler.write("export " + key + "=\"" + value.strip() + "\"\n")
             if environ["TRAVIS_OS_NAME"] == "linux":
-                filehandler.write("set +ev\nexport PS1='$ '\necho source ${HOME}/.bashrc\nsource ${HOME}/.bashrc\nset -ev\n")
+                filehandler.write("set +e\nexport PS1='$ '\necho source ${HOME}/.bashrc\nsource ${HOME}/.bashrc\nset -e\n")
             else:
-                filehandler.write("set +ev\nsource ${HOME}/.bash_profile\nset -ev\n")
-                # filehandler.write("set +x\necho source ${HOME}/.bash_profile\nsource ${HOME}/.bash_profile\nset -x\n")
+                filehandler.write("set +e\nsource ${HOME}/.bash_profile\nset -e\n")
             filehandler.write("if [[ \"${TRAVIS_SKIP}\" = \"true\" ]]; then\n  exit 0\nfi\n")
         if PY2:
             os.chmod("environ.sh", 0o755) 
