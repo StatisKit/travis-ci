@@ -1,7 +1,6 @@
 #!/bin/bash
 
-git -C .. fetch --tags
-git -C .. describe --tags
+git fetch --unshallow
 python before_install.py
 if [[ "${TRAVIS_OS_NAME}" = "windows" ]]
 then
