@@ -112,7 +112,7 @@ else
 fi
 anaconda config --set auto_register yes
 
-if [[ "${CI}" = "true" ]]
+if [[ "${ANACONDA_RELEASE}" = "true" ]]
 then
     conda install requests
     python release.py

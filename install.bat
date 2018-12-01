@@ -75,6 +75,12 @@ if not "%ANACONDA_CLIENT_PIN%" == "" (
 anaconda.exe config --set auto_register yes
 if errorlevel 1 exit 1
 
+if "%ANACONDA_RELEASE%" == "true" (
+    conda install requests
+    python release.py
+    if errorlevel 1 exit 1
+)
+
 :: set CMD_IN_ENV=cmd /E:ON /V:ON /C %cd%\\cmd_in_env.cmd
 :: if errorlevel 1 exit 1
 

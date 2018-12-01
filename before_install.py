@@ -143,6 +143,18 @@ def get_travis_skip():
             else:
                 return "false"            
 
+def set_git_describe_tag():
+    if PY2:
+        return subprocess.check_output(['git', 'describe']).splitlines()[0].split("-")[0].strip('v')
+    else:
+        return subprocess.check_output(['git', 'describe']).splitlines()[0].decode().split("-")[0].strip('v')
+
+def set_git_describe_number():
+    if PY2:
+        return subprocess.check_output(['git', 'describe']).splitlines()[0].split("-")[1]
+    else:
+        return subprocess.check_output(['git', 'describe']).splitlines()[0].decode().split("-")[1]
+
 def set_conda_recipe():
     if "CONDA_RECIPE" in environ:
         return ("../" + environ["CONDA_RECIPE"]).replace("/", os.sep)
@@ -185,7 +197,9 @@ def main():
                 environ[key] = value
     for key in ["CONDA_RECIPE",
                 "DOCKER_CONTEXT",
-                "JUPYTER_NOTEBOOK"]:
+                "JUPYTER_NOTEBOOK",
+                "GIT_DESCRIBE_TAG",
+                "GIT_DESCRIBE_NUMBER"]:
         if key in environ:
             value = eval("set_" + key.lower() + "()")
             if value:
