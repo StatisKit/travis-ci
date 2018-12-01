@@ -200,11 +200,9 @@ def main():
                 "JUPYTER_NOTEBOOK",
                 "GIT_DESCRIBE_TAG",
                 "GIT_DESCRIBE_NUMBER"]:
-        if key in environ:
-            value = eval("set_" + key.lower() + "()")
-            print(key, value)
-            if value:
-                environ[key] = value
+        value = eval("set_" + key.lower() + "()")
+        if value:
+            environ[key] = value
     ANACONDA_CHANNELS = []
     if "ANACONDA_OWNER" in environ:
         ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"])
