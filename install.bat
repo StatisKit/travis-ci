@@ -61,10 +61,6 @@ if not "%CONDA_BUILD_PIN%" == "" (
     if errorlevel 1 exit 1
 )
 
-if "%CI%" == "true" (
-    python release.py
-    if errorlevel 1 exit 1
-)
 if not "%ANACONDA_CLIENT_PIN%" == "" (
     conda.exe install anaconda-client=$ANACONDA_CLIENT_PIN
     if errorlevel 1 exit 1
