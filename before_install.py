@@ -145,16 +145,25 @@ def get_travis_skip():
                 return "false"            
 
 def set_git_describe_tag():
-    if PY2:
-        return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].split("-")[0].strip('v')
-    else:
-        return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].decode().split("-")[0].strip('v')
+    try:
+        if PY2:
+            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].split("-")[0].strip('v')
+        else:
+            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].decode().split("-")[0].strip('v')
+    except:
+        return "0.1.0"
 
 def set_git_describe_number():
-    if PY2:
-        return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].split("-")[1]
-    else:
-        return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].decode().split("-")[1]
+    try:
+        if PY2:
+            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].split("-")[1]
+        else:
+            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].decode().split("-")[1]
+    except:
+        if PY2:
+            return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0]
+        else:
+            return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0].decode()
 
 def set_conda_recipe():
     if "CONDA_RECIPE" in environ:
