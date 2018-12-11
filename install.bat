@@ -26,8 +26,6 @@ call environ.bat
 
 echo ON
 
-if "%CI%" == "true" choco install visualstudio2015community
-
 if "%CI%" == "false" git submodule update --init
 
 if "%CI%" == "true" rmdir /s /q C:\Miniconda
