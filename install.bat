@@ -50,6 +50,9 @@ if errorlevel 1 exit 1
 conda.exe config --set auto_update_conda False
 if errorlevel 1 exit 1
 
+move conda_build_config.yaml %USERPROFILE%\conda_build_config.yaml
+if errorlevel 1 exit 1
+
 if not "%CONDA_PIN%" == "" (
     conda.exe install conda=%CONDA_PIN%
 )

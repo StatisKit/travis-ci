@@ -1,6 +1,7 @@
 #!/bin/bash
 
-git -C .. fetch --unshallow
+set -ve
+
 python before_install.py
 if [[ "${TRAVIS_OS_NAME}" = "windows" ]]
 then
@@ -8,3 +9,5 @@ then
 else
     cat environ.sh
 fi 
+
+set +ve
