@@ -43,6 +43,9 @@ def get_arch():
     else:
         return "x86"
 
+def get_git_skip():
+    return "false"
+
 def get_conda_version():
     if "PYTHON_VERSION" in environ:
         return environ["PYTHON_VERSION"].split(".")[0]
@@ -125,7 +128,9 @@ def get_travis_commit_message():
     return ""
 
 def get_travis_skip():
-    if environ["TRAVIS_OS_NAME"] == "windows":
+    if "CONDA_RECIPE" in environ and environ["GIT_SKIP"] == "true" and not subprocess.check_output(['git', '-C', '..', "HEAD^", , 'diff', '--', environ["CONDA_RECIPE"]]):
+        return "true"
+    elif environ["TRAVIS_OS_NAME"] == "windows":
         if "[skip win]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[win skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
             return "true"
         else:
@@ -182,6 +187,7 @@ def main():
                 "TRAVIS_EVENT_TYPE",
                 "TRAVIS_BRANCH",
                 "CI",
+                "GIT_SKIP",
                 "ARCH",
                 "CONDA_VERSION",
                 "ANACONDA_LABEL",
