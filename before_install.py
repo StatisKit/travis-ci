@@ -134,26 +134,30 @@ def get_travis_commit_message():
         return "no commit message found"
 
 def get_travis_skip():
-    if "CONDA_RECIPE" in environ and environ["GIT_SKIP"] == "true" and not subprocess.check_output(['git', '-C', '..', 'diff', "HEAD^", '--', environ["CONDA_RECIPE"]]):
-        return "true"
-    elif environ["TRAVIS_OS_NAME"] == "windows":
-        if "[skip win]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[win skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+    try:
+        if "CONDA_RECIPE" in environ and environ["GIT_SKIP"] == "true" and not subprocess.check_output(['git', '-C', '..', 'diff', "HEAD^", '--', environ["CONDA_RECIPE"]]):
             return "true"
-        else:
-            return "false"
-    else:
-        if "[skip unix]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[unix skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
-            return "true"
-        elif environ["TRAVIS_OS_NAME"] == "osx":
-            if "[skip osx]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[osx skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+    except:
+        pass
+    finally:
+        elif environ["TRAVIS_OS_NAME"] == "windows":
+            if "[skip win]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[win skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
                 return "true"
             else:
                 return "false"
         else:
-            if "[skip linux]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[linux skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+            if "[skip unix]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[unix skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
                 return "true"
+            elif environ["TRAVIS_OS_NAME"] == "osx":
+                if "[skip osx]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[osx skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+                    return "true"
+                else:
+                    return "false"
             else:
-                return "false"            
+                if "[skip linux]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[linux skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
+                    return "true"
+                else:
+                    return "false"            
 
 def set_git_describe_tag():
     try:
@@ -171,11 +175,14 @@ def set_git_describe_number():
         else:
             return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].decode().split("-")[1]
     except:
-        if PY2:
-            return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0]
-        else:
-            return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0].decode()
-
+        try:
+            if PY2:
+                return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0]
+            else:
+                return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0].decode()
+        except:
+            return "0"
+            
 def set_conda_recipe():
     if "CONDA_RECIPE" in environ:
         return ("../" + environ["CONDA_RECIPE"]).replace("/", os.sep)
