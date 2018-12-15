@@ -140,7 +140,7 @@ def get_travis_skip():
     except:
         pass
     finally:
-        elif environ["TRAVIS_OS_NAME"] == "windows":
+        if environ["TRAVIS_OS_NAME"] == "windows":
             if "[skip win]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[win skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
                 return "true"
             else:
@@ -182,7 +182,7 @@ def set_git_describe_number():
                 return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0].decode()
         except:
             return "0"
-            
+
 def set_conda_recipe():
     if "CONDA_RECIPE" in environ:
         return ("../" + environ["CONDA_RECIPE"]).replace("/", os.sep)
