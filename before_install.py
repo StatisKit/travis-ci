@@ -195,6 +195,7 @@ def main():
                 "ANACONDA_DEPLOY",
                 "ANACONDA_RELEASE",
                 "DOCKER_OWNER",
+                "DOCKER_DEPLOY",
                 "DOCKER_CONTAINER",
                 "TRAVIS_TAG",
                 "JUPYTER_KERNEL",
