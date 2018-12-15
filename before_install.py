@@ -125,7 +125,13 @@ def get_conda_feature():
         return "stable"
 
 def get_travis_commit_message():
-    return ""
+    try:
+        if PY2:
+            return subprocess.check_output(['git', '-C', '..', 'log', '-1', '--pretty=%B']).splitlines()[0]
+        else:
+            return subprocess.check_output(['git', '-C', '..', 'log', '-1', '--pretty=%B']).splitlines()[0].decode()
+    except:
+        return "no commit message found"
 
 def get_travis_skip():
     if "CONDA_RECIPE" in environ and environ["GIT_SKIP"] == "true" and not subprocess.check_output(['git', '-C', '..', 'diff', "HEAD^", '--', environ["CONDA_RECIPE"]]):
