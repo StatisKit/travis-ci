@@ -128,7 +128,7 @@ def get_travis_commit_message():
     return ""
 
 def get_travis_skip():
-    if "CONDA_RECIPE" in environ and environ["GIT_SKIP"] == "true" and not subprocess.check_output(['git', '-C', '..', "HEAD^", , 'diff', '--', environ["CONDA_RECIPE"]]):
+    if "CONDA_RECIPE" in environ and environ["GIT_SKIP"] == "true" and not subprocess.check_output(['git', '-C', '..', 'diff', "HEAD^", '--', environ["CONDA_RECIPE"]]):
         return "true"
     elif environ["TRAVIS_OS_NAME"] == "windows":
         if "[skip win]" in environ["TRAVIS_COMMIT_MESSAGE"] or "[win skip]" in environ["TRAVIS_COMMIT_MESSAGE"]:
