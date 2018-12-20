@@ -162,18 +162,18 @@ def get_travis_skip():
 def set_git_describe_tag():
     try:
         if PY2:
-            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].split("-")[0].strip('v')
+            return subprocess.check_output(['git', '-C', '..', 'describe', '--tags']).splitlines()[0].split("-")[0].strip('v')
         else:
-            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].decode().split("-")[0].strip('v')
+            return subprocess.check_output(['git', '-C', '..', 'describe', '--tags']).splitlines()[0].decode().split("-")[0].strip('v')
     except:
         return "0.1.0"
 
 def set_git_describe_number():
     try:
         if PY2:
-            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].split("-")[1]
+            return subprocess.check_output(['git', '-C', '..', 'describe', '--tags']).splitlines()[0].split("-")[1]
         else:
-            return subprocess.check_output(['git', '-C', '..', 'describe']).splitlines()[0].decode().split("-")[1]
+            return subprocess.check_output(['git', '-C', '..', 'describe', '--tags']).splitlines()[0].decode().split("-")[1]
     except:
         try:
             if PY2:
