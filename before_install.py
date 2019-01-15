@@ -3,6 +3,7 @@ import shutil
 import platform
 import sys
 import subprocess
+import datetime
 
 if sys.version_info[0] == 2:
     PY2 = True
@@ -159,7 +160,7 @@ def get_travis_skip():
                 else:
                     return "false"            
 
-def set_git_describe_tag():
+def set_git_describe_version():
     try:
         if PY2:
             return subprocess.check_output(['git', '-C', '..', 'describe', '--tags']).splitlines()[0].split("-")[0].strip('v')
@@ -182,6 +183,17 @@ def set_git_describe_number():
                 return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count']).splitlines()[0].decode()
         except:
             return "0"
+
+def set_datetime_describe_version():
+    now = datetime.datetime.now()
+    return str(now.year % 2000) + "." + str(now.month).rjust(2, '0')  + "." + str(now.day).rjust(2, '0')
+
+def set_datetime_describe_number():
+    if 'TRAVIS_BUILD_NUMBER' in environ:
+        return environ['TRAVIS_BUILD_NUMBER']
+    else:
+        now = datetime.datetime.now()
+        return str(now.hour).rjust(2, '0')
 
 def set_conda_recipe():
     if "CONDA_RECIPE" in environ:
@@ -228,8 +240,10 @@ def main():
     for key in ["CONDA_RECIPE",
                 "DOCKER_CONTEXT",
                 "JUPYTER_NOTEBOOK",
-                "GIT_DESCRIBE_TAG",
-                "GIT_DESCRIBE_NUMBER"]:
+                "GIT_DESCRIBE_VERSION",
+                "GIT_DESCRIBE_NUMBER",
+                "DATETIME_DESCRIBE_VERSION",
+                "DATETIME_DESCRIBE_NUMBER"]:
         value = eval("set_" + key.lower() + "()")
         if value:
             environ[key] = value
