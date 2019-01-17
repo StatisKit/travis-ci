@@ -93,10 +93,7 @@ def get_python_version():
     return environ["CONDA_VERSION"]
 
 def get_anaconda_force():
-    if environ["ANACONDA_LABEL"] == "release" and environ["TRAVIS_BRANCH"] == "master":
-        return "false"
-    else:
-        return "true"
+    return "true"
 
 def get_test_level():
     if environ["CI"] == "true":
