@@ -106,7 +106,7 @@ def get_old_build_string():
     
 def get_anaconda_tmp_label():
     if environ["ANACONDA_LABEL"] == "release":
-        return environ["TRAVIS_OS_NAME"] + "-" + environ["ARCH"] + "_release"
+        return os.path.basename(os.path.abspath('..')).lower() + '-' + environ["TRAVIS_OS_NAME"] + "_" + environ["ARCH"] + "-release"
     else:
         return environ["ANACONDA_LABEL"]
 
@@ -254,8 +254,6 @@ def main():
     if "ANACONDA_OWNER" in environ:
         ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"])
         if not environ["ANACONDA_LABEL"] == "main":
-            if not environ["ANACONDA_LABEL"] == "develop":
-                ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/develop")
             ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_LABEL"])
         if not environ["ANACONDA_TMP_LABEL"] == environ["ANACONDA_LABEL"]:
             ANACONDA_CHANNELS.append(environ["ANACONDA_OWNER"] + "/label/" + environ["ANACONDA_TMP_LABEL"])

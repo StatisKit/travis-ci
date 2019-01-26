@@ -66,11 +66,18 @@ then
     fi
 fi
 
-if [[ "${ANACONDA_RELEASE}" = "true" ]]
+if [[ "${ANACONDA_RELEASE}" = "start" ]]
+then
+    if [[ ! "${ANACONDA_TMP_LABEL}" = "${ANACONDA_LABEL}" ]]
+    then
+        anaconda label -o ${ANACONDA_OWNER} --remove ${ANACONDA_TMP_LABEL}
+    fi
+elif [[ "${ANACONDA_RELEASE}" = "finish" ]]
 then
     if [[ ! "${ANACONDA_TMP_LABEL}" = "${ANACONDA_LABEL}" ]]
     then
         anaconda label -o ${ANACONDA_OWNER} --copy ${ANACONDA_TMP_LABEL} ${ANACONDA_LABEL}
+        anaconda label -o ${ANACONDA_OWNER} --remove ${ANACONDA_TMP_LABEL}
     fi
 fi
 
