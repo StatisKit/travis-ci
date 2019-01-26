@@ -85,7 +85,7 @@ conda config --set always_yes yes
 conda config --set remote_read_timeout_secs 600
 conda config --set auto_update_conda False
 
-mv conda_build_config.yaml ${HOME}/conda_build_config.yaml
+# mv conda_build_config.yaml ${HOME}/conda_build_config.yaml
 
 if [[ ! "${CONDA_PIN}" = "" ]]
 then
