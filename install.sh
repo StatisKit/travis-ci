@@ -85,8 +85,11 @@ conda config --set always_yes yes
 conda config --set remote_read_timeout_secs 600
 conda config --set auto_update_conda False
 
-sed -i .bak '/CONDA_BUILD_SYSROOT/d' conda_build_config.yaml
-sed -i .bak '/MacOSX/d' conda_build_config.yaml
+if [[ "${TRAVIS_OS_NAME}" = "osx" ]]
+then
+    sed -i .bak '/CONDA_BUILD_SYSROOT/d' conda_build_config.yaml
+    sed -i .bak '/MacOSX/d' conda_build_config.yaml
+fi
 
 if [[ ! "${CONDA_PIN}" = "" ]]
 then
