@@ -87,7 +87,6 @@ conda config --set auto_update_conda False
 
 sed -i .bak '/CONDA_BUILD_SYSROOT/d' conda_build_config.yaml
 sed -i .bak '/MacOSX/d' conda_build_config.yaml
-more conda_build_config.yaml
 
 if [[ ! "${CONDA_PIN}" = "" ]]
 then
