@@ -6,15 +6,14 @@ import subprocess
 import datetime
 
 if sys.version_info[0] == 2:
+    DEVNULL = open(os.devnull, 'wb')
     PY2 = True
     PY3 = False
-else:
-    PY3 = True
-    PY2 = False
-
-if PY2:
     environ = {key : value for key, value in os.environ.iteritems() if value}
 else:
+    from subprocess import DEVNULL
+    PY3 = True
+    PY2 = False
     environ = {key : value for key, value in os.environ.items() if value}
 
 def get_travis_os_name():
@@ -169,13 +168,13 @@ def set_git_describe_version():
 def set_git_describe_number():
     try:
         if PY2:
-            output = subprocess.check_output(['git', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0]
+            output = subprocess.check_output(['git', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0].split('-')
         else:
-            output = subprocess.check_output(['git', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0].decode()
+            output = subprocess.check_output(['git', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0].decode().split('-')
         if len(output) == 4:
-            print(output[2])
+            return output[2]
         elif len(output) == 3:
-            print(output[1]) 
+            return output[1]
         else:
             raise ValueError()
     except:
