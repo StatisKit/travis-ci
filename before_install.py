@@ -195,7 +195,13 @@ def set_datetime_describe_number():
         return environ['TRAVIS_BUILD_NUMBER']
     else:
         now = datetime.datetime.now()
-        return str(now.hour).rjust(2, '0')
+        try:
+            if PY2:
+                return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count', '--after="' + str(now.year) + '/' + str(now.month).rjust(2, '0') + '/' + str(now.day).rjust(2, '0') + ' 00:00:00"']).splitlines()[0]
+            else:
+                return subprocess.check_output(['git', '-C', '..', 'rev-list', 'HEAD', '--count', '--after="' + str(now.year) + '/' + str(now.month).rjust(2, '0') + '/' + str(now.day).rjust(2, '0') + ' 00:00:00"']).splitlines()[0].decode()
+        except:
+            return str(now.hour).rjust(2, '0')
 
 def set_conda_recipe():
     if "CONDA_RECIPE" in environ:
