@@ -168,9 +168,9 @@ def set_git_describe_version():
 def set_git_describe_number():
     try:
         if PY2:
-            output = subprocess.check_output(['git', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0].split('-')
+            output = subprocess.check_output(['git', '-C', '..', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0].split('-')
         else:
-            output = subprocess.check_output(['git', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0].decode().split('-')
+            output = subprocess.check_output(['git', '-C', '..', 'describe', '--tags'], stderr=DEVNULL).splitlines()[0].decode().split('-')
         if len(output) == 4:
             return output[2]
         elif len(output) == 3:
