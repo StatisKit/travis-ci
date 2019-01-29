@@ -32,7 +32,13 @@ def get_travis_event_type():
     return "api"
 
 def get_travis_branch():
-    return "master"
+    try:
+        if PY2:
+            return subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).splitlines()[0]
+        else:
+            return subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).splitlines()[0].decode()
+    except:
+        return "master"
 
 def get_ci():
     return "false"
@@ -63,11 +69,14 @@ def get_anaconda_release():
     return "false"
 
 def get_anaconda_label():
-    if "TRAVIS_EVENT_TYPE" in environ and environ["TRAVIS_EVENT_TYPE"] == "cron":
-        return "cron"
+    if environ['TRAVIS_BRANCH'] == 'master':
+        if "TRAVIS_EVENT_TYPE" in environ and environ["TRAVIS_EVENT_TYPE"] == "cron":
+            return "cron"
+        else:
+            return "main"
     else:
-        return "main"
-
+        return environ['TRAVIS_BRANCH'].replace('/', '-').replace('\\', '-')
+        
 def get_docker_owner():
     if "DOCKER_LOGIN" in environ:
         return environ["DOCKER_LOGIN"]
