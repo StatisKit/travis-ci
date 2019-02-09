@@ -47,12 +47,14 @@ if "%ANACONDA_RELEASE%" == "start" (
         if errorlevel 1 exit 1
     )
 )
-else if "%ANACONDA_RELEASE%" == "finish" (
-    if not "%ANACONDA_TMP_LABEL%" == "%ANACONDA_LABEL%" (
-        anaconda.exe label -o %ANACONDA_OWNER% --copy %ANACONDA_TMP_LABEL% %ANACONDA_LABEL%
-        if errorlevel 1 exit 1
-        anaconda.exe label -o %ANACONDA_OWNER% --remove %ANACONDA_TMP_LABEL%
-        if errorlevel 1 exit 1
+else (
+    if "%ANACONDA_RELEASE%" == "finish" (
+        if not "%ANACONDA_TMP_LABEL%" == "%ANACONDA_LABEL%" (
+            anaconda.exe label -o %ANACONDA_OWNER% --copy %ANACONDA_TMP_LABEL% %ANACONDA_LABEL%
+            if errorlevel 1 exit 1
+            anaconda.exe label -o %ANACONDA_OWNER% --remove %ANACONDA_TMP_LABEL%
+            if errorlevel 1 exit 1
+        )
     )
 )
 
