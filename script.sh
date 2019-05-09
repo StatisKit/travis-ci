@@ -43,6 +43,8 @@ elif [[ ! "${DOCKER_CONTEXT}" = "" ]]
 then
     cp -R ${DOCKER_CONTEXT} ${DOCKER_CONTAINER}
     cp ${HOME}/.condarc ${DOCKER_CONTAINER}/.condarc
+    more ${HOME}/.condarc
+    more ${DOCKER_CONTAINER}/.condarc
     if [[ ! "${CONDA_VERSION}" = "3" ]]
     then
         ${TRAVIS_WAIT} sudo docker build --build-arg CONDA_VERSION=${CONDA_VERSION} -t ${DOCKER_OWNER}/${DOCKER_CONTAINER}:${TRAVIS_TAG}-py${CONDA_VERSION}k ${DOCKER_CONTAINER}
