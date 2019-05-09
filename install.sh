@@ -27,8 +27,6 @@ source environ.sh
 
 set -ev
 
-source environ.sh
-
 if [[ "${CI}" = "false" ]]
 then
     git submodule update --init
@@ -135,5 +133,7 @@ if [[ ! "${CONDA_PACKAGES}" = "" ]]
 then
     conda install -n travis-ci ${CONDA_PACKAGES} --use-local
 fi
+
+more ${HOME}/.condarc
 
 set +ev
