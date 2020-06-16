@@ -44,10 +44,10 @@ if [[ ! -d "${CONDA_PREFIX}" ]]
 then
     if [[ "${TRAVIS_OS_NAME}" = "linux" ]]
     then
-        curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
+        curl -L https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-Linux-${ARCH}.sh -o miniconda.sh
     elif [[ "${TRAVIS_OS_NAME}" = "osx" ]]
     then
-        curl https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-MacOSX-${ARCH}.sh -o miniconda.sh
+        curl -L https://repo.continuum.io/miniconda/Miniconda${CONDA_VERSION}-latest-MacOSX-${ARCH}.sh -o miniconda.sh
     fi
     chmod a+rwx miniconda.sh
     set +v
